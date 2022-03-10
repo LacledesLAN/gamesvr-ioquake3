@@ -17,7 +17,7 @@ ARG SOURCE_COMMIT=unspecified
 
 HEALTHCHECK NONE
 
-EXPOSE 27910/udp
+EXPOSE 27960/udp
 
 RUN dpkg --add-architecture i386 &&`
     apt-get update && apt-get install -y `
