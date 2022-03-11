@@ -1,0 +1,1 @@
+Grabbed the server files from https://github.com/ra3se/q3ra3-server/
