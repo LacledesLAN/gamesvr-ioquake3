@@ -1,0 +1,69 @@
+--------------------------------------------------31.july.2001--
+    Dreamcast Map Pack (..::LvL edition)
+-------------------------------------------------lvlworld.com/--
+
+For 'official' Sega information about the original 'Dreamcast 
+Map Pack' release consult the 'Q3ADC pack instructions.doc' 
+which should be found in your 'baseq3' folder. You can also 
+check out the official website at; 
+
+http://www.sega.com/sega/game/quake3_launch.jhtml
+
+::NOTE::
+You do NOT need to down grade your version of Quake 3 Arena 
+unless you wish to play on the Dreamcast Q3A servers. If you 
+do wish to play on these servers then I highly suggest you 
+install a 'minimum install' of Q3A into a different location 
+on your hard drive and patch it as described in the official 
+Dreamcast document.
+
+Now, lets move on :]
+
+
+----what to do-------------------------------------------------
+
+Extract the contents of lvl-DCpack.zip (or lvl-DCpack-sm.zip) to 
+your Quake III Arena folder with directory structures. Do NOT 
+overwrite your pak0.pk3 file, the one included should be 
+extracted to a 'lvl-DCpack' folder. 
+
+If you downloaded the small version, (lvl-DCpack-sm.zip) make 
+sure you have the Dreamcast Map Pack in you 'baseq3' folder. The 
+file name of the pack is 'dc-mappack.pk3' and is about 50 megs. 
+If this file is missing you can download it from the offical 
+site or grab the full version from ..::LvL - http://lvlworld.com/
+
+
+----getting started--------------------------------------------
+
+Start up Q3A, select 'MODS' then 'Dreamcast Pack (..::LvL 
+edition)'. To start the single player excitement select 'Single 
+Player' or 'Skirmish' mode and enjoy.
+
+If you want to "record" your stats and progress through the 
+tiers, you need to start the game with "+set fs_game lvl-DCpack".
+
+For Windows users, you can use the included "lvl-dcpack.bat"
+(for standard Quake3) or "lvl-dc-ioquake3.x86.bat" for IOQuake3 
+users.
+
+Mac and Linux users will need work out how to do this.
+
+While you can use the Quake 3 menu system to select the mod and 
+start the single player mission, your "stats" and tier progress 
+is NOT recorded this way.
+
+If you receive a prompt for a CD-Key you can either enter your
+key or hit press 'ESC' on the keyboard. Both should work fine.
+
+
+----who did this?----------------------------------------------
+
+This Dreamcast Map Pack (..::LvL edition) was put together by 
+Tigger-oN to encourage more people to play these maps. There are 
+some great new maps that are just not being played, I'm hoping 
+this release will help these levels see more game play.
+
+For more info check out;
+ ..::LvL - http://lvlworld.com/ 
+
