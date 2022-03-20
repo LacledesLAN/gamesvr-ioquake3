@@ -1,0 +1,148 @@
+OSP - Server-enabled Map Decals
+===============================
+14 Dec 01
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+
+OSP Tourney DM/CA/CTF allows server operators to set up custom
+graphics for display to spectators within the map, on a per-map
+basis.  Much like the server-side graphics options, the
+motivation here is to allow clans, communities and/or tournament
+organizations to implement additional graphics in the game for
+demo/screenshot enhancements.
+
+In no way will these additional graphics interfere with normal
+gameplay, as they are displayed only:
+     - To all players during warmup and intermission periods.
+     - To all spectators during the match.
+
+The format for customization is similar to the custom server graphics
+options, except that OSP has an in-game editor for easy placement of
+decals through-out the map.
+
+The highlights of the decals:
+	- Up to 32 decals can be displayed on a per-map basis
+	- Up to 16 custom graphics can be used for these decals
+	  (Technically, there are 17.  The extra is a "freebie"
+	   OSP blender as seen throughout the rest of the mod).
+	- Decals can be enlarged/shrunken/rotated on most any
+	  surface on the map.
+	- OSP client editor for easy (and quick) placement of
+	  decals on a map.
+	- Every map will have its own specifications for decals,
+	  If a map doesnt have a decal definition file, no decals
+	  will be displayed on the map (save for the built-in
+	  ones included with OSP).
+
+How to create a custom decal set for a map:
+-------------------------------------------
+1. First, you will need to set up the custom graphics you wish to
+   use for decals.  Follow steps 1-4 as found in the
+   Docs/osp-q3-Server-gfx.txt document.
+
+2. Make a config to bind all of the decal commands (listed below)
+   to a set of keys for easier editing.
+
+3. Next, start up a listen server, i.e. :
+
+	quake3 +set fs_game osp +exec team.cfg).
+
+4. Switch to the desired map for decal editing.
+
+5. Exec the decal config you made in step 2.
+
+6. AS A SPECTATOR, type: \decaledit
+
+6a. You are now in the decal editor.  You should see 32 slots on
+    the left-side of the screen, with all but the first one grayed
+    out with the word "DISABLED" (unless this map has already been
+    defined with more decals).  Above this column, you should see
+    18x18 views of all of your custom-defined graphics.
+
+6b. You will begin by editing decal "0".
+
+7. The current active decal will always remain in the center of the
+   view.  You can fly around the level, positioning the decal
+   simply by "looking" at the spot where you want to place the decal.
+
+8. Once you have selected a position to place the decal, utilize the
+   graphics selection, sizing, and rotation commands to place the decal
+   perfectly.
+
+9. To add another decal, use the \decaladd command.  The decal will
+   be created with an initial state of "disabled".  Use the \decalenable
+   command to enable it and set it placement.
+
+10. Repeat this process for every decal you want to place on the map.
+
+11. Once you have placed all of the decals you wish to have for the
+    map, use the \decaledit to stop editing.
+
+12. Fly around the map to ensure your decals are how you expect them
+    to appear to players/spectators.
+
+13. After everything has been verified, issue the \decaldump command
+    to save the decal positioning.
+
+13a. The \decaldump command will ONLY save information on ACTIVE and
+     ENABLED decals.
+
+14. Repeat this entire process for all of the maps you wish to place
+    your custom decals.
+
+15. All of the decal positioning information is located in the main
+    osp/ directory, in the decals/ sub-directory.  Copy of these
+    files (along with the custom graphics .pk3 you made back in step 1)
+    to the server you will use for decal display.
+
+16. That's it!  Players, upon connection, will download your custom
+    graphics .pk3 and the server will inform them all necessary infor-
+    mation to view your custom decals.
+
+
+Misc. Info:
+-----------
+- By default, OSP looks in the decals/ directory for map decal definitions.
+  This can be changed by setting the decal_directory variable (on the
+  server) to any other directory under the main osp/ directory.
+
+- The decals assume a graphic that is NxN in size.  If you have a non-square
+  graphic that you want to use (i.e. its dimensions are NxM), then you will
+  have to add clear filler on the sides or top/bottom (depending on your
+  graphics aspect ratio).  If you dont do this, your graphic will be streched
+  to the longest length to create a NxN graphic, with results usually looking
+  quite nasty :)
+
+
+Commands:
+---------
+decaladd		- Adds a new decal.  It will be created in DISABLED
+			  mode.  Enable it to begin editing its placement
+			  and graphic.
+
+decaldec		- Decreases the size of the current decal.
+
+decaldisable	- Disables the current decal.
+
+decaldump		- Dumps the current set of ENABLED decals to
+			  <Quake3_root/osp/decals/decal-<mapname>.txt
+
+decaledit		- Enables/disables decal editting mode.
+
+decalenable		- Enables the current decal.
+
+decalgfxnext	- Rotates the current decal's graphic to the next
+			  defined custom graphic.
+
+decalgfxprev	- Rotates the current decal's graphic to the
+			  previous defined custom graphic.
+
+decalinc		- Increases the size of the current decal.
+decalnext		- Moves to the next active decal.
+
+decalprev		- Moves to the previous active decal.
+
+decalrotclock	- Rotates current decal clockwise.
+
+decalrotcounter	- Rotates current decal counter-clockwise.

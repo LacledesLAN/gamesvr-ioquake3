@@ -1,0 +1,386 @@
+// OSP Tourney DM/CA/CTF Commands for Quake3
+// -----------------------------------------
+// http://www.OrangeSmoothie.org
+// rhea@OrangeSmoothie.org
+// v(1.01)
+// 01 Jan 02
+
+以下为OSP Tourney DM/CA/CTF中客户端和服务器端所有命令（以及他们的选项）
+的信息。
+
+所有命令可以通过参数设置，也可以不带参数来获得当前该命令设置的参数，
+即使该命令没有被设置参数。
+
+命令中符号的定义和Unix中定义方法是一样的，分为必选和可选参数：
+
+  - < ... >中的参数是必选参数
+  - [ ... ]中的参数是可选参数
+
+下面的一些命令中定义"player_id"为可选或必选参数。"player_id"为玩家连入
+服务器时分配给玩家的一个数字型的ID数字。要获得玩家的player_id，在控制台
+输入"\players"命令就可以看到每个玩家的"player_id"。
+
+注意：下面列出的命令为除Quake3默认命令外的OSP命令。
+
+
+OSP最新的相关中文文本信息你可以在http://www.q3acn.com获得，
+如果有问题请与cat@q3acn.com联系。
+
+==============================================
+一般命令 (所有模式)
+==============================================
+autorecord              使用特定的命名信息自动录制录象（只在OSP客户端）
+
+autoscreenshot          使用特定的命名信息自动截图（只在OSP客户端）
+
+bottomshots [wpn_abbr]	显示使用武器次数最少玩家的最差武器的命中率。如
+			果后跟一武器缩写，则显示所有符合条件玩家指定武
+			器的命中率（MG，SG，GL，RL，LG，RG，PG，BFG）。
+
++button5                如果服务器允许的话，用来使用飞抓
+
+callvote <params>       大家很熟悉的命令，但OSP中可选项要丰富的多，具体的参见后面
+
+credits                 显示OSP制作人员名单
+
+currenttime             显示本地的当前时间
+
+followpowerup           如果你是在追随模式，当宝物被吃后，视角自动跟踪持有宝物的人。
+
+help                    列出该模式下命令清单（作用和commands相同）
+
+menu                    拉出OSP客户端的cgame菜单，通过weapnext/weapprev来上下移动，
+                        menuleft/menuright来前进/后退
+
+motd                    查看服务器现在的MOTD
+
+players                 列出所有玩家的数字序号
+
+ref <password>          成为裁判（但必须是服务器预先设定了）
+
+settings		显示当前游戏模式服务器的参数设置。绿色字体为当前设置和默认
+			值相同的参数，红色字体为当前设置与默认值不同的参数。
+
+speconly                如果打开，则以后连入的，只能观看，而不能参加比赛，
+                        只有取消该命令后，旁观者才能重新排队比赛
+
+stats [player_ID]       显示玩家的各种武器的命中率，如果只用stats则显示现在玩家的（如果是在跟踪                        模式下，则显示被跟踪人的）
+
+statsall		显示所有活动玩家状态
+
+statsblue/statsred	显示蓝队/红队状态
+
+statsdump               将现在的stats/scores保存到<osp_root>/stats/<date>/<logname>.txt
+                
+team s                  转换到旁观模式
+
+topshots [weapon_abbr]  显示使用武器次数最少玩家的最高武器的命中率。
+                        如果后面跟了武器的缩写，会显示符合条件的所
+			有玩家命中率（MG, SG, GL, RL, LG, RG, PG, BFG）
+
++wstats                 显示当前正在比赛或被跟踪玩家的状态。在多视角中，
+                        此玩家会在突出的窗口显示
+
+vc_follow [player_ID]   将viewcam置于跟踪模式中
+
+vc_free                 在玩家中定义手动或自动的viewcam
+
+vc_view                 定义viewcam是动态的还是静态的。
+
+viewall                 在服务器上多视角观看所有活动玩家。
+
+viewblue/viewred        多视角观看整个蓝队/红队。
+
+viewcam                 打开viewcam模式
+
+viewadd <player_id>     将游戏中玩家的pov增加到屏幕上
+
+viewremove [player_id]  删掉当前看的玩家突出的pov
+
+viewfollow              镜头将移动到跟踪视角
+
+viewnone                删掉所有活动的view
+
+viewnext/viewprev       向前或向后移动views（注意：在multi-view模式中用follownext/followprev来代                        替
+
+                       --> 如何在多点观看的键位帮定例子
+                                bind ";" viewprev
+                                bind "'" viewnext
+                                bind backspace viewremove
+
+viewcyclenext/          在队友中循环更换视角。在1v1/FFA中，将切换到没有
+viewcycleprev           切换到的视角
+
+                       --> 例子
+                                bind "[" followprev
+                                bind "]" follownext
+                                bind ";" viewprev
+                                bind "'" viewnext
+                                bind "." viewcycleprev
+                                bind "/" viewcyclenext
+                                bind backspace viewremove
+                                bind enter viewfollow
+
+
+
+=====================================
+比赛命令 (g_doWarmup = 1)
+=====================================
+
+ready           定义当玩家处于ready时，开始比赛
+notready        定义当玩家处于not ready时，开始比赛
+time            暂停/继续比赛
+pause           暂停或继续比赛 (裁判或相关人员才可使用)
+
+
+
+==========================================================
+组队中特别的命令（通用） (g_gametype = 3, 4, or 5)
+==========================================================
+captains                显示各队的队长名称
+
+coach                   切换到教练旁观模式（在被邀请到队伍中后），或者重新初始化
+                        教练队伍的视角。教练可以进行队友通讯，可以暂停，可以使队伍
+                        处于ready状态等。但只能旁观被教导的队伍
+
+coachdecline            拒绝教练请求，或辞去教练职务
+
+coachinvite <player_id> 邀请一个玩家以教练身份进入队伍
+
+coachkick <player_id>   辞去一个教练
+
+drop <item>             抛出武器或旗子（只在混战和组队中有用），当不带参数时
+                        显示现在可以抛出东西的清单
+
+joincode [password]     显示现在队伍的加入密码（不带参数时）或进入一锁定的队伍
+
+lock                    锁定一个队伍
+
+scores                  显示目前各队状况
+
+team <r|b|s|none>       选择队伍 (r=红队, b=蓝队, s=旁观) 
+                        或显示现在属于哪支队伍（只使用team命令，不带任何参数时）
+
+time                    暂停/继续比赛（等同pause）
+
+timein                  继续比赛（等同unpause）
+
+timeout                 暂停比赛（等同pause）
+
+unlock                  解除一个队伍的锁定
+
+viewred/viewblue        在红队或蓝队中增加一个视角。当新玩家加入或退出比赛时，
+                        你的屏幕将被更新。
+
+
+
+
+==========================================================
+组队中特别的命令（队长用） (g_gametype = 3, 4, or 5)
+==========================================================
+invite <player_id>      邀请一个玩家到队长所在的队伍（与pickplayer相同）
+
+remove <player_id>      使一队员退出队长所在队伍（与kickplayer相同）
+
+resign [player_ID]      辞去队长职务。你可以通过player-id将队长职务赋予队友
+
+
+specinvite <player_id>  邀请一个玩家旁观锁定的队伍
+
+speclock                锁定旁观者不能旁观本队伍
+
+teamready               使所有队员处于ready而开始比赛（与readyteam相同）
+
+
+========================
+裁判 (管理员)命令
+========================
+ref <vote_option> <param> 可以利用vote选项来改变设置
+r_abort                 取消一场正在进行的比赛（主要用于CA模式）
+r_allcaptain            给所有玩家有限的队长命令权限
+r_allready              使所有玩家处于ready状态从而开始比赛
+r_ban <player_id>       从服务器上Ban掉指定的玩家
+r_help                  列出裁判员专用命令表
+r_kick <player_id>      从服务器上踢出指定玩家
+r_lock                  锁定所有队伍防止再有玩家加入（与lock作用相同）
+r_lockblue              锁定蓝队
+r_lockred               锁定红队
+r_map <mapname>         调入指定地图
+r_mutespecs             禁止或开禁旁观者交谈
+r_pause                 暂停或继续比赛（与pause作用相同）
+r_promote <player_id>   使指定玩家成为队长
+r_putblue <player_id>   使指定玩家进入蓝队
+r_putred <player_id>    使指定玩家进入红队
+r_remove <player_id>    使指定队员退出原队伍
+r_restart               在现在的地图上重新开始
+r_speclock              锁定旁观者不能旁观所有队伍
+r_speclockblue          锁定旁观者不能旁观蓝队
+r_speclockred           锁定旁观者不能旁观红队
+r_specunlock            使旁观者能旁观所有队伍
+r_specunlockblue        使旁观者能旁观蓝队
+r_specunlockred         使旁观者能旁观红队
+r_unlock                解除队伍锁定
+r_unlockblue            解除蓝队锁定
+r_unlockred             解除红队锁定
+
+
+*注意*：所有投票选项，裁判有一票通过或否决权。这样裁判可以来合理设置服务器的参数
+
+
+========================
+Viewcam 编辑命令
+========================
+
+请参看osp/Docs/下的osp-q3-Viewcam.txt的文档介绍
+命令如下：
+
+range
+snapshot
+snapshotdump
+vc_proximity
+vc_info
+
+
+
+======================
+贴图编辑命令
+======================
+请参考osp/Docs/下的osp-q3-Decal-Editing.txt文件来获得更多命令的使用信息：
+
+decaladd	- 增加一个新贴图。它将在关闭模式中建立，在打开模式下
+                  开始编辑贴图的放置和图象。
+
+decaldec	- 减少现在贴图的大小
+
+decaldisable	- 关闭现在的贴图
+
+decaldump	- 放置现在打开贴图的设置到
+                  <Quake3_root/osp/decals/decal-<mapname>.txt
+
+decaledit	- 打开/关闭贴图编辑模式
+
+decalenable	- 使用现在的贴图
+
+decalgfxnext	- 旋转现在贴图图象到下一个自定义图象
+
+decalgfxprev	- 旋转现在贴图图象到上一个自定义图象
+
+decalinc	- 增加现在贴图大小
+
+decalnext	- 到下一个可用的贴图
+
+decalprev	- 到上一个可用的贴图
+
+decalrotclock	- 顺时针旋转当前的贴图
+
+decalrotcounter	- 逆时针旋转当前的贴图
+
+
+==========================
+callvote命令参数详解
+==========================
+下面这些OSP中"callvote"选项一般都是"0"或"1"来实现"关闭"或"打开"
+(0=关闭，1=打开)
+
+你可以在控制台输入\callvote ?来得到其参数一览表
+
+
+你也可以不输入任何数值，
+
+\callvote <option_name> ?
+
+来获取现在服务器的设置，如你可以输入callvote bfg ?来看服务器是否允许bfg
+
+
+以下就是全部的参数
+---------------------------------------------
+** 通用参数 **
+  altgraphics <0|1>          定义客户端是否可以使用可选择的pg和lg图象
+  dropitems <0|1>            是否允许抛出武器和旗子（但对tourney模式没有作用）	
+  instagib <0|1>             在现在的模式下定义"instagib"设置
+  fallingdamage <0|1>        是否允许跌落时对玩家造成伤害
+  fastrail <0|1>             Promode (CPM)下的可选设置，rg的间隔可被设为
+			     1500ms（0时），1000ms（1时）
+  hook <0|1>                 是否允许使用飞抓
+  kick <player_id>           是否从服务器上踢出指定玩家
+  lgcooldown <0|1>           Promode (CPM)下的可选设置,电枪的 "cooldown"延
+			     迟可被设为0ms（0时），200ms（当fastrail被打开
+			     时为100ms）（1时）
+  map <mapname|map_id>       是否调入一指定的新地图
+  map_restart                是否在目前的地图上重新开始
+  maxpackets_min <value>     设置客户端cl_maxpackets最小值（0等于取消）
+  maxpackets_max <value>     设置客户端cl_maxpackets最大值（0等于取消）
+  mg_damage <value>          设置mg每发子弹的伤害程度，最大为10，最小为1
+  mg_startammo <value>       设置玩家重生时mg子弹数量。最小0，最大500
+  mode <available_modes>     是否调入指定的服务器设定，如果服务器已经被
+			     正确的设定，这个命令通常用来调入一游戏模式（如ctf、dm）
+  mutespecs <0|1>            是否允许旁观者的交谈出现在正在游戏的玩家屏幕上
+  nextmap                    是否允许把指定的地图作为下一个地图
+  osphud <0|1>               定义客户端是否可以使用cg_enableOSPHUD设置
+  overtime <0|1|2|3>         设置加时规则
+                               0 - 突然死亡
+                               1 - X局后突然死亡
+                               2 - 没有加时（平分结束）
+                               3 - 加时后结束（可以平分）
+  pmove <0|1>                定义客户端是否可以使用客户端取样
+                               0 - 关闭
+                               1 - id的pmove
+                               2 - 增强的pmove
+  promode <0|1>              是否使用promode模式
+  qil|kit [mapname]	     切换到QIL TDM比赛模式
+  referee <player>           是否选指定的玩家为裁判
+  reload <100-5000>	     设置RG的子弹装入时间（单位为毫秒），只有在
+			     instagib模式下才能使用。
+  respawn <secs>             是否允许指定的时间为玩家重生前的延迟时间
+  set1v1 [mapname]           变换到1v1的模式默认设置
+  setca [mapname]            变换到CA的模式默认设置
+  setctf [mapname]           改变到CTF的模式默认设置
+  settdm [mapname]           改变到TDM的模式默认设置
+  thrufloors <0|1>           是否允许rl和pg等的武器有崩蓬效果
+  timenudge_min <value>      设置cl_timenudge的最小值（0为取消）
+  timenudge_max <value>      设置cl_timenudge的最大值（0为取消）
+  unreferee <player>         取消一个玩家的裁判职能
+  cl/capturelimit <value>    是否改变现在的夺旗目标数（只在ctf中有用）
+  fl/fraglimit <value>       是否改变现在的frag目标数
+  rl/roundlimit <time>       是否改变现在的场次目标时间（仅在ca模式中有用）
+  tl/timelimit <time>        是否改变现在的目标时间
+
+
+** 除了ca模式外的其他模式的参数 **
+  bfg <0|1>                  是否屏蔽掉bfg
+  bsuit <0|1>                是否屏蔽掉金身的宝物
+  invis <0|1>                是否屏蔽掉隐形的宝物
+  medkit <0|1>               是否屏蔽掉药针
+  quad <0|1>                 是否屏蔽掉雷神环
+  regen <0|1>                是否屏蔽掉加血的宝物
+  teleporter <0|1>           是否屏蔽掉手持传送器
+
+
+** ClanArena-based parameters **
+**CA模式参数**
+  armordamage <0|1>          定义玩家自伤时是否损失装甲（只在CA模式下有用）
+  startrespawn <0|1>         定义每局开始时客户端是否重生（只在CA模式下有用）
+  warmupfire <0|1>           定义玩家热身时是否可以开火（只在CA模式下有用）
+
+** 组队参数 **
+  allcaptain <0|1>           给予所有队员以队长权限（除了剔除某人的命令）
+  teamdamage <0|1>           定义是否可以伤害队友
+
+===============
+服务器命令
+===============
+
+以下命令是在服务器控制台使用的命令。
+
+addbot              当bot名不是quake3默认的bot时，OSP会自动调入一个与你设置
+                    名字相同的bot
+allready            使所有客户端处于ready状态
+ban <player_id>     从服务器上ban一个玩家
+
+filterlist          显示现在服务器所有的限制（等同banlist）
+filterload          调入服务器上的 filter_file和player_file中
+                    指定的过滤和/ban（等同playernames, banload）
+loadmaps            调入服务器的地图队列
+pause               暂停比赛（等同于mpause）
+players             显示玩家信息
+

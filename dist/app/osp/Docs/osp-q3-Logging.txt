@@ -1,0 +1,108 @@
+Here are the G_LogPrintf() lines I've added for OSP.  I just included
+the calls, so if something is confusing/needs clarification, let me
+know and I'll document it better =)
+
+-Rhea
+
+OrangeSmoothie Productions
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+
+[PS = Player State .. gives player_id, health, armor, and update reason info]
+-----------------------------------------------------------------------------
+G_LogPrintf("PS: %i %i %i -1 REGENERATION\n", ent->s.number, ent->health, ent->client->ps.stats[STAT_ARMOR])
+G_LogPrintf("PS: %i %i %i -1 REGENERATION\n", ent->s.number, ent->health, ent->client->ps.stats[STAT_ARMOR]);
+G_LogPrintf("PS: %i %i %i -1 HEALTH_MAX\n", ent->s.number, ent->health, ent->client->ps.stats[STAT_ARMOR]);
+G_LogPrintf("PS: %i %i %i -1 ARMOR_MAX\n", ent->s.number, ent->health, ent->client->ps.stats[STAT_ARMOR]);
+G_LogPrintf("PS: %i %i %i -1 RESPAWN\n", ent->s.number, ent->health, ent->client->ps.stats[STAT_ARMOR]);
+G_LogPrintf("PS: %i %i %i -1 HEALTH_PICKUP\n", other->s.number, other->health, other->client->ps.stats[STAT_ARMOR]);
+G_LogPrintf("PS: %i %i %i -1 ARMOR_PICKUP\n", other->s.number, other->health, other->client->ps.stats[STAT_ARMOR]);
+G_LogPrintf("PS: %i %i %i %i %i\n", targ->s.number, hlth, targ->client->ps.stats[STAT_ARMOR],
+		(attacker && attacker->s.number < MAX_CLIENTS && attacker->s.number >= 0)?attacker->s.number:ENTITYNUM_WORLD, mod);
+
+(if log_default = 0)
+G_LogPrintf("Kill: %i %i %i: %s killed %s by %s %i\n",
+		 killer, self->s.number, meansOfDeath, killerName,
+		 self->client->pers.netname, obit, self->s.weapon);
+
+G_LogPrintf("Game_Start:\n");
+
+G_LogPrintf("Game_End: Timelimit\n");
+G_LogPrintf("Game_End: Fraglimit\n");
+G_LogPrintf("Game_End: Capturelimit\n");
+G_LogPrintf("Game_End: Scorelimit\n");
+
+G_LogPrintf("Resetting back to default settings\n");
+
+G_LogPrintf("Referee Setting: %s\n", level.voteString);
+G_LogPrintf("Vote Passed: %s\n", level.voteString);
+G_LogPrintf("Vote Failed: %s\n", level.voteString);
+
+G_LogPrintf("DEMORECORD: j[0]=%d, j[1]=%d\n", j[0], j[1]);
+
+
+Referee/Console pausing
+-----------------------
+G_LogPrintf("Pause: %s\n", ref);
+G_LogPrintf("Unpause: %s\n", ref);
+G_LogPrintf("Unpause: Complete\n");
+
+
+Timeout/in for teamplay modes
+-----------------------------
+G_LogPrintf("Timeout: RED team\n");
+G_LogPrintf("Timeout: BLUE team\n");
+G_LogPrintf("Timein: %s team\n", tname[tteam]);
+
+
+Timeout/in for 1v1
+------------------
+G_LogPrintf("Timeout: %s\n", ent->client->pers.netname);
+G_LogPrintf("Timein: %s\n", ent->client->pers.netname);
+
+
+Weapon stats
+------------
+[non-teamplay] Weapon_Stats <p_id> <weap_name:attempts:hits> ... Given:<x> Recvd:<x>
+    [teamplay] Weapon_Stats <p_id> <weap_name:attempts:hits> ... Given:<x> Recvd:<x> TeamDmg:<x>
+
+
+CA-specific
+-----------
+G_LogPrintf(va("Game_End: Roundlimit - %s wins match\n", nameteam[team_win]));
+
+
+CTF-specific
+------------
+G_LogPrintf("Kill_Carrier: %d\n", attacker-g_entities);
+G_LogPrintf("Defend_Hurt_Carrier: %d\n", attacker-g_entities);
+G_LogPrintf("Defend_Base: %d\n", attacker-g_entities);
+G_LogPrintf("Defend_Flag: %d\n", attacker-g_entities);
+G_LogPrintf("Defend_Carrier: %d\n", attacker-g_entities);
+G_LogPrintf("Flag_Return: %d\n", other-g_entities);
+G_LogPrintf("Flag_Capture: %d\n", other-g_entities);
+G_LogPrintf("Flag_Assist_Return: %d\n", player-g_entities);
+G_LogPrintf("Flag_Assist_Frag: %d\n", player-g_entities);
+G_LogPrintf("Flag_Pickup: %d\n", other-g_entities);
+
+
+Viewcam Recording
+-----------------
+G_LogPrintf("%d %.3f %.3f %.3f %.3f %.3f\n",
+						snapshot_cnt - 1,
+						snapshot_pos[snapshot_cnt - 1][0],
+						snapshot_pos[snapshot_cnt - 1][1],
+						snapshot_pos[snapshot_cnt - 1][2],
+						snapshot_view[snapshot_cnt - 1][0],
+						snapshot_view[snapshot_cnt - 1][1]);
+
+if(!g_dedicated.integer && level.numConnectedClients == 1) {
+	G_LogPrintf("%d %.3f %.3f %.3f %.3f %.3f\n",
+							i,
+							snapshot_pos[i][0],
+							snapshot_pos[i][1],
+							snapshot_pos[i][2],
+							snapshot_view[i][0],
+							snapshot_view[i][1]);
+}

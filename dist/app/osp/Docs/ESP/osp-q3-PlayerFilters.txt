@@ -1,0 +1,131 @@
+Filtrado de Jugadores en OSP
+============================
+rhea@OrangeSmoothie.org
+14 Dec 01
+
+====================================================
+ Traducido al Español por el equipo Rancid:
+====================================================
+ - Pablo González 	alias Totoro
+ - Roberto Konow 		alias Ratón
+ - Antonio Inocencio	alias Nyto
+ - Mauricio Quilpatay 	alias Phobos
+
+ WWW:		http://www.rancid.cl
+ Email: 	webmaster@rancid.cl
+ IRC:		#rancid on irc.enterthegame.com
+
+ --> Visita www.rancid.cl para obtener noticias
+     del E-Sport y Quake3 totalmente en Español.
+====================================================
+====================================================
+
+El filtrado de Jugadores en OSP permite mas que banear 
+una sola dirección IP.  Debajo encontraras una descripción
+de las opciones actuales en la versión del OSP Tourney DM/CA/CTF para Quake3.
+
+Todas los comandos de filtrado son de la forma:
+
+<ban_command> <TAB> <player_name> <TAB> <address_prefix> <TAB> <password>
+
+<ban_command>:
+	banplayer
+	bantag
+	banaddr
+	banpass
+
+<player_name>
+	Nombre (o parcial) del jugador a banear/permitir.
+
+<address_prefix>
+	El comienzo de la dirección del cliente a banear/permitir.
+	Notese que la versión actual NO soporta la especificación
+	de la mascara de la subred, además este método es el 	"tradicional" filtro para Clase C o mejor (Aunque pudieras 	pasar con una subnet más pequeña si es que sabes lo que estas 	haciendo).
+
+<password>
+	Especifica la pass pública del cliente(s) o la "osp_password"
+	(usar el comando "setu osp_password") que debe setearse para 	pass/fail del filtro actual.
+
+----> Nota: Especificar "none" en un campo inhabilitara este campo 	para el actual filtro.
+
+
+Filtrando el nombre
+-------------------
+El tradicional filtro de nombres.  Este especifica una exacta coincidencia (excepto las mayúsculas y el color) del nombre del jugador para permitir/denegar.
+Al jugador SIEMPRE se le negará acceso al servidor (o cambiando su nombre después de conectar) con el nombre especificado en el filtro.
+
+El cliente todavía puede conectarse aun cuando los nombres coincidan con los especificados en el filtro aunque ellos puedan coincidir con cualquiera de los dos criterios:
+	- Satisfaciendo la regla de <address_prefix> (si se especifica)
+	- Satisfaciendo la regla de <password>  (si se especifica)  en 	  su "contraseña" o "osp_password" del userinfo del cliente 
+
+----> Éste es un método viejo para prohibir (Baneo). Se recomienda 	que el filtro "bantag" (abajo) sea usado en casi todos los 	casos.
+
+Uso:
+
+banplayer	Rhea	none	none
+	---> (Nadie con el nombre "Rhea" podrá conectar nunca, (o 	     cambiando su nombre en el juego a "Rhea" después de 		     conectar con un nombre valido)
+
+banplayer	Johnny	129.237.	my_bad
+	---> (Nadie con el nombre "Johnny" podra conectar nunca (o 	     cambiando su nombre a "Johnny") a menos que estén 		     conectando desde una dirección que empieza con "129. 237."	     y si ellos tienen su "password" o "osp_password" como 		     "my_bad").
+
+
+Filtrado del nombre "etiqueta"
+------------------------------
+Filtrado del nombre basado en un patrón de coincidencia.  
+Este especifica un filtro con un patrón de coincidencia,  
+(excepto mayúsculas y colores ) del nombre de un jugador para permitir/denegar.  
+La principal diferencia entre este tipo de filtro y el filtro del nombre (arriba) son las "etiquetas" que los clanes suelen usar antes o entre sus nombres (fraudes, impostores... se entiende?).  También es útil para impedir que las personas cambien su nombre ligeramente para lograr el mismo efecto
+
+Al jugador SIEMPRE se le negará acceso al servidor (o cambiando su nombre después de conectar) con el nombre especificado en el filtro.
+
+El cliente todavía puede conectarse aun cuando su nombre  contiene lo especificadoen el patrón de la etiqueta y puede coincidir en uno de los dos criterios:
+
+	- Satisfaciendo la regla de <address_prefix>  (Si se 	  especifica)
+	- Satisfaciendo la regla de <password> rule (Si se especifica) 	  en su "password" o "osp_password" del userinfo del cliente.
+
+---->  Se recomienda que esta forma de prohibir un nombre se usara en 
+       casi todos los casos.  De hecho, yo no encuentro razón para no 	 usarlo en lugar del "banplayer" =) 
+
+Uso:
+bantag	a|	none	w3rd
+	---> (Nadie puede conectar con el patron "a|" en su nombre a 		menos que ellos tengan su "contraseña" o "osp_password" 	      como "w3rd").
+
+
+Filtrado de direccion IP
+------------------------
+Filtrado de dirección IP de un client.  Esto permite administrar la negación al cliente basado solamente en su dirección de IP.
+Al jugador SIEMPRE se le negará el acceso al servidor basado en su dirección que coincida con el filtro <address_prefeix> a menos que el cliente coincida con estos dos criterios:
+	- Satisfaciendo la regla de <player_name> (si se especifica)
+	- Satisfaciendo la regla de <password> (si se especifica) 
+	  en su "contraseña" o "osp_password" del userinfo del cliente .
+
+---->  Éste probablemente es el método primario para usar para 	 prohibir a un jugador el acceso
+
+Uso:
+banaddr	none	129.237.	none
+	---> (Nadie podra conectar de una dirección que empieza con
+		"129.237.",periodo)
+
+banaddr	none	129.237.	imc00l
+	---> (Nadie podrá conectar de una dirección que empieza con
+		"129.237." a menos que posean su "contraseña"  o
+		"osp_password" como "imc00l").
+
+
+Filtrado de password
+--------------------
+Este permite administrar múltiples contraseñas del servidor para los clientes que poseen la password especifica en su "password" o "osp_password" variable.  
+Los Jugadores pueden desviar la contraseña si:
+	- Satisfaciendo la regla de <player_name> (si se especifica)
+	- Satisfaciendo la regla de <address_prefix> (si se especifica)
+
+----> Los jugadores no serán baneados a menos que ellos fallen en 	todos los filtros del "banpass" (si hay alguno especificado).
+ 
+Tu puedes tener contraseñas temporales mientras usas contraseñas predefinidas que se mantengan por periodo más largos.
+
+Uso:
+banpass	none	129.237.	onthedownlow
+	--->  (el jugador no pasara por el filtro si su "password" o
+	      "osp_password" no coincide con "onthedownlow" a menos que  
+            esten conectando de una dirección con la que empieza "129. 237.").
+

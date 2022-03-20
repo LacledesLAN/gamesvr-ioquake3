@@ -1,0 +1,83 @@
+# Below is a description of how to use map .cfg files.  The example here
+# is for the "ffamaps.txt" configuration.
+#
+#
+# "ffamaps.txt"
+# -------------
+# Example of the format of the text file used for specifying maps under
+# OSP Tourney DM for Quake3.
+#
+# Format:
+#
+#      <mapname> <min_players> <max_players> <fraglimit> <capturelimit> <timelimit> <roundlimit>
+#
+#	Note: A value < 0 for any of the fl, tl, or cl means to use current
+#	      server settings
+#
+# The map queue will only load a map if its min/max active player counts on
+# the current level are within its bounds.  Otherwise, the map will NOT be loaded.
+#
+# If you dont want any limits on each map, just specify the map with no min/max
+# values on each line.
+#
+# We use a trick here... only load usual maps between level loads.
+# In the case of some of the maps, it unlikely that there are 99 people
+# in a match watching, but they ARE available for voting reasons.
+#
+# Use a min of 0 for maps that should be rotated through when there is
+# nobody on and playing.  Probably should use popular maps for quick
+# pickup games when people connect initially.
+#
+# Also, there is an alternate format that can be used if one wishes to
+# change more than just fl/tl/cl/rl:
+#
+#     configmap <mapname> <min_players> <max_players> <config_to_exec>
+#
+# The config_to_exec file will be executed from the fs_game directory
+# (osp/ if osp_gamename is 1, or baseq3/ if osp_gamename is 0).
+#
+#
+# If you dont feel like setting up any maplists, OSP can automatically create
+# one for you!  The "map_autoload 1" setting will dynamically create a map-
+# list, based on information about maps in their respective .arena file
+# specification.  OSP will pick up maps in either the osp/ or baseq3/
+# directories, and add them to the map list *if* they specify the current
+# gametype in their .arena specification (usually included within the
+# map's .pk3.
+#
+# However, there may be some maps you DON'T want to include.  OSP provides
+# another use for the maplist file in that you can specify maps to NOT
+# include.  The format is simple:
+#
+#     deletemap <mapname>
+#
+# Any maps that would be dynamically added that are specified in a deletemap
+# entry will NOT be added to the maplist.
+#
+q3dm1  00 06 20 0 20 -1
+# "configmap" example:
+configmap q3dm1 00 06 mapq3dm1.cfg 
+q3dm2  00 07 25 0 20 -1
+q3dm3  00 08 25 0 20 -1
+q3dm4  00 06 25 0 15 -1
+q3dm5  00 06 25 0 15 -1
+q3dm6  04 14 25 0 20 -1
+q3dm7  04 99 30 0 20 -1
+q3dm8  02 14
+q3dm9  02 14
+q3dm10 03 14
+q3dm11 03 14
+q3dm12 04 99 25 0 20 -1
+q3dm13 04 10 30 0 20 -1
+q3dm14 04 14
+q3dm15 04 14
+q3dm16 03 99
+q3dm17 04 99
+q3dm18 99 99 20 0 20 -1
+q3dm19 99 99 20 0 20 -1
+q3tourney2 00 06 20 0 10 -1
+q3tourney3 00 07 20 0 10 -1
+q3tourney4 00 07 20 0 10 -1
+q3tourney5 00 05 20 0 10 -1
+deletemap q3tourney1
+deletemap q3tourney6

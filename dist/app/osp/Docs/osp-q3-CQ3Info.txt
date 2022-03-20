@@ -1,0 +1,84 @@
+CQ3 (Challenge Quake3) Information:
+-----------------------------------
+28 January 2002
+
+
+Note: This is not necessarily the final version of the settings.
+
+CQ3 is an update to the core Quake3 settings in an attempt to "de-newbietize"
+some of the fundamental aspects of competitive Q3 gameplay.  The appropriate
+term in referring to this format is "Chocolate Quake3" :)
+
+Without further ado, here is the list of changes:
+
+Strategic:
+==========
+  - Hit tones:
+      o Four tones, each with a 25-damage range
+      o Lower pitches indicate higher damage
+
+  - Player spawns:
+      o 100 health;
+      o 50 bullets for the MG
+      o Player respawn times are reduced:
+         . Minimum limbo time is 1 second
+         . Maximum limbo time is 10 seconds
+
+  - Weapon respawns:
+      o FFA - 5 seconds
+      o 1v1 - 15 seconds
+      o TDM - 30 seconds
+      o CTF - 5 seconds
+
+  - Item respawns:
+      o Ammo boxes - 30 seconds
+      o Health - 30 seconds
+      o DM MegaHealth - 20 seconds after it "runs out"
+
+  - Powerups:
+      o Initial powerup spawns: 15-30 seconds into the game, 2min there-after
+      o Powerup factors:
+         . Quad is "true", i.e. 4x damage
+         . BattleSuit protects at 75%
+
+   - Armor system:
+       o No "decay" over time
+       o Green Armor (GA)  - protects 1:1, first pickup 50, second adds 50  (max 100)
+       o Yellow Armor (YA) - protects 2:1, first pickup 100, second adds 50 (max 150)
+       o Red Armor (RA)    - protects 3:1, first pickup 150, second adds 50 (max 200)
+
+   - Machinegun settings:
+       o FFA/1v1: 5 damage per shot
+       o TDM/CA:  4 damage per shot
+       o CTF:     7 damage per shot
+       o 30 bullets per ammo box
+
+   - Railgun settings:
+       o Railgun ammo boxes give 5 slugs
+
+   - Maximum ammo counts:
+       o SG 100; GL 100; RL 100; RG 100
+
+   - Item "sizes":
+       o Items can be picked up while strafejumping
+
+   - Water speeds:
+       o Faster wading and swimming
+
+Fixes:
+======
+   - Damage from the "world":
+       o Lava and slime cause a steady flow of damage
+
+   - Shotgun:
+       o Pattern is more evenly spread and more predictable
+       o 16 shots at 6 damage each (max damage now only 96)
+
+
+
+***********************************************************************************
+****
+**** Note: If its not listed here, then whatever setting in question follows normal
+****       baseq3 rules.
+****
+***********************************************************************************

@@ -1,0 +1,772 @@
+// Custom Server Settings: OSP Tourney DM - Quake3
+// -----------------------------------------------
+// Version: 1.0
+// Date:    14 Oct 2001
+// Email:   rhea@OrangeSmoothie.org
+// WWW:     http://www.OrangeSmoothie.org
+// IRC:     irc.enterthegame.com: #osp
+//
+//
+// 注意：不要用这个config来做你自己服务器的config!!请将此作为你
+//       自己config的参考。
+//
+//
+// 推荐专用服务器（dedicated server）运行命令：
+//
+//    quake3 +set dedicated 2 +set fs_game osp +exec <config>
+//
+//OSP最新的相关中文文本信息你可以在http://www.q3acn.com获得，
+//如果有问题请与cat@q3acn.com联系。
+//
+// =========================
+//    启动（参考）
+// =========================
+// admin_log <log文件名>
+//      记录服务器的其他诸如玩家IP地址、裁判命令的发布等信息，
+//      设置成""或"none将取消记录功能（默认是没有）
+//
+// decal_directory <路径>
+//      在osp目录下指定目录在寻找贴图定义（默认是"decals"）
+//
+// dmflags <df_mask>
+//      id的q3选项（默认是0）
+//      df_mask:
+//	--------
+//      8  - 没有坠落伤害
+//      16 - 固定FOV
+//      32 - 没有脚步声
+//
+//
+// filter_file <文件名>
+//      指定服务器对客户端过滤的文件名（默认为"filters.txt"），详细
+//      信息参考Docs/Player-filters-q3.txt
+//
+// g_spectatorInactivity <数值>
+//      定义旁观者在服务器旁观时多少时间（以秒表示）不做任何动作，会被服务器
+//      自动踢出服务器。参数设置为0时将关闭此选项（此为默认）。参数被设置成
+//      <0服务器将不会允许旁观者。
+//
+// player_file <文件名>
+//      指定一个允许连入服务器的玩家名字的列表（默认是"none"）。玩家名字
+//      被加入到指定的这个文件中。如果这个选项被打开，只有列表中的玩家可以
+//      连入服务器。
+//
+// player_always <名字>
+//      指定玩家名称开始的标记，这样不管标记后面为什么，该玩家都不能连入
+//      
+// pmove_fixed <0|1>
+//      允许客户端使用增强的客户端取样（客户端也用要这个命令来打开）
+//
+// osp_gamename <0|1>
+//       允许osp当作baseq3来运行，可以通过q3的UI服务器搜寻，
+//        0 - 显示"FFA/1V1/TDM/CTF/???"
+//        1 - 显示"osp"
+//         注意如果使用这个功能的话，要拷贝paks下的pk3文件到baseq3下，
+//         并改成"zzzosp-game099.pk3"类的名
+//
+// roundlimit <数值>
+//      指定CA模式中一队胜的局数（默认是7）
+//
+// server_availmodes <flags>
+//       指定可以投票的游戏模式，可以从Docs/osp-q3-Mode-info.txt
+//       获得详细信息（默认是63，即所有模式）
+//           <flags>:
+//                  1 - FFA
+//                  2 - 1V1
+//                  4 - FFA (competition)
+//                  8 - Team DM
+//                 16 - CTF
+//                 32 - Clan Arena
+//
+// server_customclient <flags>
+//       指定客户端可以使用的一些特性（默认是15）
+//		<flags>:
+//                  1 - 打开125hz[看pmove_fixed]
+//                  2 - 允许使用cg_truelightning 
+//                  4 - 允许使用cg_altPlasma和cg_altLightning
+//                  8 - 定义客户端使用osp的hud
+//		   16 - 关闭比赛时钟
+//
+// server_fastrail <0|1>
+//      * 0 - (Promode) 服务器默认涡轮枪转换间隔为1500毫秒。
+//        1 - (Promode) 服务器默认涡轮枪转换间隔为1000毫秒。
+//
+// server_gfxspecfile <文件名>
+//      定义在客户端显示自定义的图象。服务器也应有这些图象供下载
+//      具体参看osp/Docs/osp-q3-Server-gfx.txt（默认为"none"-自定义服务器图象关闭）
+//
+// server_lgcooldown <0|1>
+//      * 0 - (Promode) 服务器默认电枪转换间隔为0毫秒。
+//        1 - (Promode) 服务器默认电枪转换间隔为200毫秒（如果fastrail被打开，则为100毫秒）。
+//
+// server_maxpacketsmin <数值>
+//      指定客户端cl_maxpackets最小值（默认是0，没有最小限制）
+//
+// server_maxpacketsmax <数值>
+//      指定客户端cl_maxpackets最大值（默认是0，没有最大限制）
+//
+// server_motdfile <文件名>
+//      定义一个外部文件，可以从其中读取在OSP客户端显示的MOTD信息
+//      这个文件将不管server_motdX参数的设定（默认是"none"）
+//
+// server_motdX <string> (X = 1 到 8)
+//      设置服务器的MOTD，每个参数在MOTD中显示一行，当遇到
+//      第一个""行时，停止往下读取
+//
+// server_ospauth <数值>
+//      定义服务器是否校验客户端cgame模块。这个选项需要客户端使用osp cgame。
+//             * 0 -不校验
+//               1 -校验+检测nopbot
+//               2+-只校验
+//
+// server_promode <0|1>
+//     允许服务器使用promode。客户端需要osp客户端cgame和额外的（extra）pk3文件
+//              * 0 - 普通q3模式
+//                1 - promode模式
+//
+//	--->关于更多的Promode设置可以参看http://www.challenge-world.com
+//
+// server_realping <0|1>
+//      指定当旁观者跟随玩家时，是否显示其真正的ping
+//              * 0 - 显示被跟随者的ping（id默认）
+//                1 - 显示旁观者真实的ping
+//
+// server_record <bitmask>
+//        强制客户端录制demo和进行比赛截图。需要客户端有osp的cgame
+//		<bitmask>:
+//		----------
+//		* 0 - 不强制客户端录制demo
+//		  1 - 录制demo
+//		  2 - 在比赛结束后截图
+//		  4 - demo中包括服务器的名称
+//		  8 - demo中包括唯一的服务器时间
+//               16 - demo如下命名
+//                     SERVERNAME-PLAYERNAME-[#]
+//
+// server_thrufloors <0|1>
+//      * 0 - 不允许地板伤害
+//        1 - 打开地板伤害
+//
+// server_timenudgemin <数值>
+//      指定客户端cl_timenudge最小值（默认为0，没有最小限制）
+//
+// server_timenudgemax <数值>
+//      指定客户端cl_timenudge最大值（默认为0，没有最大限制）
+//
+// viewcam_directory <路径>
+//      指定所有"viewcam-<mapname>.cfg"文件的目录（默认为"cfg-viewcam"）
+//
+set sv_pure 1
+set sv_hostname "OSP Tourney DM"
+set sv_maxclients 10
+set bot_enable 0
+set decal_directory "decals"
+set dmflags 0
+set timelimit 20
+set fraglimit 30
+set capturelimit 8
+set roundlimit 7
+set g_spectatorInactivity 0
+set filter_file "filters.txt"
+set osp_gamename 1
+set player_file "none"
+set player_always ""
+set pmove_fixed 0
+set server_availmodes 63
+set server_customclient 15
+set server_fastrail 0
+set server_gfxspecfile "none"
+set server_lgcooldown 0
+set server_maxpacketsmin 0
+set server_maxpacketsmax 0
+set server_motdfile "none"
+set server_motd1 " ^B^3*** Welcome to OSP Tourney DM/CA/CTF *** "
+set server_motd2 "  "
+set server_motd3 "      http://www.OrangeSmoothie.org"
+set server_motd4 ""
+set server_motd5 ""
+set server_motd6 ""
+set server_motd7 ""
+set server_motd8 ""
+set server_ospauth 0
+set server_promode 0
+set server_realping 0
+set server_record 0
+set server_thrufloors 0
+set server_timenudgemin 0
+set server_timenudgemax 0
+set viewcam_directory "cfg-viewcam"
+
+
+// =============
+//    裁判
+// =============
+// ref_password <字符串>
+//      设置裁判密码（默认为"none"，即没有）
+set ref_password "none"
+
+
+// ========================
+//    普通Q3参数
+// ========================
+// bot_autoload <字符串>
+//      指定服务器开通后，调入bot的名称。多个bot名之间以空格来间隔。这个参数允许
+//      管理员使用addbot命令来自动调入bot。bot名可以随意
+//
+// bot_checktime <数值>
+//      指定一个使用bot_minplayers设置的服务器中，bot加入/离开的间隔时间（默认为10）
+//
+// g_gametype <数值>
+//      定义游戏模式 
+//		0 - Free For All DM (FFA)  [默认]  混战
+//		1 - 1v1 DM                         单挑
+//		2 - Single-Player                  单人模式
+//		3 - Team Deathmatch                组队
+//		4 - Capture The Flag (CTF) Teamplay夺旗
+//		5 - Clan Arena (CA)                CA模式
+//
+// g_inactivity <秒数>
+//      定义一个玩家在服务器上多长时间没反映就被kick，（默认为0，即关闭此选项）
+//
+// g_log <log文件名>
+//       定义保存所有游戏信息的文件名称，设置成""则关闭文件
+//      （默认为"games.log"）
+//
+// log_default <0|1>
+//      决定log采用什么格式
+//              * 0 - 使用OSP格式
+//                1 - id默认模式
+//
+// log_stat <0|1|2>
+//      记录玩家游戏过程中血/甲信息。注意：重要的加强的信息都被包括在内
+//              * 0 - 不记录额外的信息
+//                1 - 只在log中记录
+//                2 - 同时在控制台显示
+set bot_checktime 10
+set g_gametype 0
+set g_inactivity 0
+set g_log ""
+set log_default 0
+set log_stat 0
+
+
+// ==============================
+//    比赛用相关参数
+// ==============================
+// g_doWarmup <0|1>
+//      指定比赛前是否进行热身。（默认为0）
+//
+// g_warmup <秒数>
+//      指定热身的时间，如果g_doWarmup为1，g_warmup为0，则热身
+//      时间无限（默认为20）
+//
+// match_carespawn <0|1>
+//      决定在CA模式下，客户端在一局开始时是否随机重生。只在CA模式下有效
+//          * 0 - 客户端在每局开始时不重生
+//            1 - 客户端在每局开始时重生
+//
+// match_cawarmupfire <0|1>
+//      指定CA模式下，客户端在热身时间内是否可以使用武器
+//            0 - 不允许
+//          * 1 - 允许，同时不造成伤害
+//
+// match_dropitems <0|1>
+//      是否允许玩家在TDM模式下扔下物品（武器/子弹）
+//              * 0 - 不允许
+//                1 - 允许
+//
+// match_hurtself <0|1>
+//      溅射伤害是否会伤害到玩家本身
+//                0 - 不会
+//              * 1 - 会
+//
+// match_instagib <0|1>
+//	* 0 - Match is in normal DM-style play.
+//        1 - Match is in "instagib" style play: No items, players
+//	      spawn with railgun and gauntlet, and each rail hit is
+//            400 points of damage.
+//     * 0 - 比赛为正常的DM类型的比赛
+//       1 - 比赛类型为"instagib"：即没有物品，玩家重生后就有rg和铁拳，rg伤害值为400
+//
+// match_lateJoin <0|1>
+//       指定玩家在比赛开始后连入时，是否可以自由加入比赛。如果g_doWarmup
+//       为0，则该参数被忽略
+//           * 0 - 不能随便加入比赛
+//             1 - 可以随便加入比赛
+//
+// match_maxsuicides <value>
+//     定义客户端误伤或自杀多少次后会被kick/ban（默认为5）。自杀为2*match_maxsuicides
+//
+// match_minplayers <value>
+//      定义比赛自动开始需要的最少队员数量，（默认为2），数量不够，可以通过
+//      ready命令强制比赛开始。
+//
+// match_mutespecs <0|1>
+//      在组队模式下，是否将旁观者的话显示在比赛选手的屏幕上（默认为0）
+//
+// match_poweruprespawn <60|90|120>
+//	指定除金身宝物（其被锁定为120秒了）外其他宝物的重生时间（单位为秒），
+//	但只能在promode下使用（夺旗模式下默认为120秒，其他模式默认为60秒）。
+//
+// match_overtime <0|1|2|3>
+//       指定当比赛时间到了后，比分持平后如果再继续进行。
+//              0 - 突然死亡
+//              1 - 加时+突然死亡：在加时仍平分后，通过突然死亡决胜（TDM默认加时为5分钟）
+//              2 - 没有加时：以平局结束
+//              3 - 加时：如果加时后仍然平分，就以平分结束。
+//
+// match_overtimecount <数值>
+//    设置加时场次数（默认为0）
+//
+// match_overtimelength <分钟数>
+//      设置加时时间（默认为5）同时必须>=1
+//
+// match_readypercent <百分比，1 - 100>
+//      定义有多少比例的人ready后，比赛就可以开始（默认为51）
+//
+// match_roundtimer <秒数>
+//      定义比赛中每局间隔（只在CA模式下）（默认为10）注意：最小为2最大为20
+//
+// match_timeoutcount <数值>
+//      指定组队中每队或1v1中的玩家允许的timeout的次数
+//
+// match_timeoutlength <秒数>
+//      指定每次timeout的时间大小（默认为60）
+//
+// match_winbyscore <分数差>
+//      1v1模式下，指定1方胜出另一方多少后，比赛结束（默认为0）
+//
+// warmup_armor <数值>
+//      定义热身时玩家的装甲数量（除了CA以外的任何模式）
+//
+set g_doWarmup 0
+set g_warmup 20
+set match_carespawn 0
+set match_cawarmupfire 1
+set match_hurtself 1
+set match_instagib 0
+set match_latejoin 0
+set match_maxsuicides 5
+set match_minplayers 2
+set match_mutespecs 0
+set match_overtime 1
+set match_overtimecount 0
+set match_overtimelength 5
+set match_readypercent 51
+set match_roundtimer 10
+set match_timeoutcount 0
+set match_timeoutlength 60
+set match_winbyscore 0
+set warmup_armor 0
+
+
+// ==============
+//  组队比赛设定
+// ==============
+// team_allcaptain <0|1>
+//      * 0 - 正常的队长资格（一队一人）
+//        1 - 所有队员都有权利邀请旁观者加入或暂停比赛。但每队真正的队长还是一人
+//
+// team_armordamage <0|1>
+//      * 0 - 当武器自溅时，不伤盔甲（只在CA模式）
+//        1 - 当武器自溅时，伤盔甲（只在CA模式）
+//
+// team_maxplayers <数值>
+//      定义每队人数上限，0则意味着取消限制（默认为0）
+//
+// team_nocontrols <数值>
+//     服务器可以去掉队长和组队命令的选项（默认为0，所有项目都是打开的）
+//
+// team_noteamready <0|1>
+//      定义是否可以使用teamready命令（默认为0，可以使用）
+//
+// g_weaponTeamrespawn <数值>
+//      定义TDM中武器重生时间（默认为30）
+//
+// g_weaponrespawn <数值>
+//    定义除TDM外所有模式的武器重生时间（默认为5）
+//
+// g_friendlyFire <0|1>
+//        0 - 不能伤害队友
+//      * 1 - 可以伤害队友
+//
+// g_teamAutoJoin <0|1>
+//      * 0 - 玩家在比赛开始后连入，则将玩家置于旁观者
+//        1 - 玩家在比赛开始后连入，则自动将玩家加入人数少的一队中（人数一样则加入到分数少的一方）
+//
+// g_teamForceBalance <0|1>
+//      * 0 - 允许玩家加入任何对于，不管队伍的人数
+//        1 - 强迫玩家加入人少的队伍，人数如果一样，则强迫加入分数少的队伍
+//
+set team_allcaptain 1
+set team_armordamage 0
+set team_maxplayers 0
+set g_weaponTeamrespawn 30
+set g_weaponrespawn 5
+set g_friendlyFire 1
+set g_teamAutoJoin 0
+set g_teamForceBalance 0
+
+
+// ==========
+//  飞抓设置
+// ==========
+// hook_enable <0|1>
+//        1 - 允许使用hook。 bind <key> +button5
+//
+// hook_delaytime <毫秒>
+//      定义hook使用间隔时间（默认750）
+//
+// hook_holdtime <秒>
+//      设置hook保持束缚时间（默认3）
+//
+// hook_sky <0|1>
+//      * 0 - 不可以hook天空
+//        1 - 可以hook任何地方（除了其他玩家）
+//
+// hook_speed <数值>
+//      设置hook发射速度（默认1200）
+//
+// hook_speedpull <数值>
+//      设置hook回收速度（默认9500）
+//
+set hook_enable 0
+set hook_delaytime 750
+set hook_holdtime 3
+set hook_sky 0
+set hook_speed 1200
+set hook_speedpull 950
+
+
+// ========================
+//       模式投票设定
+// ========================
+// mode_start <mode_id>
+//      设置服务器开始时的模式，如果没有玩家连入则10分钟后，服务器会从其他模式
+//      重新恢复到设置的模式。<mode_id>可以参考osp/Docs/osp-q3-Mode-info.txt。
+//      默认为-1，即关闭此选项
+//
+// mode_customfile <文件名>
+//      定义服务器可以被vote的模式的存放的文件名。如果设置成"none"则不能被vote
+//
+set mode_start "-1"
+set mode_customfile "none"
+
+
+// ============
+//   投票设定
+// ============
+// g_allowVote <0|1>
+//        0 - 不允许客户端vote
+//      * 1 - 允许客户端vote
+//
+// vote_limit <数值>
+//      被允许的vote的最大的数量（默认为5）
+//
+// vote_allow_*
+//         0 - 关闭对特定物品的vote
+//       * 1 - 打开对特定物品的vote
+//      --->注意如果vote_allow_ref设置成1（默认为0），则需要至少3个
+//          玩家连入才可vote，当地图结束后，vote的裁判将被取消。
+//
+// vote_allow_armordamage <0|1>
+//      是否允许武器澎溅伤害装甲（只在CA模式有用）
+//
+// vote_allow_ca_startrespawn <0|1>
+//      是否允许客户端投票改变是否在CA模式下每局开始时重生
+//
+// vote_allow_ca_warmupfire <0|1>
+//      是否允许客户端投票决定在CA模式下热身时是否可以开火
+//
+// vote_allow_falling <0|1>
+//      打开/关闭坠落伤害
+//
+// vote_allow_items <item_mask>
+//     定义玩家可以投票允许的物品，（ 默认为1023）
+//
+// vote_allow_mutespecs <0|1>
+//      定义是否允许投票决定参数match_mutespecs设置
+//
+// vote_allow_pmove <0|1>
+//      是否允许投票决定参数pmove_fixed的设置
+//
+// vote_allow_poweruprespawn <0|1>
+//	是否允许客户端在promode下设置宝物的重生时间，
+//	通过投票可以决定的时间只有60、90、120秒。
+//
+// vote_allow_powerups <powerup_mask>
+//      是否允许投票决定是否使用宝物（默认为255）
+//
+// vote_allow_reload <0|1>
+//	定义是否可以投票决定RG的子弹调入时间。
+//	此功能只能在服务器打开instagib模式时才能使用。
+//
+// vote_allow_respawn <0|1>
+//      是否可以投票决定参数g_forerespawn的设置
+//
+// vote_percent <1-100>
+//      投票通过的百分比
+//
+set g_allowVote 1
+set vote_allow_altgraphics 1
+set vote_allow_allcaptain 1
+set vote_allow_armordamage 1
+set vote_allow_capturelimit 1
+set vote_allow_ca_startrespawn 1
+set vote_allow_ca_warmupfire 1
+set vote_allow_dropitems 1
+set vote_allow_falling 1
+set vote_allow_fastrail 1
+set vote_allow_fraglimit 1
+set vote_allow_hook 0
+set vote_allow_instagib 1
+set vote_allow_items 1023
+set vote_allow_kick 1
+set vote_allow_lgcooldown 1
+set vote_allow_map 1
+set vote_allow_machinegun 1
+set vote_allow_maxpackets 1
+set vote_allow_mutespecs 1
+set vote_allow_osphud 1
+set vote_allow_overtime 1
+set vote_allow_pmove 1
+set vote_allow_poweruprespawn 1
+set vote_allow_powerups 255
+set vote_allow_promode 1
+set vote_allow_referee 0
+set vote_allow_reload 1
+set vote_allow_respawn 1
+set vote_allow_roundlimit 1
+set vote_allow_teamdamage 1
+set vote_allow_thrufloors 1
+set vote_allow_timelimit 1
+set vote_allow_timenudge 1
+set vote_allow_weaponrespawn 1
+set vote_limit 5
+set vote_percent 50
+
+
+// ==================
+//      地图设定
+// ==================
+// map_file	<文件名>
+//      定义地图信息文件名（默认"maps.txt"）
+//
+// map_autoload <0|1|2|3>
+//        0 - 关闭（不自动搜寻地图）
+//      * 1 - 基于游戏模式进行普通自动搜寻
+//        2 - 和1相同，但还搜寻没有.arena的地图
+//        3 - 搜寻osp和baseq3下所有地图
+//
+//      动态地图显示!在1.27n以上版本中，OSP可以通过现在游戏模式来自动生成
+//      自动列表。这个命令可以有效的搜寻到地图列表中遗漏的地图。这里还有
+//      一条新命令：
+//
+//	deletemap <mapname>
+//
+//      服务器主管用来去掉自动搜寻的，但不需要的地图
+//
+//
+// map_queue <0|1>
+//        0 - 取消使用地图序列
+//      * 1 - 允许使用地图序列（默认）
+//
+// map_rotate <0|1>
+//        0 - 使用地图序列，但在到序列尾后，地图不会循环
+//      * 1 - 地图可以循环
+//
+// map_random <0|1>
+//        0 - 按地图序列顺序调用地图
+//      * 1 - 从地图序列中随机调用地图
+//
+// map_once	<0|1>
+//        0 - 当随机调用地图时，地图可以多次被调用
+//      * 1 - 在地图序列一个循环中，地图最多被调用1次
+//
+// map_nocount <0|1>
+//      * 0 - 按地图序列中的地图最多/最少玩家设定调用地图
+//        1 - 不管人数设定
+//
+// map_halt <0|1>
+//      * 0 - 不停止的调入下个地图
+//        1 - 停止调用下个地图
+//
+set map_file "maps.txt"
+set map_queue 1
+set map_rotate 1
+set map_once 1
+set map_random 1
+set map_nocount 0
+set map_halt 0
+
+
+// ==========================
+//       物品/武器设定
+// ==========================
+// armor_q2style <0|1>
+//      是否使用Q2系统的盔甲模式
+//              * 0 - Q3盔甲模式
+//                1 - 黄甲100，红甲200，碎甲5没有限制，甲不会自动减少
+//
+// gauntlet_damage <数值>
+//      定义铁拳伤害程度（默认为50）
+//
+// gauntlet_disable <0|1>
+//      使用/禁止使用铁拳。
+//
+// instagib_reload <100-5000>
+//    指定RG在instagib下的装入时间。（单位为毫秒）（默认=1500）
+//
+// item_disable <item_mask>
+//        定义地图中所有物品（除了宝物）是否从地图中被剔除（默认为0）。注意
+//        后跟数字为所有物品数字的合计。
+//
+//		item_mask
+//		------------
+//		* 0	- 没有物品被剔除
+//		  1	- 所有盔甲
+//		  2	- 所有血
+//		  4	- BFG
+//		  8	- 机枪Machinegun
+//		  16	- 霰弹枪Shotgun
+//		  32	- 手雷GrenadeLauncher
+//		  64	- 火箭炮RocketLauncher
+//		  128	- 电枪LightningGun
+//		  256	- 等离子枪PlasmaGun
+//		  512	- 涡轮枪RailGun
+//
+//		---> 注意：当武器被剔除后，其子弹也会相应被剔除
+//
+// mg_damage <数值>
+//      定义machinegun的伤害程度（不包括TDM）（默认为7）
+//	
+// mg_damageTeamplay <数值>
+//      定义TDM中machinegun的伤害程度（默认为5）
+//	
+// powerup_disable <powerup_mask>
+//     从地图上剔除所有的宝物（默认为0）
+//
+//		powerup_mask
+//		------------
+//		* 0	- 不剔除宝物
+//		  1	- 雷神环Quad Damage
+//		  2	- 金身Battlesuit
+//		  4	- 加速Haste
+//		  8	- 自动加血Regeneration
+//		  16	- 隐身Invisibility
+//		  32	- 飞行Flight
+//		  64	- 手持传送器Teleporter
+//		  128	- 手持医药针Medkit
+//
+// railgun_damage <数值>
+//      定义railgun的伤害程度（默认为100）
+//
+// replace_*: <数值>
+//      定义地图上某种武器是否被其他武器所代替，默认值如下：
+//
+//	replace_machinegun   机枪(默认为 1   - Machinegun)
+//	replace_shotgun      霰弹枪(默认为 2   - Shotgun)
+//	replace_glauncher    手雷(默认为 4   - GrenadeLauncher)
+//	replace_rlauncher    火箭炮(默认为 8   - RocketLauncher)
+//	replace_lightning    电枪(默认为 16  - LightningGun)
+//	replace_railgun      涡轮枪(默认为 32  - Railgun)
+//	replace_plasmagun    等离子枪(默认为 64  - PlasmaGun)
+//	replace_bfg          BFG(默认为 128 - BFG)
+//	replace_invis        隐形(默认为 256  - Invisibility)
+//	replace_quad         雷神环(默认为 512  - Quad)
+//	replace_battlesuit   金身战袍(默认为 1024 - BattleSuit)
+//	replace_haste        加速(默认为 2048 - Haste)
+//	replace_regen        自动加血(默认为 4096 - Regeneration)
+//	replace_flight       飞行(默认为 8192 - Flight)
+//
+//		<replace_mask>:
+//		---------------
+//		1	- 机枪Machinegun
+//		2	- 霰弹枪Shotgun
+//		4	- 手雷GrenadeLauncher
+//		8	- 火箭炮RocketLauncher
+//		16	- 电枪LightningGun
+//		32	- 涡轮枪Railgun
+//		64	- 等离子枪PlasmaGun
+//		128	- BFG
+//		256     - 隐形Invisibility
+//		512	- 雷神环Quad Damage
+//		1024	- 金身战袍BattleSuit
+//		2048	- 加速Haste
+//		4096	- 自动加血Regeneration
+//		8192	- 飞行Flight
+//
+// start_*: <数值>
+//      定义玩家开始时子弹等的数量
+//
+//	start_armor     盔甲(默认为0)
+//	start_health    血(默认为125)
+//	start_bullets   机枪子弹(组队模式默认为50，其他为100)
+//	start_shells    霰弹枪子弹(默认为0)
+//	start_rockets   火箭炮(默认为0)
+//	start_grenades  手雷(默认为0)
+//	start_lightning 电枪子弹(默认为0)
+//	start_slugs     涡轮枪子弹(默认为0)
+//	start_cells     等离子枪子弹(默认为0)
+//	start_bfg       BFG子弹(默认为0)
+//
+// weapon_deaddrop <0|1>
+//        0 - 玩家被杀后不扔下他们现在的武器
+//      * 1 - 玩家被杀后扔下他们现在的武器
+//
+// weapon_have <weapon_mask>
+//      定义玩家重生后拥有武器的种类
+//
+// weapon_start <weapon_mask>
+//       定义玩家重生后手里拿的武器
+//
+//		weapon_mask:
+//		------------
+//		1	- 机枪Machinegun
+//		2	- 霰弹枪Shotgun
+//		4	- 手雷GrenadeLauncher
+//		8	- 火箭炮RocketLauncher
+//		16	- 电枪LightningGun
+//		32	- 涡轮枪Railgun
+//		64	- 等离子枪PlasmaGun
+//		128	- BFG
+//              256     - 铁拳Gauntlet
+//
+set armor_q2style 0
+set gauntlet_damage 50
+set instagib_reload 1500
+set item_disable 0
+set mg_damage 7
+set mg_damageTeamplay 5
+set powerup_disable 0
+set railgun_damage 100
+set replace_battlesuit 1024
+set replace_bfg 128
+set replace_flight 8192
+set replace_glauncher 4
+set replace_haste 2048
+set replace_invis 256
+set replace_lightning 16
+set replace_machinegun 1
+set replace_plasmagun 64
+set replace_quad 512
+set replace_railgun 32
+set replace_regen 4096
+set replace_rlauncher 8
+set replace_shotgun 2
+set start_armor 0
+set start_bfg 0
+set start_bullets 0
+set start_cells 0
+set start_grenades 0
+set start_health 125
+set start_lightning 0
+set start_rockets 0
+set start_shells 0
+set start_slugs 0
+set weapon_deaddrop 0
+set weapon_have 257
+set weapon_start 1
+
+
+

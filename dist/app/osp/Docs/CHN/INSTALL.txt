@@ -1,0 +1,62 @@
+OSP Tourney DM/CA/CTF for Quake 3
+=================================
+Version: 1.0
+Date:    14 Dec 01
+Site:    http://www.OrangeSmoothie.org
+Contact: rhea@OrangeSmoothie.org
+IRC:     irc.enterthegame.com - #osp
+
+OSP最新的相关中文文本信息你可以在http://www.q3acn.com获得，
+如果有问题请与cat@q3acn.com联系。
+
+安装须知:
+-------------------
+带目录将.zip文件解压到Quake3/目录下，在Quake3/目录下会有一个
+osp/的新目录。
+
+目录中的文件为：
+        osp/INSTALL.txt                  (本文件)
+        osp/README.txt                   (OSP的主要信息文件)
+
+        osp/1v1.cfg                      (1v1 "Tournament" 设置)
+        osp/clanarena.cfg                ("arena" 设置)
+        osp/ctf.cfg                      (夺旗设置)
+        osp/ctf-public.cfg               (夺旗公共设置)
+        osp/ffa.cfg                      (混战设置)
+        osp/filters.txt                  (玩家过滤文件)
+        osp/instagib.cfg                 (Instagib混战设置)
+        osp/OSP Match Quick Start.txt    (客户端基本信息)
+        osp/team.cfg                     (组队设置)
+        osp/spectool.cfg                 (多视角设置)
+
+        osp/zz-osp-client0.pk3           (OSP-Q3 客户端文件)
+        osp/zz-osp-server0.pk3           (OSP-Q3 服务器端文件)
+
+        osp/cfg-DefaultModeReference/*   (内部模式设置范例)
+
+        osp/cfg-GfxExample/*             (自定义图象范例)
+
+        osp/cfg-maps/*.txt               (各种模式地图列表设置范例)
+
+        osp/CHN/*                          (OSP中文文本说明)
+        osp/ESP/*                          (OSP西班牙文本说明)
+        osp/RUS/*                          (OSP俄文文本说明)
+        osp/Docs/CPM-info.txt              (所有CPM设置信息)
+        osp/Docs/osp-q3-ClientReadme.txt   (OSP客户端设置/信息)
+        osp/Docs/osp-q3-Commands.txt       (OSP客户端/服务器命令)
+        osp/Docs/osp-q3-DecalEditing.txt   (地图图象说明)
+        osp/Docs/osp-q3-History.txt        (历史文本)
+        osp/Docs/osp-q3-Logging.txt        (OSP扩展登录格式说明)
+        osp/Docs/osp-q3-MapConfigInfo.txt  (建立地图列表文件说明)
+        osp/Docs/osp-q3-ModeInfo.txt       (建立模式说明)
+        osp/Docs/osp-q3-PlayerFilters.txt  (玩家过滤文件说明)
+        osp/Docs/osp-q3-ServerGfx.txt      (建立自定义图象说明)
+        osp/Docs/osp-q3-Variables.txt      (OSP服务器参数说明)
+        osp/Docs/osp-q3-Viewcam.txt        (ViewCam信息说明)
+
+        osp/locs/*.cfg                     (各种自定义位置范例)
+
+        osp/vm/qagame.qvm                  (OSP-Q3的专用服务器文件)
+
+
+更多的信息你可以从README.txt,Docs/osp-q3-*.txt文件和所有范例中获得。

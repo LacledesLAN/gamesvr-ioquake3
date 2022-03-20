@@ -1,0 +1,266 @@
+Viewcam Information and Editing
+===============================
+Version: 1.0
+Date:    14 Dec 00
+Site:    http://www.OrangeSmoothie.org
+Contact: rhea@OrangeSmoothie.org
+
+
+Overview
+--------
+The viewcam is "enabled" if the server can locate an appropriate
+viewcam positioning definition file for the current map.
+
+Definition files for the viewcam are expected to be named as:
+
+	viewcam-<mapname>.cfg
+
+... where <mapname> is q3dm1, q3dm2, etc.
+
+When the server is loaded, it looks in the directory "cfg-viewcam/"
+found below the osp/ directory by default.  This can be changed by
+editing the "viewcam_directory" server variable.
+
+
+Creating viewcam definition files
+---------------------------------
+1. Creating the definition files is quite easy, and sorta fun =)  The
+   easiest way to do this is to start up your own listen server running
+   OSP Tourney DM/CA/CTF version 0.81 or greater.
+
+2. Once loaded, go to spectator mode (\team s).
+
+3. Bind a key (I use "h") to the command "\snapshot".  For example:
+
+	\bind h snapshot
+
+4. Also, bind several other keys for some useful info while your
+   setting viewcam positions:
+
+	\bind f range
+	\bind g vc_proximity
+
+   These will be explained shortly.
+
+4. Now, go around the level, positioning the camera in optimal
+   play areas, with the view covering as much ground as possible.
+
+5. When you have a position that you think is decent, hit the "g"
+   key (or whatever you bound the "vc_proximity" command to) to see
+   how close other snapshots and already defined viewcams are to
+   your current location.
+
+   "vc_proximity" gives only direct line distances to the closest
+   of all snapshots and viewcams.  So, the info may be bunk as the
+   other positions live just on the other side of the wall that you
+   are currently positioned.  However, this info can be useful in
+   determining the extent of the camera range overlap (camera radius
+   = 450 units) with your current position.
+
+   This information is center-printed to avoid messing up all of
+   your snapshot prints.
+
+6. Just before u take the snapshot, hold down the "f"-key (or
+   whatever you bound the "range" command to) and check your view
+   all around your current position.
+
+   The range command will tell you if the current line of sight in
+   your cross-hairs is within camera range (it will be yellow if it
+   IS in range, red if it is not).
+
+   By using the range command, you can see the extent to which the
+   camera can see all around the current psotion.  Note, you can
+   get immediate feedback by holding the range-key while change your
+   view.  It will be updated instantly.
+
+7. Once you have a position you're happy with, hit your pre-defined
+   snapshot key.
+
+8. The server will print a message (to the console) that is a bunch
+   of numbers.  The line will look something like:
+
+	4 -269.920 -1493.019 333.001 37.512 -124.612
+
+   Where the first number is an increasing integer (unique position
+   identifier) and the rest being position coordinates on the current
+   map.
+
+7. Go around and make as many "snapshots" as necessary to guarantee
+   full coverage on the map.  The leftmost number of the console
+   line message will increase every snapshot.
+
+8. Once done, pull down the console and type: \condump <mapname>.cfg
+
+   Note: As a line of precaution, the server will also log all
+   snapshots in the games.log file if the server is NOT dedicated and
+   there is only one player connected.
+
+9. Close quake3 (or load another map and do some more).
+
+10. Open up your condump'ed files (located in the osp/ directory)
+    with your favorite text editor (i.e. WordPad).
+
+11. Erase ALL of the other information in this file up to the point
+    where you first started making snapshots.  Delete everything
+    below the last snapshot line.
+
+12. You should have a file that then looks something like:
+
+	0 -404.158 -458.847 607.734 38.677 -114.675
+	1 -807.011 -840.523 351.869 55.042 158.214
+	2 -1167.130 -277.282 345.887 77.217 133.132
+	3 -1319.148 -747.830 674.927 47.390 36.337
+	4 -1156.306 191.654 658.774 43.429 156.720
+	5 -959.129 374.814 159.875 39.996 -29.927
+	6 -331.580 -82.610 209.948 41.578 -142.125
+	7 -7.374 -496.873 24.125 14.255 42.935
+	8 -71.779 486.688 24.126 22.044 -95.043
+	9 147.193 -834.934 156.112 51.081 -22.967
+	10 228.905 -1061.497 435.306 53.987 -86.858
+	11 462.476 -672.954 682.738 46.066 -155.138
+
+
+13. Save this file and then rename it to "viewcam-<mapname>.cfg" and
+    move it into the cfg-viewcam/ directory (or wherever you store
+    the viewcam definition files).
+
+14. Reload quake3 up as a listen server and load the map you just
+    used to make the viewcam definition file.
+
+15. Type "\viewcam", "\team viewcam" or "\team vc".
+
+16. Type "\vc_info" (to get a dump of a point when you switch viewcam
+    positions).
+
+17. Hit your JUMP button to move forward through the viewcam positions,
+    hit your CROUTCH button to move backwards through the positions.
+    Since you are by yourself on the map, the views will be static
+    and look exactly how you made your free floating snapshot.  Compare
+    the position info dump (from \vc_info) with what you have in your
+    freshly made viewcam definition file (gonna have to be in windowed
+    mode to do this).  It should all match up.
+
+18. Once satisfied, do any other remaining maps you may have left.
+
+
+Snapshot Notes
+--------------
+- The range of the cameras is 450 units for detection/tracking, keep
+  this in mind for large open areas, where you may have to include
+  several cameras to cover the entire area (a little overlap here
+  is best).  Hold down the "\range"-key command a lot!
+
+- Try to avoid having two (or more) cameras that have a coverage
+  area that overlaps another camera position (i.e. two camera positions
+  that are less than 450 units apart).  This will help in avoid abrupt
+  transitions as a player moves through these areas.
+
+- Two cameras CAN be closer, just as long as they do not have direct
+  line of sight of one another.  However, be careful here.  You can
+  get some really cool camming angles this way, but you can also
+  get some really bad ones as well =)
+
+- Try to keep cameras (generally) above the players heads to avoid
+  having them "run over" a camera.  Although, it is quite cool to
+  have a low camera that gets more in the face of players who pass
+  close-by =)
+
+- Static cameras will only pick up action that is generally in front
+  of them (about 120 fov).  So a player creeping up from the back CAN
+  be missed by the camera.  Hence, care needs to be maintained when
+  placing a camera away from corners and ceilings and out in open
+  areas.
+
+- If you want a nice clean line-by-line dump of all current snapshots,
+  just type:
+
+	\snapshotdump
+
+- If you make a bad snapshot, just delete it from the map's snapshot
+  definition file, no big deal at all here.
+
+- If you find you have dead spaces or just want to add more cams
+  positions, follow the above steps as described when making a FULL
+  definition file.  However this time, only go to the areas that you
+  want to add and take the snapshots.  From the condump of these
+  additional positions, just cut and paste them into your original
+  definition file, changing the left-most numbers to unique numbers.
+  Try to make the left-most numbers on each line unique (from other
+  lines in the same definition file) so that you can more easily
+  find positions if you need them.
+
+- For serious editing of the viewcam, I *seriously* recommend opening
+  up Q3 in two windows.  When you open the first, launch a listen
+  server by running something like "cfg-SinglePlayer/team.cfg".  Once
+  it is loaded, switch to the viewcam.
+
+  Then, open up a second windowed quake and connect to the first
+  window (easiest is to go to Multiplayer and switch to "Local Servers").
+  With this window, use it to run around the level.
+
+  The first window will show the action of the viewcam, and u can
+  precisely control its movement (well to a certain extent) through
+  the movements of the player in the second window.  This DEFINATELY
+  helps in finding dead spaces and points of contention in camera
+  overlap.
+
+  Of course, you will need a video card that supports windowed mode
+  (i.e. TNT2).
+
+- There is an additional OPTIONAL paramter on viewcam positions to
+  dynamically change the range on a particular position.  For
+  example, the \snapshot command can dump something like this:
+
+	5 668.980 2338.872 173.705 42.709 -88.748
+
+  The position for each viewcam can also be augmented with a length
+  argument:
+
+	5 668.980 2338.872 173.705 42.709 -88.748 [length]
+
+  So to change from the default 450 range to say, 900, FOR THIS
+  PARTICULAR POSITION, just change the original line (by hand) to:
+
+	5 668.980 2338.872 173.705 42.709 -88.748 900
+
+  This is especially helpful for covering wide open areas where
+  too many viewcams can get to be confusing and cause a lot of
+  quick position changes.
+
+  Note: NOT specifying a range will just have the position default
+  to the normal 450 range.
+
+
+Viewcam commands:
+-----------------
+- To switch to viewcam mode:
+	\viewcam
+	\team viewcam
+	\team vc
+	\vc_follow	(allows the viewcam to follow a single player.  You
+			 can optionally provide a player's name/ID to follow
+			 a specific player directly, without having to cycle
+			 through to them).
+	Pressing FIRE when in CHASE mode
+	Pressing FIRE when in FREEFLOAT mode with no active players.
+
+- Viewcam position info:
+	\vc_info		(Gives current viewcam position info)
+	\vc_proximity	(Gives info on closest snapshot and viewcam position)
+	\range		(Gives ranges to surface from current position)
+
+- Other
+	\vc_free		(toggles auto-follow mode for action-based viewcam)
+	\snapshot		(takes a "snapshot" of the current position)
+	\snapshotdump	(dumps all snapshots that have been taken)
+
+- Client variables
+	cg_followviewcam	 0 - Viewcam defaults to dynamic action mode
+				*1 - Viewcam locks on a single player, that can
+				     be switched to other players with jump button
+				     or \followprev or  \follownext.
+
+- Manually cycling through viewcam positions:
+	- JUMP cycles forward
+	- CROUTCH cycles backward
+	(Valid only when there are no active players on the server)

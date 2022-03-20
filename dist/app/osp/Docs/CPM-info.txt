@@ -1,0 +1,230 @@
+====================
+CPM Gameplay Changes
+====================
+
+Saturday, 22 July 2000 - Khaile (khaile@www.com)
+
+Introduction
+============
+The Challenge Pro Mode (http://www.challenge-world.com/promode/) is a modification for Q3A which aims to make the game more exciting and challenging for "expert players". It is not a remake of Q3A as QW or Q2, although some features from both previous id Software games have made their way into pro mode.
+
+In addition, the CPM team has put together a package of custom maps
+designed for 1v1, 2v2, and Teamplay DM.  These maps have been created
+specifically for the new dynamic gameplay that CPM provides.  These
+maps are available at:
+	http://www.challenge-world.com/promode/
+This map pack will also be included with the official 1.0 release of
+OSP Tourney DM/CA/CTF.
+
+This document isn't a readme as such, but rather a listing of all the changes that has been made to the gameplay of ordinary Q3 (refered to as "Q3" in this document).
+
+
+1. Physics Changes
+==================
+The physics have been tweaked to give more control to the players. This allows for more complex tricks and a general gameplay with more depth. New players have more tricks to learn, and old players will need more time to perfect them all. In the end will the most skilled player use the physics to his advantage, emphasing the need for beign "pro".
+
+Air Control
+-----------
+"Air control" is not to be mistaken with "air acceleration". The air acceleration hasn't been changed from Q3, but air control has been added. The new settings can take a couple of games to grow comforted with, so don't give up already after 10 minutes of playing.
+
+The control can be described as this:
+- Holding down just the forward, backward or any of the strafe keys, you have full control of your movement, and will move in the direction you are facing.
+- Hold down two buttons at the same time will result in Q3 air control (ie none at all), but might gain you more speed. This is recommended for long strafe-jumps.
+
+Ground Acceleration
+-------------------
+The ground acceleration (acceleration when you're walking or running) has been slightly increased for faster starts. The floor friction has also been increased to allow faster stops. This is to increase the overall game speed (but the maximum running speed hasn't been changed), and give the player more control of his movements.
+
+Settings in numbers:
+- Ground acceleration has been increased to 15 (from 10).
+- Friction has been increased to 8 (from 6).
+
+Double-jumping
+--------------
+Double-jumping is a trick from Quake 2. It is performed by moving close to a ledge and jump twice, once from the floor and once from the ledge, in a single, fast movement. This trick isn't so useful on most of the Q3 maps, except for jumps in stairs and sudden attacks out from teleporters (jump into the teleporter, and press the jump button again before you actually go though it, if timed correctly you'll perform a high double-jump on the floor on the other side).
+
+
+2. Weapon switch changes
+========================
+Instant weapon switch
+---------------------
+To further increase the gameplay, and create spectacular weapon combinations, the weapon switch delay time (450 ms in Q3) has been removed. If you want to create weapon switching scripts, you can use the "+vstr [down_command] [up_command]" feature provided with CPM. Here's an example:
+set shaft "weapon 6; wait 2; +attack"
+set unfire "-attack"
+bind mouse2 +vstr shaft unfire
+
+"Allow switch" setting
+----------------------
+This is a setting that enables you to switch weapon to another weapon before your weapon has reloaded. The setting is currently at 1000 ms, and thus only affecting the rail gun (which has a reload time of 1500 ms). This is not to remove the "penalty" for firing the rail gun, rather another setting to improve the game speed. Railgun fights usually was slow, but now they're sped up and encourages weapon combos (you can only use the 1000 ms reload time if you change to another weapon).
+
+
+3. Weapon settings
+==================
+Gauntlet
+--------
+Gauntlet knockback has been decreased by half.
+
+Machinegun
+----------
+Machinegun now does 5 damage in ALL gametype modes. Ammo has also been reduced to 50 for all modes, and the ammo boxes only gives you 25 rounds instead of 50.
+
+Shotgun
+-------
+Shotgun pellets has been increased to 16 per shot (from 11), damage has been reduced to 7 (from 10) and spread has been increased to 900 (from 700). The knockback has been increased by 35%. The maximum number of shells has been decreased to 100 (from 200).
+
+Grenade Launcher
+----------------
+The GL reload time has been decreased to 600 (from 800) and the maximum number of grenades has been decreased to 100.
+
+Rocket Launcher
+---------------
+Rocket speed has been increased to 1000 (from 900), max ammo has been decreased to 100 and knockback has been increased by 20% (doesn't affect rocket-jumping).
+
+Lightning Gun
+-------------
+Knockback has been increased 55%.
+
+Railgun
+-------
+Max ammo has been decreased to 100 and ammo boxes now only gives 5 slugs.
+
+Plasmagun
+---------
+Knockback has been decreased to 0.5 and damage has been decreased to 15 (from 20).
+
+
+3. Armor system
+===============
+The armor system has been changed to emphasize the need for armors and armor control. This gives the maps more weight, both in duel and in teamplay games.
+- Armor doesn't decay.
+- RA protects 75%.
+- YA protects 60%.
+- RA gives 200 armor units (max RA).
+- YA gives 100 armor units, accumulative up to 150 armor units (max YA).
+- 120 RA can be exchanged for 150 YA if the player tries to pick up an YA.
+- Shards give 2 armor units, accumulated ontop of the armor the player currently has (no limits).
+
+
+4. Respawn times
+================
+Item respawn times
+------------------
+Health and ammo respawns every 30 seconds (35 seconds for health and 40 seconds for ammo in Q3). All powerups spawn after 60 seconds except battlesuit which spawns after 120 (this is subject to change). Powerups start spawned on the map when the game starts.
+
+Weapons respawn at 15 seconds in FFA and duels, and 30 seconds in teamplay. This will probably be altered a little to allow "deathmatch settings" where the respawn times can be toggled (some maps doesn't work well with 15 second respawn times, q3tourney4 beign the best example).
+
+Megahealth respawns 20 seconds after it "runs out", which means that it wont respawn until 20 seconds after the player who grabbed it has 100 or less health.
+
+Client respawn delay
+--------------------
+In Q3 there's a small delay that prevents people from respawning immediately. The setting was 1700 ms and is now completely removed. This greatly increased the pace of the game.
+
+
+5. Sound changes
+================
+Footsteps
+---------
+The footsteps sound has been turned off by default in CPM. This is also to increase the speed of the game, because now you don't need to be afraid of running. It also adds the surprise element when you can sneak by your opponent without making a sound.
+
+Hit tones
+---------
+There are four different tones when you hit your opponent. These are based on how much damage you inflicted with your shot on a 1-25, 26-50, 51-75, 76+ scale. The lower the tone, the more damage have you inflicted.
+
+
+6. Other settings
+=================
+Backpacks
+---------
+Instead of dropping a single weapon you drop a "backpack" containing your current weapon, plus all your ammo.
+
+Powerup changes
+---------------
+Quad damage now multiplies your damage by 4 instead of 3, and battlesuit now protects against 75% damage instead of 50%.
+
+Item height
+-----------
+The height of the items has been increased by 30 units so you don't accidentically jump over items.
+
+Lava and slime damage
+---------------------
+The lava/slime damage has been changed to be more consistent. It now gives you steady flow of damage instead of, seemingly, randomly hits.
+
+
+
+Client Settings/Variables
+=========================
+
+ENHANCED HUDs/ SCOREBOARD [Khaile].
+-----------------------------------
+The Challenge Pro Mode has extensively customisable HUDs. Our programmers have focused on the needs of the competitive Quake player.
+
+Key features [Khaile]:
+- Health and armor bars
+- Weaponlists
+- Crosshair colors
+- Crosshair team info
+- More flexible / more options (lots of combinations)
+- Ammo doesn't flash when you fire
+- The selected weapon is marked with a background in the weaponlist.
+- When a weapon is picked up, the weapon's background flashes in the
+  weaponlist.
+- Increased alpha for crosshairs.
+
+Usage [Khaile]:
+- \hudstyle # - Sets the style to the specified number. There are
+        currently 8 different styles, you can create your own styles
+        with config files.
+- \hudnext - Sets the HUD to the "next" style, use this to quickly
+        check out all styles.
+- \hudprev - Sets the HUD to the "previous" style, use this to quickly
+        check out all styles.
+- \ch_crosshairColor - Use this to change the crosshair color. 0 is
+        white, 1 is red, 2 green, 3 yellow, 4 blue, 5 magenta, 6 cyan.
+        Important note: cg_crosshairHealth overrides this function,
+        turn it off to use these colors (replaced with ch_crosshaircolor).
+- \ch_crosshairTeamInfo - When enabled you see information about
+        your teammates when they're targeted in your crosshair. Only
+        available when cg_drawTeamOverlay is enabled.
+- \ch_graphs - Enables the graphs for some of the statusbar styles.
+- \ch_statusbarStyle - This sets the HUD's appearance. 0 is
+        original q3 style, 1 uses long horizontal bars, 2 uses short
+        horizontal bars, 3 uses vertical bars, 4 places the health
+        information in the weaponlist and 5 uses three horizontal bars.
+        Notice that some combinations of statusbar styles and
+        weaponlists wont display all information. Find the one you feel
+        most comfortable with.
+- \ch_teamBackground - Enables/disables the use of the team
+        background in the statusbar.
+- \ch_weaponList - This sets the weaponlist's appearance, 0
+        disables it. 1 is on the left, 2 is on the right and 3 is in
+        the middle. The weaponlist can look differently depending on
+        the statusbar's style.
+- \ch_weaponListDrawAll - Enabling this variable will force the
+        weaponlist to show all weapons (ie. including those not
+        carried).
+- \ch_weaponListBackground - This setting will display a blue
+        background for the selected weapon in the weaponlist.
+- \ch_weaponListFlash - Disable this to remove the background
+       "flash" for new weapons in the weaponlist.
+- \ch_drawPickup - Disable this if you don't want the item pickup
+        messages.
+- \ch_fragMessage - Set this to 0 to completely remove the frag
+        message or to 2 for the normal size.
+- \cg_crosshairHealth - This function now works for _all_ crosshair
+       types.  This variable, if enabled, will override any
+       ch_crosshaircolor setting.
+- \cg_damageDraw - Toggles blood splashes on screen when you get hit
+       by another player (really applicable only to r_picmip 0 and
+       r_picmip 1 settings).
+- \cg_damageKick - Toggles if, when hit, you viewangle "shakes"
+- \cg_fallKick - Toggles view angle "bob" when falling from an
+       appreciable height.
+- Client variables for smoke puffs for rl, gl, and sg:
+	cg_smokeradius_rl <value>  (default = 64)
+	cg_smokeradius_gl <value>  (default = 32)
+	cg_smokegrowth_rl <0|1>  (default = 1)
+	cg_smokegrowth_gl <0|1>  (default = 1)
+	cg_smoke_sg <0|1>  (default = 1)
+
+- "True Shaft"  To activate, use: "\cg_truelightning 0, 1, 2"
+  [CRT/PhaNToM/HighlandeR]

@@ -1,0 +1,68 @@
+OSP Tourney DM/CA/CTF для Quake 3
+=======================
+Версия: 1.0
+Дата:    14 Декабря 2001
+Сайт:     http://www.OrangeSmoothie.org
+Адрес:   rhea@OrangeSmoothie.org
+IRC:       irc.enterthegame.com - #osp
+
+
+УСТАНОВКА:
+----------------
+Распакуйте поставляемый zip-файл в корневую директорию Quake3/.
+У вас должна появится новая директория "osp/" (например "Quake3/osp/").
+
+Дистрибутив OSP включает:
+
+        osp/INSTALL.txt		(данный файл)
+        osp/README.txt		(общая информация по OSP)
+
+        osp/1v1.cfg			(примерные конфиги для различных типов игры)
+        osp/clanarena.cfg
+        osp/ctf.cfg
+        osp/ctf-public.cfg
+        osp/ffa.cfg
+        osp/instagib.cfg
+        osp/team.cfg
+
+        osp/spectool.cfg		(привязки клавиш для мульти-наблюдения)
+        osp/filters.txt			(пример файла фильтров)
+        osp/OSP Match Quick Start.txt	(инструкция по быстрому запуску матча)
+
+        osp/zz-osp-client0.pk3		(OSP-Q3 клиентский компонент)
+        osp/zz-osp-server0.pk3		(OSP-Q3 серверный компонент)
+
+        osp/cfg-DefaultModeReference/*   (примеры конфигов для встроенных режимов игры)
+
+        osp/cfg-GfxExample/*		(пример использования дополнительной графики)
+
+        osp/cfg-maps/1v1maps.txt	(примерные конфигурационные списки карт)
+        osp/cfg-maps/ctfmaps.txt
+        osp/cfg-maps/ffamaps.txt
+        osp/cfg-maps/qilmaps.txt
+        osp/cfg-maps/teammaps.txt
+
+        osp/CHN/*			(перевод некоторой документации OSP на китайский)
+        osp/ESP/*			(перевод некоторой документации OSP на испанский)
+        osp/RUS/*			(перевод некоторой документации OSP на русский)
+
+        osp/Docs/CPM-info.txt			(информация о всех настройках CPM)
+        osp/Docs/osp-q3-ClientReadme.txt	(информация о настройках OSP-клиента)
+        osp/Docs/osp-q3-Commands.txt		(клиентские/серверные команды OSP)
+        osp/Docs/osp-q3-DecalEditing.txt		(описание использования и создания "нашлепок")
+        osp/Docs/osp-q3-History.txt		(история изменений в данной модификации)
+        osp/Docs/osp-q3-Logging.txt		(информация о расширенном формате osp-лога)
+        osp/Docs/osp-q3-MapConfigInfo.txt	(информация о создании очереди карт)
+        osp/Docs/osp-q3-Modeinfo.txt		(информация о настройке режимов игры)
+        osp/Docs/osp-q3-PlayerFilters.txt		(информация о фильтрах)
+        osp/Docs/osp-q3-ServerGfx.txt		(информация о настройке серверной графики)
+        osp/Docs/osp-q3-Variables.txt		(информация о серверных переменных OSP)
+        osp/Docs/osp-q3-Viewcam.txt		(информация о камере наблюдения)
+
+        osp/locs/*.cfg			(различные дополнительные файлы локаций на карте)
+
+        osp/vm/qagame.qvm		(компонент OSP-Q3 для ВЫДЕЛЕННОГО-сервера)
+
+
+Более подробную информацию вы можете найти
+в файле README.txt и в Docs/osp-q3-*.txt.

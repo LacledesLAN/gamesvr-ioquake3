@@ -1,0 +1,107 @@
+Jugando un Match en un Server de OSP
+--------------------------------
+14 Dec 01
+by Fia
+
+====================================================
+ Traducido al Español por el equipo Rancid:
+====================================================
+ - Pablo González 	alias Totoro
+ - Roberto Konow 		alias Ratón
+ - Antonio Inocencio	alias Nyto
+ - Mauricio Quilpatay 	alias Phobos
+
+ WWW:		http://www.rancid.cl
+ Email: 	webmaster@rancid.cl
+ IRC:		#rancid on irc.enterthegame.com
+
+ --> Visita www.rancid.cl para obtener noticias
+     del E-Sport y Quake3 totalmente en Español.
+====================================================
+====================================================
+
+Aquí hay algunos pasos que necesitas conocer para configurar
+y jugar un match en un Server de OSP.
+
+
+1. Configura el server en el modo de juego que quieras con:
+
+    /callvote mode <modos_disponibles>
+
+El modo de OSP estándar son Free-For-All, 1v1, QIL TDM, TeamplayDM, CTF, y
+ClanArena. Sin embargo, el servidor no pueda ser configurado
+para todas las configuraciones (o pueda tener modos adicionales), 
+entonces para obtener la lista de los modos disponibles del server usa:
+
+    /callvote mode ?
+
+Además, puedes necesitar jugar el modo Instagib solo Railgun con:
+
+    /callvote instagib <0|1>
+
+
+2. Cambiar al mapa que quieras jugar con:
+
+    /callvote map <mapname|map_id>
+
+Para obtener una lista de los mapas disponibles y sus IDs del servidor, usa:
+
+    /callvote map ?
+
+
+3. Chequear cualquier opción de votación que puedas estar interesado en cambiar con:
+
+    /callvote <option_name> ?
+
+Para obtener una lista de todas las votaciones disponibles en el servidor del servidor, usa:
+
+    /callvote ?
+
+
+4. Cuando los equipos están en sus lugares, cierra los equipos con:
+
+    /lock
+
+Para abrir los equipos para cambiar los jugadores de tu equipo, usa:
+
+    /unlock
+
+Si es necesario, tu también puedes prevenir que los espectadores puedan ver el juego:
+
+    /speclock
+
+Cuando speclock está en uso, todos los espectadores quedarán inmóviles 
+y mirando hacia una muralla. 
+Un equipo permite especificar a los espectadores que pueden seguir a ese equipo invitándolos con
+el comando specinvite. Primero, obtiene una lista los IDs de los jugadores con:
+
+    /players
+
+Entonces invita a un jugador en específico para espectar a tu equipo con:
+
+    /specinvite <player_id>
+
+
+5. Para que los jugadores queden en el estado "ready" con:
+
+    /ready
+
+Un jugador también puede volver a un estado "not ready" con:
+
+    /notready
+
+
+6. Jugar el juego. Durante el juego, los equipos pueden llamar a timeins/timeouts con:
+
+    /time
+
+
+Esto es. Diviértete jugando en tus matches en el servidor de OSP!
+
+Hay muchos otros comandos/opciones de OSP, pero estos son los comandos básicos
+que necesitas para un match.  Tipea: \? para ver una lista de todos los comandos
+disponibles del servidor. Cualquier comando seguido con un "?", dará más información 
+de este comando.
+
+Para más detalles, mira en el directorio osp/Docs (osp/Docs/ESP para español), siéntate, 
+relajate y lee los documentos del OSP Tourney DM/CA/CTF :)

@@ -1,0 +1,263 @@
+Informacion del Viewcam 
+===============================
+Version:  1.0
+Fecha:    14 Dec 00
+Sitio:    http://www.OrangeSmoothie.org
+Contacto: rhea@OrangeSmoothie.org
+
+====================================================
+ Traducido al Español por el equipo Rancid:
+====================================================
+ - Pablo González 	alias Totoro
+ - Roberto Konow 		alias Ratón
+ - Antonio Inocencio	alias Nyto
+ - Mauricio Quilpatay 	alias Phobos
+
+ WWW:		http://www.rancid.cl
+ Email: 	webmaster@rancid.cl
+ IRC:		#rancid on irc.enterthegame.com
+
+ --> Visita www.rancid.cl para obtener noticias
+     del E-Sport y Quake3 totalmente en Español.
+====================================================
+====================================================
+
+Vista general
+-------------
+El vievam esta activado solo si el servidor, puede localizar una
+posición de cámara apropiado para el mapa actual.
+
+Las posiciones de los mapas se deberían llamar así:
+
+	viewcam-<mapname>.cfg
+
+... donde <mapname> es q3dm1, q3dm2, etc.
+
+Cuando el servidor es cargado, examina el directorio "cfg-viewcam/", 
+el cual se encuentra en el directorio osp/ directory por defecto.  
+Esto se puede cambiar editando la variable "viewcam_directory"
+dentro del config del servidor.
+
+
+Creando archivos de definiciones viewcam 
+-----------------------------------------
+1. Crear los archivos de definición es bien fácil, y divertido :).
+La forma mas fácil es empezar  con un servidor listen, usando el OSPTourney DM/CA/CTF versión 0.81 o mayor.
+
+2. Cuando ya haya cargado el servidor, cambie el team a spectador (\team s).
+
+3. Bindee una tecla a (yo use "h") el comando "\snapshot".  Por ejemplo:
+
+	\bind h snapshot
+
+4. Tambien, Bindee otras letras para otras funciones importantes para 
+   definir las posiciones de la cámara :
+
+	\bind f range
+	\bind g vc_proximity
+
+   Estos comandos van a ser explicados pronto.
+
+4. Ahora, muevete alrededor del mapa, posicionando la cámara en óptimos puntos de juego, 
+   cubriendo la mayor parte de superficie posible.
+
+5. Cuando tengas una posición en la que tu creas que es decente, aprieta la tecla g 
+   (o cualquier otra tecla que hayas bindeado al comando "vc_proxmity") para ver que tan
+   cerca están los otros snapshots de las posiciones que hayas sacado, 
+   desde tu posición actual.
+
+   "vc_proximity" te da solo la distancia en línea recta al snapshot
+   y viewcam mas cercano de todos. Así que, la información que este comando
+   te dará, podría ser el de detrás de una muralla, en la cual tu estas 
+   posicionado. En cambio, la información podría ser muy útil para determinar
+   lo extenso del foco visual de la cámara (radio de camara = 450 unidades)
+   con tu posición actual .
+
+   Esta información es impresa en la mitad de la pantalla, para ignorar los demás mensajes 
+
+6. Justo antes de que saques el snapshot, mantén apretada la tecla "f" 
+   (o cualquier otra tecla a la cual hayas bindeado el comando "range" ) y 
+   checkea toda la vista alrededor de tu posición actual.
+
+   El comando range, te dirá si la  si tu mira esta en el rango de la cámara
+   (se pondrá amarillo si esta en el rango, rojo si no lo esta)
+
+7. Una vez que tengas una posición que encuentres adecuada, 
+   aprieta la tecla predefinida de snapshot.
+
+8. El servidor mostrara un mensaje (a la consola) que son números. 
+    La linea se vera algo asi como esto: 
+   
+	4 -269.920 -1493.019 333.001 37.512 -124.612
+
+   Donde el primero numero es un integer ingresivo (posición única del indentificador)
+    y el resto son posiciones de las coordenadas dentro del mapa actual.
+
+7. Avanza por el mapa actual y hace cuantas "snapshots" sean necesarias para poder 
+   cubrir toda la superficie del mapa. El numero mas a la izquierda en la consola 
+   va aumentar para cada snapshot.
+
+8. Cuando esto este listo, baja la consola y escribe: : \condump <mapname>.cfg
+
+   Nota: Como una manera de precaución el servidor también logeara todos los snapshots
+   en el archivo games.log, si el servidor NO es dedicado y solo hay 1 
+   solo jugador conectado.
+
+9. Cierra quake3 (o Carga algún otro mapa para hacer mas snapshots).
+
+10. Abre los archivos condumped (que se localizan en el directorio osp/ )
+    con tu editor de textos favorito (ej.Wordpad).
+
+11. Borra toda la información en este archivo hasta el punto cuando empezaste
+    a sacar snapshots por primera vez. Borra todo antes y después de la ultima
+    o primera línea de snapshots 
+
+12. Deberías tener un archivo que se vea así:
+
+	0 -404.158 -458.847 607.734 38.677 -114.675
+	1 -807.011 -840.523 351.869 55.042 158.214
+	2 -1167.130 -277.282 345.887 77.217 133.132
+	3 -1319.148 -747.830 674.927 47.390 36.337
+	4 -1156.306 191.654 658.774 43.429 156.720
+	5 -959.129 374.814 159.875 39.996 -29.927
+	6 -331.580 -82.610 209.948 41.578 -142.125
+	7 -7.374 -496.873 24.125 14.255 42.935
+	8 -71.779 486.688 24.126 22.044 -95.043
+	9 147.193 -834.934 156.112 51.081 -22.967
+	10 228.905 -1061.497 435.306 53.987 -86.858
+	11 462.476 -672.954 682.738 46.066 -155.138
+
+
+13. Guarda este archivo y renómbralo a "viewcam-<nombredelmapa>.cfg" y 
+    muevelo al directorio  cfg-viewcam/  (o donde tu guardes los 
+    archivos de definición de viewcams)
+
+14. Carga de nuevo quake3,corre un servidor listen y carga un mapa, 
+    justo como lo hiciste para crear las definiciones de viewcam.
+
+15. Escribe "\viewcam", "\team viewcam" o "\team vc" en la consola.
+
+16. Escribe "\vc_info" (para obtener un punto donde se cambien las 
+    camaras dentro del mapa)
+
+17. Presiona la tecla de saltar, para moverse por las posiciones de cámaras,
+    Presiona tu tecla de agacharse, para devolverse una posición. Debido a que estas 
+    solo en el mapa, las cámaras estarán quietas y se verán exactamente como 
+    cuando hiciste los snapshots. 
+
+18. Cuando estés satisfecho, haz algún otro mapa faltante.
+
+Notas de Snapshot
+--------------
+- El rango de la cámara es de 450  unidades para la detección, mantén 
+  esto en mente para areas grandes, donde quzias tengas que incluir varias
+  cámaras para cubrir la área completa. Presiona y mantén la tecla bindeada
+  a "\range" frecuentemente! 
+
+- Trata de ignorar tener dos(o mas) cámaras que tengan un rango de 
+  vista con otra cámara (ej. 2 posiciones de cámaras que están menos 
+  de 450 unidades de distancia).Esto ayudara a impedir transiciones 
+  abruptas cuando algún jugador se mueva por estas áreas.
+
+- Dos cámaras PUEDEN estar mas cercas, solo cuando no tengan una línea 
+  de vista directa con la otra cámara. Sin embargo, se cuidadoso acá. 
+  Puedes conseguir excelentes ángulos de juego así, pero también muy
+  malos =) 
+
+- Trata de mantener las cámaras (generalmente) arriba de la cabeza 
+  de los jugadores, para así impedir que estos "corran" encima de alguna
+  cámara. Aun así es bastante cool tener una cámara mas abajo, para poder
+  ver mas de tipo cara contra cara a los jugadores que pasen cerca =) 
+
+- Las cámaras estáticas, solo van a encontrar la acción que generalmente 
+  están al frente de ellas (como fov 120). Así que los jugadores podrían
+  perderse de algo de acción. 
+
+- Si quieres una escritura limpia de todos los snapshots, solo tienes que tipear: 
+
+	\snapshotdump
+
+- Si haces una mala snapshot, simplemente bórrala del archivo de definición,
+  no hay gran problema aquí.
+
+- Si encuentras que tienes espacios muertos o simplemente quieres añadir más
+  posiciones de cámaras, sigue los pasos arriba descrito cuando haces un archivo
+  de definición COMPLETO. Pero esta vez, solo ve a las áreas que quieres añadir
+  y toma las snapshots. Desde el condump de estas posiciones adicionales, solo
+  corta y pégalos en tu archivo de definición original, cambiando los números 
+  de más a la izquierda a números únicos. Intenta hacer que los números más a
+  la izquierda sean únicos en cada línea (de otras líneas en el mismo archivo
+  de definición) para que puedas encontrar las posiciones más fácilmente si los 
+  necesitas.
+
+- Para edición seria de la viewcam, yo *seriamente* recomiendo abrir
+  Q3 en dos ventanas. Cuando abras la primera, lanza un servidor no-dedicado
+  corriendo algo como "cfg-SinglePlayer/team.cfg". Una vez que esté cargado,
+  cambia a la viewcam.
+
+  Entonces, abre un segundo quake en ventana y conéctate al servidor
+  que acabas de crear (lo más fácil es ir al menú Multiplayer y cambiar a "Servidores Locales").
+  Con esta ventana, úsala para correr a través del nivel.
+
+  La primera ventana mostrará la acción de la viewcam, y tu puedes controlar su movimiento 
+  precisamente (bueno hasta cierto punto) a través de los movimientos del jugado
+  en la segunda ventana. Esto DEFINITIVAMENTE ayuda en encontrar espacios muertos y puntos
+  en que las cámaras se sobreponen.
+
+  Por supuesto, necesitarás una tarjeta de video que soporte modos en ventana (p.e. TNT2).
+
+- Hay un parámetro adicional y opcional en las posiciones dinámicas 
+  para cambiar el rango por algún razón en particular. por ejemplo, 
+  el comando \snapshot daría como resultado algo así:
+ 
+	5 668.980 2338.872 173.705 42.709 -88.748
+
+  La posición para cada viewcam puede ser argumentada por un argumento de longitud 
+
+	5 668.980 2338.872 173.705 42.709 -88.748 [length]
+
+  Así que para cambiar de rango el cual por defecto es de 450, a 900 por decir, 
+  PARA ESTA POSICION EN PARTICULAR, solo cambia (a mano) la línea a:
+
+	5 668.980 2338.872 173.705 42.709 -88.748 900
+
+  Esto es ayuda bastante para cubrir áreas mas grande donde muchas cámaras, 
+  harían el juego confuso, debido a los bruscos cambios que se producirían.
+
+  Nota: No por especificar el ángulo va a dejar las posiciones de un rango por 
+  defecto de 450.
+
+
+Comandos del Viewcam:
+---------------------
+- Para cambiar al modo viewcam:
+	\viewcam
+	\team viewcam
+	\team vc
+	\vc_follow	(permite que el viewcam siga a un jugador. Tu opcionalmente
+			 puedes indicarle el jugador nombre/ID a seguir
+			 especificando un jugador directamente, sin tener que pasar 
+		       por un ciclo para llegar a el).
+	Presionando DISPARAR cuando esta en modo CHASE
+	Presionando DISPARAR FIRE cuando esta en modo FREEFLOAT con un jugador no activo.
+
+- Información de la posición del Viewcam:
+	\vc_info		(Entrega la información de la posición actual del viewcam)
+	\vc_proximity	(Entrega información instantánea y la posición del viewcam)
+	\range		(Entrega los rangos de la superficie de la posición actual)
+
+- Otros
+	\vc_free		(elegir entre el modo auto-seguimiento para acción-basadd en el viewcam)
+	\snapshot		(toma un "snapshot" de la posición actual)
+	\snapshotdump	(muestra todos los "snapshots" que han sido tomados)
+
+- Variables del cliente
+	cg_followviewcam	 0 - Defecto del Viewcam para un modo dinámico
+				*1 - Viewcam cierra en estilo single player, esto puede ser
+				     cambiado para otro jugador con el botón de salto
+				     o \followprev o  \follownext.
+
+- Ciclo manual entre las posiciones del viewcam:
+	- SALTAR adelanta el ciclo
+	- AGACHARSE retrocede el ciclo
+	(Valido solo cuando hay un jugador activo en el servidor)

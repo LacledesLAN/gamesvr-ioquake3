@@ -1,0 +1,392 @@
+// OSP Tourney DM/CA/CTF Comandos para Quake3
+// -----------------------------------------
+// http://www.OrangeSmoothie.org
+// rhea@OrangeSmoothie.org
+// v(1.0)
+// 14 Dec 01
+//
+//====================================================
+// Traducido al Español por el equipo Rancid:
+//====================================================
+// - Pablo González 	alias Totoro
+// - Roberto Konow 	alias Ratón
+// - Antonio Inocencio	alias Nyto
+// - Mauricio Quilpatay alias Phobos
+//
+// WWW:		http://www.rancid.cl
+// Email: 	webmaster@rancid.cl
+// IRC:		#rancid on irc.enterthegame.com
+//
+// --> Visita www.rancid.cl para obtener noticias
+//     del E-Sport y Quake3 totalmente en Español.
+//====================================================
+//====================================================
+
+Las siguientes descripciones dan información sobre todos los comandos 
+disponibles (y sus opciones) de OSP Tourney DM/CA/CTF para Quake3 para ambos: clientes y consola del servidor.
+
+Todos los comandos requieren un parámetro, se pueden usar sin el
+parámetro para obtener información adicional del seteo del comando
+incluso si este esta deshabilitado.
+
+La notación usada para describir los comandos es una semántica parecida a Unix que especifica si un parámetro es opcional o requerido:
+
+  - Cualquier parámetro encerrado entre < ... > es requerido.
+  - Cualquier parámetro encerrado entre [ ... ] es opcional.
+
+Algunos comandos dados continuación también especifican un "player_id" como un parámetro opcional o requerido. La información del "player_id" es un ID numérico asignado a un jugador cuando se está conectando al servidor.
+Para encontrar el player_id asociado a un jugador, escribe el comando "\players" para ver una lista de todos los nombres de jugadores y su "player_id" asociado.
+
+Nota: todos los comandos listados a continuación son una adición a los comandos que vienen con el juego Quake3 por defecto.
+
+
+
+=========================================================
+Comandos generales disponibles (todos los modos de juego)
+=========================================================
+autorecord              Crea un demo utilizando información semántica 
+                        consistente de nombres (Solo clientes de 					OSP).
+
+autoscreenshot          Crea un screenshot utilizando información 				semántica consistente de nombres (Solo 					clientes de OSP).
+
++button5                Habilita el uso del hook/grapple, si está 				permitido en en el servidor.
+
+callvote <parametros>   Llama a votación. La lista de <parámetros> 				disponibles se dá más abajo en este 					documento.
+
+credits                 Introducción cool de la gente que toma parte 				en el desarrollo del OSP.
+
+currenttime             Muestra la hora local.
+
+followpowerup           Cambia a la vista automáticamente de quien 				toma el pickup (si el modo chase-cam esta 				habilitado).
+
+help                    Muestra una lista de los comandos disponibles 				para el modo de juego en el que el server se 				encuentra (Alias: commands).
+
+menu                    Muestra al cliente un menu de juego del OSP 				mejorado. Usa weapnext/weapprev para moverte 				abajo/arriba por los items del menu, y 					menuleft/menuright para escoger los seteos 				hacia atras/adelante.
+
+motd                    Ver el MOTD activo del servidor.
+
+players                 Muestra una lista de todos los jugadores 					activos y sus server ID (Este ID es ocupado 				por otros comandos, como mostramos a 					continuación). También se da otro tipo 					información. 
+
+ref <password>          Hacerse referee (acceso al admin).
+
+settings                Muestra los seteos del servidor actual. Verde 				indica un valor por defecto, mientras que 				rojo muestra cuales han sido cambiados
+				desde el default en el tipo de juego actual.
+
+speconly                Escoge el modo de cola en el 1v1.
+                        Si esta habilitado, entonces los clientes 				nunca entran al juego 1v1. Ellos permanecen 				espectando todo el tiempo en que estén 					conectados. Deshabilitado el "speconly"
+                        pondrá al cliente al final de la cola para 				comenzar a jugar nuevamente.
+
+stats [player_ID]       Muestra las estadísticas (stats) de la 					exactitud de las armas de un jugador. Si no 				se le da un ID, muestra las estadísticas 
+				del jugador activo (o si se esta siguiendo a 				un jugador, muestra las estadísticas del 					jugador que se esta siguiendo).
+
+statsall                Muestra las estadísticas de todos los 					jugadores activos.
+
+statsblue/statsred      Muestra las estadísticas de todo el equipo 				blue/red.
+
+statsdump               Deja las stats/scores al archivo de registro:
+                             <osp_root>/stats/<date>/<logname>.txt
+                
+team s                  Deja en modo espectador.
+
+topshots [weapon_abbr]  Despliega las estadísticas del mejor jugador 				para todas las armasn que han sido disparadas 				con un mínimo de 10 disparos por arma. Si es 				seguido de una abreviación, el comando 					mostrará todas las calificaciones del jugador
+				en la arma particular (MG, SG, GL, RL, LG, 				RG, PG, BFG).
+
++wstats                 Muestra estadísticas mientras se juega o del 				jugador a quien se sigue (si se esta es 					espectador). En multiview, las estadísticas 				serán del jugador de la ventana resaltada.
+
+vc_follow [player_ID]   Pone la viewcam (cámara) en estado de 					seguimiento.
+                        Player_ID es opcional para seguir a un 					jugador en especifico.
+
+vc_free                 Escoge el modo en que la viewcam cambia entre 				los jugadores de forma manual/automática. 
+				
+vc_view                 Escoge el modo en que la viewcam ve de forma 				estática/dinámica (si la cámara es fija o 				sigue a los jugadores con un rango de 					visión).
+
+viewall                 Activa la multivista de todos los jugadores 				activos del server.
+
+viewblue/viewred        Activa la multivista de todo el equipo 					blue/red.
+
+viewcam                 Cambia al modo de cámara cinematic.
+
+viewadd <player_id>     Agrega pov a la pantalla de jugadores 					activos.
+
+viewremove [player_id]  Remueve el pov del jugador que esta 					resaltado.
+                        Usando la opción del player_id remueve el pov
+				especifico del jugador.
+
+viewfollow              La vista se mueve al modo de seguimiento 					"chasecam" del jugador que tiene la ventana 				resaltada.
+
+viewnone                Remueve todos los pov activos.
+
+viewnext/               Mueve hacia adelante/atras por las vistas que 				se seleccionan
+viewprev                cual jugador esta activo en el momento.
+                        (Nota: Los comandos follownext/followprev son 				iguales a estos comandos mientras se está en 				modo multi-view).
+
+viewcyclenext/          Un ciclo a través de los compañeros de equipo
+viewcycleprev           en la vista activa. Si un miembro esta en 				otro punto de vista, se pasará. Para modos 				1v1/FFA, este ciclo será entre todos los 					jugadores activos.
+
+                       --> Teclas ideales para el modo multi-view:
+                                bind "[" followprev
+                                bind "]" follownext
+                                bind ";" viewprev
+                                bind "'" viewnext
+                                bind "." viewcycleprev
+                                bind "/" viewcyclenext
+                                bind backspace viewremove
+                                bind enter viewfollow
+
+
+========================================
+Comandos de competición (g_doWarmup = 1)
+========================================
+ready           Deja al jugador en estado "ready" (listo) para 			    comenzar el match.
+notready        Deja al jugador en estado "not ready" (no listo) para 		    comenzar el match.
+time            Llama a tiempo timeout/timein para un equipo.
+pause           Pausa/despausa un match (solo admin).
+
+
+==========================================================
+Comandos especificos para equipos [general] (g_gametype = 3, 4, ó 5)
+==========================================================
+captains                Muestra el nombre de ambos capitanes.
+
+coach                   Cambia a modo "entrenador" ("coach") en 					espectador (después de ser invitado al 					equipo), o reinicializa la vista multi-					jugador del "entrenador". Los entrenadores
+                        pueden hacer chat en equipo, llamar a 					timeouts, teamready, etc. con o para el 					equipo como si ellos fueran un jugador más 				del equipo, pero ellos solo pueden espectar 				su equipo.
+
+coachdecline            Declina una invitación de "entrenador", o 				saca un estatus entrenador de un equipo que 				ya tiene un entrenador.
+
+coachinvite <player_id> Invita a un jugador a se entrenador de un 				equipo.
+
+coachkick <player_id>   Quita a un entrenador invitado previamente a	 			un equipo.
+
+drop <item>             Tirar un arma/munición disponible (solo 					TDM/CTF) o la bandera (CTF). Escribir 					"\drop" dará una lista de los items 					disponibles para tirar.
+
+joincode [password]     Muestra el código de acceso actual o el usado 				para entrar a un equipo cerrado entregando el 				código de acceso del equipo.
+
+lock                    Abre un equipo de jugadores
+
+scores                  Muestra las estadísticas del match en 					progreso.
+
+team <r|b|s|none>       Escoger un equipo (r=rojo, b=azul, 						s=espectador) o muestra el equipo actual (si 				no se le da un parámetro).
+
+time                    Llama un timeout/timein (Alias: pause)
+
+timein                  Llama un timein  (Alias: unpause)
+
+timeout                 Llama un timeout (Alias: pause)
+
+unlock                  Cierra un equipo de jugadores
+
+viewred/viewblue        Agrega vistas de todo el equipo rojo/azul.  				Si un nuevo jugador entra o sale del equipo, 				tu pantalla será actualizada.
+
+
+==========================================================
+Comandos especificos para equipos [capitán] (g_gametype = 3, 4, ó 5)
+==========================================================
+invite <player_id>      Invita a un jugador a ser capitán del equipo.
+                        (Alias: pickplayer)
+
+remove <player_id>      Remueve a un jugador del cargo de capitán del 				equipo. (Alias: kickplayer)
+
+resign [player_ID]      Resigns team captainship.  You can optionally
+                        assign captainship to another teammate by
+                        supplying the teammate's ID.
+
+specinvite <player_id>  Invita a un jugador a espectar un equipo 					cerrado.
+
+speclock                Escoge si se cierra un equipo para 						espectadores.
+
+teamready               Dejar en estado "ready" a todos los miembros 				de un equipo para comenzar el match.
+                        (Alias: readyteam)
+
+
+========================
+Referee (admin) commands
+========================
+ref <vote_option> <param> Trabaja igual que la información y seteos 				del callvote.
+r_abort                 Aborta un match en progreso (principalmente 				para CA)
+r_allcaptain            Dar a todos los jugadores comandos limitados 				de capitán.
+r_allready              Poner a todos los jugadores en estado 					"ready" para comenzar el match.
+r_ban <player_id>       Kickear o bannear al jugador seleccionado del 				servidor.
+r_help                  Muestra una lista de los comandos.
+r_kick <player_id>      Kickea a un jugador seleccionado del 					servidor.
+r_lock                  Cierra ambos equipos de jugadores que quieran 				entrar. (Alias: lock)
+r_lockblue              Cierra el equipo azul
+r_lockred               Cierra el equipo rojo
+r_map <mapname>         Carga un mapa seleccionado.
+r_mutespecs             Dejar Mutes/unmutes a los espectadores.
+r_pause                 Pausa/despausa un match. (Alias: pause)
+r_promote <player_id>   Promueve a un jugador a un estado de capitán.
+r_putblue <player_id>   Pone un jugador especificado en el equipo 				AZUL.
+r_putred <player_id>    Pone un jugador especificado en el equipo 				ROJO.
+r_remove <player_id>    Remueve un jugador seleccionado de un equipo.
+r_restart               Reinicia el mapa activo.
+r_speclock              Habilita a los espectadores a ver ambos 					equipos.
+r_speclockblue          Habilita a los espectadores a ver al equipo 				azul.
+r_speclockred           Habilita a los espectadores a ver al equipo 				rojo.
+r_specunlock            Deshabilita a los espectadores a ver ambos 				equipos.
+r_specunlockblue        Deshabilita a los espectadores a ver al 					equipo azul.
+r_specunlockred         Deshabilita a los espectadores a ver al 					equipo rojo.
+r_unlock                Abre ambos equipos de jugadores que quieran 				entrar.
+r_unlockblue            Abre el equipo azul.
+r_unlockred             Abre el equipo rojo.
+
+*NOTA*: Todas las opciones de votación están también habilitadas por cualquier "votos" del referee aun que pase ó falle. Esto permite al referee modificar todas las configuraciones del servidor que se muestran en la lista de \callvote.
+	  Se puede usar opcionalmente el comando "ref" para lograr el mismo efecto.
+
+===============================
+Comandos de edición del Viewcam
+===============================
+Por favor revisa el archivo osp-q3-Viewcam.txt en el directorio osp/Docs/
+para una descripción de los siguientes comandos:
+
+range
+snapshot
+snapshotdump
+vc_proximity
+vc_info
+
+
+============================
+Comandos de edición de logos
+============================
+Por vador revisa el archivo osp-q3-Decal-Editing.txt file en el directorio osp/Docs/ para ver información del uso de los siguientes comandos:
+
+decaladd	- Agrega un nuevo logo. Este será creado en modo 			  DESHABILITADO.
+		  Para habilitarlo hay que comenzar a editarlo en su 		        ubicación y gráfica.
+decaldec	- Descrese el tamaño del logo actual.
+decaldisable	- Deja deshabilitado el logo actual.
+decaldump	- Deja la información actual de los logos habilitado a
+		  <Quake3_root/osp/decals/decal-<mapname>.txt
+decaledit	- Activa/Desactiva el modo de edición de logos.
+decalenable	- Habilita el logo actual.
+decalgfxnext	- Pasa del logo actual al próximo que se haya definido.
+decalgfxprev	- Pasa del logo actual al anterior que se haya definido.
+decalinc	- Incrementa el tamaño del logo actual.
+decalnext	- Mueve al próximo logo activo.
+decalprev	- Mueve al anterior logo activo.
+decalrotclock	- Rota el logo actual en el sentido de las agujas                    	              del reloj.
+decalrotcounter	- Rota el logo actual en sentido contrario a las 	              agujas del reloj.
+
+
+===============================
+Comandos/Parametros de votación
+===============================
+Las siguientes opciones están disponibles por el "callvote" de OSP.
+La mayoría de las opciones son llamadas con parámetro "0" o "1" para
+señalar "OFF" (apagado/deshabilitad) o "ON" (prendido/habilitado) respectivamente.
+
+Puedes obtener una lista de todas las opciones disponibles para votar escribiendo en el juego:
+
+    \callvote ?
+
+por si misma sin un nombre de la opción. Esto dará una lista de todas las opciones disponibles por el servidor para votar basadas en el tipo de juego actual del servidor.
+
+Tambien puedes obtener una descripción y el actual seteo de la mayoría de las variables del servidor, simplemente escribiendo:
+
+    \callvote <nombre_opción> ?
+
+sin ningún parámetros. Por ejemplo, tu puedes obtener el seteo actual del servidor para la BFG y se ver si está disponible o no. Esto lo haces escribiendo:
+
+    \callvote bfg ?
+
+
+Acá hay una lista de todas las opciones para votación:
+------------------------------------------------------
+** Parámetros de votación generales **
+  altgraphics <0|1>          	Opción para determinar si el cliente 					puede usar los gráficos alternativos de 					la plasma y lightning.
+  dropitems <0|1>            	Poder tirar armas/municiones (solo 						Teamplay DM) o la bandera (solo CTF).
+  instagib <0|1>             	Cambiar a modo "instagib" bajo el tipo 					de juego actual. Instagib es un formado 					donde el en el mapa está libre de 						items, los jugadores aparecen con una 					railgun y gauntlet y la railgun hace 					400 puntos de daño. Este formato 						trabaja bajo todos los tipos de  						juegos.		
+  fallingdamage <0|1>        	Si el daño al caer esta 							habilitado/deshabilitado.
+  fastrail <0|1>             	Opción que funciona con Promode (CPM), 					donde el cambio de la railgun tiene un 					tiempo de espera que puede ser seteado 					a 1500ms (opción 0), o 1000ms (opción 					1).
+  hook <0|1>                 	Escoge entre el "hook" o "grapple".
+  kick <player_id>           	Kickear a un jugador del servidor.
+  lgcooldown <0|1>           	Option under Promode (CPM) settings, 					where the LightningGun "cooldown" 						switching delay can be set to either 					0ms (option 0), or a slower 200ms 						(100ms if fastrail is enabled) (option 					1).
+  map <nombremapa|mapa_id>   	Votar para cambiar un mapa. Para ver 					una lista de los mapas disponibles, 					escribe:
+                                  \callvote map
+                             	Los mapas pueden ser llamados por el 					nombre o por el numero ID (es dado en 					la lista de mapas).
+  map_restart                	Reinicia el mapa actual.
+  maxpackets_min <valor>     	Setea el mínimo de cl_maxpackets para 					los clientes (0 no hay limite).
+  maxpackets_max <valor>     	Setea el máximo de cl_maxpackets para 					los clientes (0 no hay limite).
+  mg_damage <valor>          	Setea el daño de la machinegun por 						bala. Máximo es 10, mínimo es 1.
+  mg_startammo <valor>       	Setea la cantidad de municiones de un 					jugador que aparece con la machinegun 					(mín = 0, máx = 500).
+  mode <modos_disponibles>   	Carga una configuración especifica,
+                             	si el server esta propiamente 						configurado. Esto es usa generalmente 					para cargar nuevos tipos de juego (CTF, 					DM, etc.)
+  mutespecs <0|1>            	Habilitas/deshabilita la posibilidad de 					chat de los espectadores.
+  nextmap                    	Carga el siguiente Mapa de la lista.
+  osphud <0|1>               	Alterna la habilidad del cliente pa 					usar cg_enableospHUD.
+  overtime <0|1|2|3>         	Setea la posibilidad de tiempo extra:
+                               0 - Muerte Súbita (first score 						     decides)
+                               1 - Muerte Súbita-Timed Overtime
+                                   (Muerte Súbita después de  X 					            rounds)
+                               2 - Sin Tiempo extra(puede terminar en 					     empate)
+                               3 - Tiempo Extra  (Empate después de x 					     rounds)]
+  pmove <0|1|2>              	Toggles client ability to utilize 						enahced
+                             	client sampling (pmove_fixed).
+                               0 - pmove enhancements disabled
+                               1 - id-based pmove enhancements
+                               0 - Improved pmove enhancements
+  promode <0|1>              	Alterna las opciones promode
+  qil|kit [mapname]          	mm,.  Cambia del defecto del seteo de 					QIL TeamDM.
+                             	Opcionalmente se puede especificar un	 				nombre del mapa para cambiarlo en este 					modo.
+  referee <player>           	Permite a un jugador tener las opciones 					referee.
+  reload <100-5000>          	Setea el tiempo de recarga de la 						railgun (en ms). Solo disponible bajo 					modo instagib.
+  respawn <secs>             	Setea un valor forzado para el tiempo 					de respawn.
+  set1v1 [mapname]           	Cambia el servidor al modo de defecto 					de 1vs1.Un mapa opcional especifica el 					cambio de modo.
+  setca [mapname]            	Cambia el servidor al modo Clan Arena 					con las opciones de defecto.
+                             	Un mapa opcional especifica el cambio 					de modo.
+  setctf [mapname]           	Cambia el servidor al modo de defecto 					CTF.  Un mapa opcional especifica el 					cambio de modo.
+  settdm [mapname]           	Cambia el servidor al modo de defecto 					CTF.
+                             	Un mapa opcional especifica el cambio 					de modo.
+  thrufloors <0|1>           	Especifica el daño a través de las  					murallas que se transmite.(defecto id)
+  timenudge_min <value>      	Setea el mínimo cl_timenudge para el 					cliente (0 inhabilitado).
+  timenudge_max <value>      	Setea el máximo cl_timenudge para el 					cliente (0 inhabilitado).
+  unreferee <player>         	Quita la habilidad de referree.
+  cl/capturelimit <value>    	Cambia el capturelimit actual (solo 					CTF) 
+  fl/fraglimit <value>       	Cambia el Fraglimit actual
+  rl/roundlimit <time>       	Cambia el roundlimit actual (CA only)
+  tl/timelimit <time>        	Cambia el timelimit actual
+
+** Todos los Modos excepto Los parámetros de Clan Arena **
+  bfg <0|1>                  	Habilita/Deshabilita la BFG (Excepto en 					el modo CA).
+  bsuit <0|1>                	Habilita/Deshabilita el BattleSuit (No 					en el modo CA).
+  invis <0|1>                	Habilita/Deshabilita el item 							Invisibility (No en el modo CA).
+  medkit <0|1>               	Habilita/Deshabilita el item MedKit (No 					en el modo CA).
+  quad <0|1>                 	Habilita/Deshabilita el Quad Damage (No 					en el modo CA).
+  regen <0|1>                	Habilita/Deshabilita el Regeneration 					(No en el modo CA).
+  teleporter <0|1>           	Habilita/Deshabilita el item teleporter 					(No en el modo CA).
+
+** Parametros de ClanArena  **
+  armordamage <0|1>          	Especifica si el armor personal es 						afectado o no por el dañó propio. 						(Solo en el modo CA ).
+  startrespawn <0|1>         	Especifica si los clientes hacen 						respawn en el comienzo de un match
+	 		     		(Solo en el modo CA).
+  warmupfire <0|1>           	Especifica si  los jugadores pueden 					disparar durante el armup. 
+			     		(Solo en el modo CA).
+
+** Parametros de equipo **
+  allcaptain <0|1>           	Especifica si todos los jugadores en un 					equipo tienen todos los comandos 						disponibles solo para el actual capitán 					del equipo.
+                            
+  teamdamage <0|1>           	Permite la posibilidad de dañar a 						personas de tu propio equipo.
+
+
+=====================
+Comandos del servidor
+====================
+La siguiente lista describe los comandos disponibles en la consola
+del servidor. Nota: Todos los comandos de consola que vienen por
+defecto en Quake3 también están disponibles.
+
+addbot              Si es llamado con un nombre que no es por defecto
+		    	  del Quake3, OSP determinará cargar un bot con un 
+		    	  determinado nivel de dificultad (skill). Esta 
+		    	  selección es basada en la representación numérica
+	              en el nombre del bot. Así, el mismo bot sera 
+	              seleccionado cuando el nombre sea dado, cada vez.
+allready            Setea a todos los clientes en estado "ready".
+ban <player_id>     Bannea a un jugador del servidor.
+filterlist          Muestra una lista de todos los filtros 					  habilitados en el servidor.
+                    (Alias: banlist)
+filterload          Carga una lista de filter/ban especifica de las 
+		        variables filter_file y player_file server.
+                    (Aliases: playernames, banload)
+loadmaps            Recarga la cola de mapas del servidor.
+pause               Pausa un match en progreso.  (Alias: mpause)
+players             Da información de los jugadores igual que el          			  comando "\players".

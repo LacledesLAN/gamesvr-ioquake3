@@ -1,0 +1,84 @@
+OSP Tourney DM/CA/CTF for Quake 3
+=================================
+Version: 1.0
+Date:    14 Dec 01
+Site:    http://www.OrangeSmoothie.org
+Contact: rhea@OrangeSmoothie.org
+IRC:     irc.enterthegame.com - #osp
+
+====================================================
+ Traducido al Español por el equipo Rancid:
+====================================================
+ - Pablo González 	alias Totoro
+ - Roberto Konow 		alias Ratón
+ - Antonio Inocencio	alias Nyto
+ - Mauricio Quilpatay 	alias Phobos
+
+ WWW:		http://www.rancid.cl
+ Email: 	webmaster@rancid.cl
+ IRC:		#rancid on irc.enterthegame.com
+
+ --> Visita www.rancid.cl para obtener noticias
+     del E-Sport y Quake3 totalmente en Español.
+====================================================
+====================================================
+
+NOTAS DE LA INSTALACIÓN:
+------------------------
+Pone el .zip adjunto en la raíz del directorio Quake3/. Tu 
+deberías tener un directorio nuevo "osp/" justo bajo el directorio
+principal Quake3/.
+
+Los siguientes archivos son incluidos en esta distribución:
+        osp/INSTALL.txt                  (archivo de instalación en ingles)
+        osp/README.txt                   (información principal sobre OSP)
+
+        osp/1v1.cfg                      (1v1 "Tournament" Deathmatch)
+        osp/clanarena.cfg                ("arena" estilo de juego, team-based)
+        osp/ctf.cfg                      (Capture The Flag juego en equipo)
+        osp/ctf-public.cfg               (Capture The Flag juego en equipo para publico)
+        osp/ffa.cfg                      (Free-For-All Deathmatch)
+        osp/filters.txt                  (Modelo de filtro de jugadores)
+        osp/instagib.cfg                 (Instagib FFA con otros modos habilitados)
+        osp/OSP Match Quick Start.txt    (información básica para clientes)
+        osp/team.cfg                     (Juego en equipo Deathmatch)
+        osp/spectool.cfg                 (Multi-view bindings)
+
+        osp/zz-osp-client0.pk3           (OSP-Q3 client volumen)
+        osp/zz-osp-server0.pk3           (OSP-Q3 server volumen)
+
+        osp/cfg-DefaultModeReference/*   (ejemplos de configs usados en modos internos)
+
+        osp/cfg-GfxExample/*             (ejemplos para gráficas personales usadas)
+
+        osp/cfg-maps/*.txt               (ejemplo de un config con una lista de mapas para
+							varios modos)
+
+        osp/CHN/*                          (Traducción en Chino de los documentos de OSP)
+        osp/ESP/*                          (Traducción en Español de los documentos de OSP)
+        osp/RUS/*                          (Traducción en Ruso de los documentos de OSP)
+        osp/Docs/CPM-info.txt              (Información sobre los seteos del CPM)
+        osp/Docs/osp-q3-ClientReadme.txt   (OSP clientes info/seteos)
+        osp/Docs/osp-q3-Commands.txt       (OSP clientes/servidor comandos)
+        osp/Docs/osp-q3-DecalEditing.txt   (Definición de logos por-mapa)
+        osp/Docs/osp-q3-History.txt        (información de los cambios del mod)
+        osp/Docs/osp-q3-Logging.txt        (Información del formato en el logging de OSP)
+        osp/Docs/osp-q3-MapConfigInfo.txt  (Información para crear cola de mapas)
+        osp/Docs/osp-q3-ModeInfo.txt       (Información para configurar modos en OSP)
+        osp/Docs/osp-q3-PlayerFilters.txt  (Información del filtro de jugadores)
+        osp/Docs/osp-q3-ServerGfx.txt      (Información de las configuracioens de las gráfícas
+							  personales)
+        osp/Docs/osp-q3-Variables.txt      (Información de las variables del servidor OSP)
+        osp/Docs/osp-q3-Viewcam.txt        (Información para editar el ViewCam)
+
+        osp/locs/*.cfg                     (Varios archivos de ejemplo de "customloc")
+
+        osp/vm/qagame.qvm                  (OSP-Q3 para servidores DEDICADOS)
+
+
+Más información la puedes obtener en el README.txt,
+archivos en Docs/osp-q3-*.txt (README-ESP.txt para español),
+y todos los configs de ejemplos están contenidos acá.
+
+
+

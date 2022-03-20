@@ -1,0 +1,105 @@
+OSP - Server-enabled Graphics
+=============================
+14 Dec 01
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+
+OSP Tourney DM/CA/CTF allows server operators to set up custom
+graphics for display to clients while they are connected to the
+server.  The motivation here is to allow clans, communities and/or
+tournament organizations to implement additional graphics in the
+game for demo/screenshot enhancements.
+
+In no way will these additional graphics interfere with normal
+gameplay, as they are displayed in only two places:
+     - On the level screenshot page seen while connecting to
+       a server.
+     - On the end-level scoreboard after a match has been
+       played and before the map is restarted or the next
+       map loaded.
+
+The format for customization is rather straight-forward.  I've
+also included an example in the main OSP-Q3 distribution for
+reference in case things dont seem to go well:
+
+1. Collect the graphics that you want to display.  These
+   graphics should be targa (.tga) format of type 6(?) or
+   type 10(?) for maximum compatibility (i.e. for transparency
+   layers).  JPEG (.jpg) format may work, but it is unsupported
+   at this time in OSP.
+
+2. Create a new .pk3 file and add these graphics to the path:
+
+        gfx\2d\
+
+3. Name these graphics in the following manner:
+
+        customXX.tga  (where XX is from 1 to 16)
+
+   This naming scheme MUST be monotmically increasing, starting
+   at "1".  In other words, name your first graphic "custom1.tga",
+   the next one "custom2.tga", and so forth for all your graphics
+   *UP TO* 16.  OSP supports only 16 custom graphics.
+
+4. When complete, place this .pk3 in your server's osp/ directory.
+   You should name the .pk3 with a your own name, starting with
+   a "z-" prefix, to ensure proper "sv_pure 1" semantics.
+
+5. Enable sv_pure 1 and sv_allowDownload 1 on the server to ensure
+   that clients can download the custom graphics .pk3 file.
+
+6. Create a gfx specification file that defines the position and
+   size for each of the graphics for both the connect splash
+   screen, and the end-level scoreboard.  The format for this is
+   as follows:
+
+      x y w h:x y w h
+
+      - x = the X (horizontal) coordinate (from the left)
+      - y = the Y (vertical) coordinate (from the top)
+      - w = width of graphic
+      - h = height of graphic
+
+        ----> Note: The X coordinate must be between 0 and 640,
+              while the Y coordinate must be between 0 and 480.
+              Don't worry about people with larger or smaller
+              screens, OSP will scale the graphics to the
+              client's resolution appropriately.
+
+      As you can see, there are two sets of coordinates defined
+      on each line, seperated by a ":".  Each line represents the
+      coordinates for one of the graphics, with the first set
+      specifying the connect-screen position/size of the graphic,
+      and the second set representing the end-level scoreboard
+      position/size for the graphic.
+
+      The graphic specified is implied by the line number that
+      defines position/size.  In other words, the first line
+      corresponds to the positioning information for the
+      "custom1.tga" graphic, the second line specifying info
+      for "custom2.tga" graphic, etc.
+
+      To suppress the display of a graphic on one of the screens
+      (i.e. show only on connect, but not on end-level), then
+      substitute "-1" for all "x y w h" info bits.
+
+      Specify only the number of lines equal to the number of
+      "customXX.tga" graphic files that you provide in your
+      custom graphic .pk3.
+
+7. Define "server_gfxspecfile" with the path/name to the graphics
+   specification file you just made in the server's main .cfg
+   file.
+
+8. Restart the server and BAM! your in business.
+
+9. If you're having trouble, take a look at the example I have
+   in cfg-gfxexample.  Just copy these two file into the main
+   osp/ directory, and add the following line to your server's
+   config:
+
+        set server_gfxspecfile "gfxdef.cfg"
+
+    Upon connect, clients should see 3 additional blenders in
+    the corners of varying sizes.

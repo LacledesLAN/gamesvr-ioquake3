@@ -1,0 +1,1039 @@
+// Custom Server Settings: OSP Tourney DM - Quake3
+// -----------------------------------------------
+// Version: 1.03
+// Date:    23 Feb 2003
+// Email:   rhea@OrangeSmoothie.org
+// WWW:     http://www.OrangeSmoothie.org
+// IRC:     irc.enterthegame.com: #osp
+//
+//
+// Note: Do *not* use this config as a base for your own custom
+//       server configs!  Please use one of the other included
+//       example configs as a base and refer to this document
+//       for information on each option, as needed.
+//
+// Recommended dedicated server command-line:
+//
+//    quake3 +set dedicated 2 +set fs_game osp +exec <config>
+//
+
+// =========================
+//    STARTUP (Reference)
+// =========================
+// admin_log <logname>
+//	Logs additional server information that describes such things
+//	as IP addresses of players, attempts to referee status, ref
+//	commands issued, etc.  Setting the paramter to null ("") or
+//	"none" will disable this logging (the default).
+//
+// decal_directory <directory>
+//	Specifies the directory under the main osp/ directory to
+//	look for map decal definitions (default = "decals").
+//
+// dmflags <df_mask>
+//	id's Quake3 options for gameplay (default = 0):
+//	
+//	df_mask:
+//	--------
+//	8   - No falling damage
+//	16  - Fixed FOV
+//	32  - No footsteps
+//	64  - Winning team keeps their current armor/health/powerups (FT only)
+//    128 - Winning team's frozen players are not thawed on a new round (FT only)
+//
+// filter_file <filename>
+//	Specifies the file to use for server client filters
+//	(default = "filters.txt").  Please refer to the
+//	Docs/Player-filters-q3.txt file for more information on
+//	player filters.
+//
+// freezetag_latejoin <0|1>
+//    Toggles whether players joining a team while a match is in
+//    progress will spawn frozen.
+//
+// freezetag_respawn <1.7-10.0>
+//    Specifies the length of time (in seconds) a player must wait
+//    before they can respawn after dying from most world events
+//    (void, lava, etc.) (default = 3.0, FT-only)
+//
+// g_spectatorInactivity <value>
+//	Specifies the time (in seconds) that a spectator has to sit idle
+//	on a server until they are automatically kicked from the server.
+//	A value of 0 disables this option (the default).  A value of < 0
+//	will prevent any spectators from remaining on the server.
+//
+// player_file <filename>
+//	Specifies a list of playernames who are only allowed to connect
+//	to the server (default = "none").  Playernames are to be added
+//	to the file specified in this variable.  If this option is used,
+//	ONLY players with the names listed can connect to the server.
+//	(Note: this option will be enhanced in the future to allow more
+//	flexible player allowances/banning).
+//
+// player_always <name>
+//	Specifies starting tag of a playername that allows a player
+//	to connect regardless of what follows the tag.  This player
+//	can NEVER enter the game, however.  Note: QTV observers with
+//	"QTV" starting in their name is hardcoded in the server, so
+//	this option allows for QTV and one other allowed forced
+//	spectator name tag.
+//
+// pmove_fixed <0|1>
+//      Allows clients to utilize enhanced client sampling (also named
+//      the same "pmove_fixed" on the client).
+//
+// osp_gamename <0|1>
+//	Allows OSP to run as "baseq3" for UI server browser filtering.
+//	This allows server ops to let clients use the in-game browser
+//	and select their server if the client uses the FFA/1v1/etc.
+//	filter types.
+//		  0 - Shows up as "FFA/1V1/TDM/CTF/???"
+//		* 1 - Shows up as "osp"
+//	---> Note: To use this properly, you will have to put everything
+//	 (configs, subdirectories, etc.) in the baseq3/ directory, copy
+//	 the "game" .pk3 in the paks/ directory into the baseq3/
+//	 directory and rename it to something like "zzzosp-game099.pk3"
+//
+// roundlimit <value>
+//	Specifies the number of rounds for a team to win to win the
+//	overall match in ClanArena mode (default = 7).
+//
+// server_availmodes <flags>
+//      Specifies which internal configurations are available for
+//      voting.  Check the Docs/osp-q3-Mode-info.txt for complete
+//      info. (Default = 63 - all modes available for voting).
+//           <flags>:
+//                  1 - FFA
+//                  2 - 1V1
+//                  4 - FFA (competition)
+//                  8 - Team DM
+//                 16 - CTF
+//                 32 - Clan Arena
+//                 64 - FreezeTag w/OSP settings
+//                128 - FreezeTag w/vanilla settings
+//
+// server_cq3 <0|1>
+//    Enables/disables alternate CQ3 settings (default = 0 - disabled).
+//    ---> More info on these settings can be found in: Docs/osp-q3-CQ3Info.txt
+//
+// server_customclient <flags>
+//	Specifies what custom options can be enabled on the client.
+//	(Default = 15)
+//		<flags>:
+//                  1 - Enable 125Hz sampling. [DEPRECATED, see: pmove_fixed]
+//                  2 - Allow cg_truelightning usage.
+//                  4 - Custom graphics used with cg_altPlasma and
+//                      cg_altLightning is allowed.
+//                  8 - Toggles client usage of OSP-based HUD.
+//                 16 - Disables the drawing of the match clock.
+//                 32 - Disables to clamp on com_maxfps for clients.
+//
+// server_fastrail <0|1>
+//	* 0 - (Promode) Server defaults to 1500 msec railgun switching delay.
+//	  1 - (Promode) Server defaults to 1000 msec railgun switching delay.
+//
+// server_freezetag <0|1|2>
+//    * 0 - FreezeTag TDM (FT) mode not in effect
+//      1 - FT with OSP settings in effect (must be in g_gametype 3)
+//      2 - FT with vanilla settings in effect (must be in g_gametype 3)
+//
+// server_gfxspecfile <filename>
+//      Defines custom graphics to display on the client.  Server
+//      also needs to have graphics available for download.  Please
+//      see osp/Docs/osp-q3-Server-gfx.txt for complete details.
+//      (Default = "none" - Custom server graphics disabled)
+//
+// server_lgcooldown <0|1>
+//	* 0 - (Promode) Server defaults to 0 msec LightningGun switching delay.
+//	  1 - (Promode) Server defaults to 200 msec LightningGun switching delay
+//	      (100ms if fastrail is enabled).
+//
+// server_maxpacketsmin <value>
+//	Specifies minimum client cl_maxpackets setting (Default = 0,
+//	no lower limit on client cl_maxpackets).
+//
+// server_maxpacketsmax <value>
+//	Specifies maximum client cl_maxpackets setting (Default = 0,
+//	no upper limit on client cl_maxpackets).
+//
+// server_motdfile <filename>
+//      Defines an external file from which to read MOTD message to
+//      display to an OSP-based client.  This file will override
+//      any server_motdX variable setting (defined below).
+//      (Default = "non" - No MOTD file defined).
+//
+// server_motdX <string> (X = 1 through 8)
+//      Sets the server MOTD.  Each var is used to display a line in the
+//      MOTD.  The message is terminated when the first NULL ("") line is
+//      encountered.
+//
+// server_ospauth <value>
+//	Custom OSP-based client-side authentication to verify the
+//	integrity of a client's cgame module.  This option requires
+//	the custom OSP client-side cgame.
+//		* 0  - No additional authentication performed on clients.
+//		  1  - Clients are verified that they are using an OSP
+//		       client-side cgame + enhanced nopbot/.exe hack
+//		       detection.
+//		  2+ - Clients are only authenticated.
+//
+// server_promode <0|1>
+//	Allows for enabling "ProMode" server settings for any mode of
+//	play.  ProMode is a tweak on several basic gameplay features
+//	to facilitate a faster style of play.
+//		* 0 - Normal Quake3 settings (VQ3)
+//		  1 - Promode-style of play  (Promode)
+//
+//	---> More info on ProMode Quake3 settings can be found at:
+//			http://www.challenge-world.com
+//
+// server_realping <0|1>
+//	Specifies whether spectators who are following player's in the
+//	game will have their real ping reflected in the scoredboard
+//	and remote server queries.
+//		* 0 - Copy followed players ping (id default)
+//		  1 - Show spec's real ping.
+//
+// server_record <bitmask>
+//	Forces clients to take demos and screenshots of a match.
+//	This options requires the custom OSP client-side cgame.
+//		<bitmask>:
+//		----------
+//		* 0 - Client-side records are NOT enforced.
+//		  1 - Record Demos
+//		  2 - Take end-level screenshot
+//		  4 - Include server name in demo name
+//		  8 - Include server time for uniqueness
+//            16 - Alternate recording style that does:
+//                     SERVERNAME-PLAYERNAME-[#]
+//                 For both demos and screenshots.  All other bits
+//                 will be ignored if this option is set.  The [#]
+//                 field will increase on each successful round
+//                 played.  It will NOT be incremented if something
+//                 like a match is aborted or a new map is loaded.
+//
+//		  Thus, a server_record value of 7 will: record demos,
+//		  take end-level screenshot, and include the servername
+//		  in the filename of the demo/screenshot.
+// 
+//		  A value of 3 will do the same without the server's
+//		  name included.
+//
+//		  ---> Note: A match must be "All players ready" or
+//		  forced to start by the referee to invoke this
+//		  option on players.  Simply letting the warmup
+//		  countdown to match start will NOT invoke the
+//		  client-side recordings.  To be safe, just set
+//		  "g_doWarmup 1" and "g_warmup 0" to guarantee
+//		  for this option to work.
+//
+// server_thrufloors <0|1>
+//	* 0 - Blast damage does NOT radiate through thin surfaces.
+//	  1 - Default id Quake3 (version 1.17 and prior) format where
+//            blast damage can be given through thin surfaces.
+//
+// server_timenudgemin <value>
+//	Specifies minimum client cl_timenudge setting (Default = 0,
+//	no lower limit on client cl_timenudge).
+//
+// server_timenudgemax <value>
+//	Specifies maximum client cl_timenudge setting (Default = 0,
+//	no upper limit on client cl_timenudge).
+//
+// viewcam_directory <directory>
+//	Specifies the location of all "viewcam-<mapname>.cfg" files
+//	(default = "cfg-viewcam").
+//
+set sv_pure 1
+set sv_hostname "OSP Tourney DM"
+set sv_maxclients 10
+set bot_enable 0
+set decal_directory "decals"
+set dmflags 0
+set timelimit 20
+set fraglimit 30
+set capturelimit 8
+set roundlimit 7
+set g_spectatorInactivity 0
+set filter_file "filters.txt"
+set freezetag_respawn 3.0
+set osp_gamename 1
+set player_file "none"
+set player_always ""
+set pmove_fixed 0
+set server_availmodes 255
+set server_cq3 0
+set server_customclient 15
+set server_fastrail 0
+set server_freezetag 0
+set server_gfxspecfile "none"
+set server_lgcooldown 0
+set server_maxpacketsmin 0
+set server_maxpacketsmax 0
+set server_motdfile "none"
+set server_motd1 " ^B^3*** Welcome to OSP Tourney DM/CA/CTF *** "
+set server_motd2 "  "
+set server_motd3 "      http://www.OrangeSmoothie.org"
+set server_motd4 ""
+set server_motd5 ""
+set server_motd6 ""
+set server_motd7 ""
+set server_motd8 ""
+set server_ospauth 0
+set server_promode 0
+set server_realping 0
+set server_record 0
+set server_thrufloors 0
+set server_timenudgemin 0
+set server_timenudgemax 0
+set viewcam_directory "cfg-viewcam"
+
+
+// =============
+//    REFEREE
+// =============
+// ref_password <string>
+//	Sets the password for in-game "referee" (admin) access.
+//	Setting this password to "none" disables the referee feature
+//	(default = "none").
+//
+set ref_password "none"
+
+
+// ========================
+//    GENERAL Q3 OPTIONS
+// ========================
+// bot_autoload <string>
+//	Specifies names of bots to add after the server has loaded.
+//	Bot names are delimited by spaces.  This variable allows the
+//	server admin to automatically load bots on map start as if
+//	the admin issued "addbot" commands.  ANY name can be used
+//	for the bots.
+//
+// bot_checktime <value>
+//	Specifies the number of seconds between bots joining/leaving
+//	a server based on bot_minplayers setting (default = 10).
+//
+// g_gametype <value>
+//	Specifies gametype the server is to start on startup:
+//		0 - Free For All DM (FFA)  [default]
+//		1 - 1v1 DM
+//		2 - Single-Player
+//		3 - Team Deathmatch
+//		4 - Capture The Flag (CTF) Teamplay
+//		5 - Clan Arena (CA)
+//
+// g_inactivity <seconds>
+//	Specifies how long a player can idle before being kicked
+//	from the server.  A value of "0" disables this feature
+//	(default = 0).
+//
+// g_log <logfilename>
+//	Specifies the name of the file to save all in-game
+//	information.  Setting this to "" disables logging
+//	(default = "games.log").
+//
+// log_default <0|1>
+//	Determines if log format follows default id format or uses
+//	the enhanced OSP format.
+//		* 0 - Enhanced OSP logging format.
+//		  1 - Default id logging format.
+//
+// log_stat <0|1|2>
+//	Dumps player health/armor based on events that occur during
+//	the game.  Note: VERY intensive logging here!!
+//		* 0 - Not extra stat logging.
+//		  1 - All stat-log events printed to logfile only.
+//		  2 - Stat-log events also dumped to console.
+//
+set bot_checktime 10
+set g_gametype 0
+set g_inactivity 0
+set g_log ""
+set log_default 0
+set log_stat 0
+
+
+// ==============================
+//    MATCH-RELATED PARAMETERS
+// ==============================
+// g_doWarmup <0|1>
+//	Specifies whether a match should have a "warm-up"
+//	period before actual gamplay begins.  In almost all
+//	cases, these option SHOULD be set to 1 to make it
+//	a more fair of a fight for slow connects from a
+//	previous level (default = 0).
+//
+// g_warmup <seconds>
+//	Specifies the maximum length of the warmup period,
+//	if it is enabled.  This warmup period is shortened to
+//	10 seconds once enough players are "ready".  If this
+//	value is set to 0, and g_doWarmup is set to 1, then
+//	players must manually "ready" themselves to start the
+//	match -- much like the traditional method in such mods
+//	as OSP Tourney DM	for Quake2 (default = 20).
+//
+// match_carespawn <0|1>
+//	Determines whether clients respawn randomly when a round
+//	begins for CA (ClanArena) mode.  This affects *only* the
+//	CA gametype.
+//	    * 0 - Clients do NOT respawn on round start.
+//            1 - Clients respaawn when the round begins.
+//
+// match_cawarmupfire <0|1>
+//	Specifies whether or not clients can shoot weapons during
+//	warmup periods in the CA gametype.
+//	      0 - Weapon firing is not allowed in CA warmup.
+//          * 1 - Players can shoot weapons during warmup periods
+//		    in CA.  No ammo, health or armor is lost during
+//		    warmup.
+//
+// match_dropitems <0|1>
+//	Allows players to drop items (weapons/ammo) in TDM mode.
+//		* 0 - Players CANNOT drop weapons/ammo
+//		  1 - Players CAN drop weapons/ammo
+//
+// match_hurtself <0|1>
+//	Whether clients can hurt themselves with splash damage.
+//		  0 - Clients can NOT hurt themselves.
+//		* 1 - Clients can inflict damage on themselves.
+//
+// match_instagib <0|1>
+//	* 0 - Match is in normal DM-style play.
+//        1 - Match is in "instagib" style play: No items, players
+//	      spawn with railgun and gauntlet, and each rail hit is
+//            400 points of damage.
+//
+// match_lateJoin <0|1>
+//	Specifies whether players connecting after a match
+//	has started can freely join during the match.  This
+//	option is ignored if g_doWarmup is set to 0.
+//	    * 0 - Latecomers must sit and watch a match
+//                in progress (i.e. they cannot join the
+//                match uless: an in-game player unlocks his/her
+//                team, an in-game captain invites the late-
+//                connector to join his/her team, or a referee
+//                manually places them on a team).  This option
+//                is useful in coducting serious on-line matches
+//                where disruptions in play of uninvited players
+//                cannot be tolerated.
+//            1 - This allows for the "traditional" id game join
+//                mode, where anyone can join at anytime of the
+//                match (barring the server is running in 1v1 mode).
+//
+// match_maxsuicides <value>
+//     Configurable number of suicides before a client is kicked/banned
+//     (default = 5).  A client will be kick/banned for a map that
+//     /kill themselves the specified number of times, or suicide
+//     (i.e. lava jumping) 2 * match_maxsuicides.
+//
+// match_minplayers <value>
+//	Specifies the minimum # of players that must be in the game
+//	before they can "ready" up to start the match (default = 2).
+//	Note, this option is useful only if g_doWarmup = 1 and
+//	g_warmup = 0.
+//
+// match_mutespecs <0|1>
+//	Enables/disables spectator chat being displayed to active
+//	players in the game when a match is in progress (for
+//	teamplay modes only) (default = 0).
+//
+// match_poweruprespawn <60|90|120>
+//    Specifies the time (in seconds) between powerups (except for
+//    the BattleSuit, which is locked to 120).  Only available
+//    in promode (default = 120 for CTF, 60 all other modes).
+//
+// match_overtime <0|1|2|3>
+//	Specifies the type of overtime mode to handle in the case of
+//	a scoring tie in 1v1/Team DM/CTF:
+//
+//		0 - Sudden Death: Match continues indefinately, first score
+//		    wins (1v1/CTF default -- id default overtime handling)
+//
+//		1 - Sudden Death-Timed overtime: If the match is still
+//              tied after x overtime rounds, the match will move
+//              to sudden death with first score to win (Team DM
+//              default -- unlimited 5-minute periods)
+//
+//		2 - No overtime: matches can end in a tie
+//
+//		3 - Tie-Timed overtime: If match is still tied after x
+//		    overtime rounds, the match ends in a tie (like hockey).
+//
+// match_overtimecount <value>
+//	Number of timed overtime rounds to play until either sudden
+//	death or a tie is issued.  Note, setting this parameter to 0
+//    will give an indefinate # of overtime periods until a victor
+//    is determined (default = 0).
+//
+// match_overtimelength <minutes>
+//	Number of minutes for a timed overtime round (default = 5).
+//	This value must be >= 1 (forced inside the game).
+//
+// match_readypercent <percentage from 1-100>
+//	Specifies the percentage of in-game players who must be
+//	"ready" to start a match.  This can also be used to get
+//	a match going on an otherwise long g_warmup "warmup" period
+//	(default = 51).
+//
+// match_roundtimer <seconds>
+//	Specifies the number of seconds between rounds once a match
+//	has started (Clan Arena mode only) (default = 10).  Note,
+//	the minimum value for this setting is 2 seconds, while the
+//	maximum is 20.
+//
+// match_timeoutcount <value>
+//	Specifies the number of timeouts allowed for each team in
+//	teamplay (DM or CTF), or each player in 1v1 (default = 3).
+//
+// match_timeoutlength <seconds>
+//	Specifies the length (in seconds) of each timeout
+//	(default = 60).
+//
+// match_winbyscore <scorespread>
+//	For 1v1 mode, this option specifies the point spread to reach
+//	to finish a match.  This value, in conjunction with a low frag-
+//	limit can speed up 1v1 matches.  This is a sort of "skunk"
+//	setting when one player is really beating another player.  A
+//	value of "0" disables this option (default = 0).
+//
+// warmup_armor <value>
+//	Specifies the amount of armor given during warmup (for all
+//	modes except CA).
+//
+set g_doWarmup 0
+set g_warmup 20
+set match_carespawn 0
+set match_cawarmupfire 1
+set match_hurtself 1
+set match_instagib 0
+set match_latejoin 0
+set match_maxsuicides 5
+set match_minplayers 2
+set match_mutespecs 0
+set match_overtime 1
+set match_overtimecount 0
+set match_overtimelength 5
+set match_readypercent 51
+set match_roundtimer 10
+set match_timeoutcount 0
+set match_timeoutlength 60
+set match_winbyscore 0
+set warmup_armor 0
+
+
+// ==============
+//    TEAMPLAY
+// ==============
+// team_allcaptain <0|1>
+//	* 0 - Normal team captain assignments (1 per team).
+//	  1 - All players on a team have the ability to invite
+//		spectators or to call a time-out.  There is still
+//		a single "true" captain.
+//
+// team_armordamage <0|1>
+//	* 0 - No armor is stripped for self-inflicted blast damage
+//		(Clan Arena gametype mode only).
+//	  1 - Armor is stripped for self-inflicted blast damage
+//		(Clan Arena gametype mode only).
+//
+// team_maxplayers <value>
+//	Specifies the maximum size for each team.  A value of 0
+//	specifies no limit to a team's size (default = 0).
+//
+// team_nocontrols <value>
+// 	Option for public servers to remove captainship and team
+//    commands (default = 0 - all options enabled)
+//
+// team_noteamready <0|1>
+//      Toggles ability for use of the "teamready" command (default
+//      = 0 - "teamready" command is available for use.
+//
+// g_weaponTeamrespawn <value>
+//	Specifies the repawn time (in seconds) of weapons for Team
+//	DM gametype (default = 30).
+//
+// g_weaponrespawn <value>
+//    Specifies the weapon respawn time for all gametypes EXCEPT
+//    Team DM (default = 5).
+//
+// g_friendlyFire <0|1>
+//	  0 - Teammates cant hurt each other.
+//	* 1 - Teammates CAN inflict damage on fellow teammates.
+//
+// g_teamAutoJoin <0|1>
+//	* 0 - Places connecting players in spectator mode once they
+//		have fully connected to the game.
+//	  1 - Automatically places a player on the team with the
+//		lowest number of players (or score if equal player
+//		counts) after fully connecting to the game.
+//
+// g_teamForceBalance <0|1>
+//	* 0 - Allows players to join any team, regardless of player
+//		counts.
+//	  1 - Forces players to join the team with the lower number
+//		of players, and if equal, then the team with the lower
+//		score.
+//
+set team_allcaptain 1
+set team_armordamage 0
+set team_maxplayers 0
+set g_weaponTeamrespawn 30
+set g_weaponrespawn 5
+set g_friendlyFire 1
+set g_teamAutoJoin 0
+set g_teamForceBalance 0
+
+
+// ==========
+//    HOOK
+// ==========
+// hook_enable <0|1>
+//	* 0 - Disables grappling hook
+//	  1 - Allows players to use hook with: bind <key> +button5
+//
+// hook_delaytime <milliseconds>
+//	Specifies the minimum number of MILLISECONDS that a player
+//	can redeploy a hook after use (default = 750).
+//
+// hook_holdtime <seconds>
+//	Specifies the maximum number of seconds that a player's
+//	hook will remain attached (default = 3).
+//
+// hook_sky <0|1>
+//	* 0 - Players cannot hook the "sky" surface.
+//	  1 - Players can hook onto any surface (except other players).
+//
+// hook_speed <value>
+//	The speed at which the hook leaves from the player's position
+//	and makes contact with a surface on the map (default = 1200).
+//
+// hook_speedpull <value>
+//	The speed at which a player is pulled along the hook's path
+//	after it has landed on a valid map surface (default = 9500).
+//
+set hook_enable 0
+set hook_delaytime 750
+set hook_holdtime 3
+set hook_sky 0
+set hook_speed 1200
+set hook_speedpull 950
+
+
+// ========================
+//    MODE CONFIG VOTING
+// ========================
+// mode_start <mode_id>
+//      Specifies the server configuration that the server will
+//      start with upon launch.  Note, this is setting also specifies
+//      the server's default mode to roll back to after 10 minutes
+//      if no clients are connected.  The specification of <mode_id>
+//      is documented in osp/Docs/osp-q3-Mode-info.txt.  Setting this
+//      option to "-1" disables this feature (the default).
+//
+// mode_customfile <filename>
+//      Specifies the name/config of each server config available
+//      for voting.  The "name" is what clients vote for, while the
+//      "config" is the server config that will be execed if the
+//      vote passes.  These alternate modes of play can be disabled
+//      for voting if the value for "mode_file" is set to "none"
+//      (the default).  Please see osp/Docs/osp-q3-Mode-info.txt
+//      for complete info on this variable and its settings.
+//
+set mode_start "-1"
+set mode_customfile "none"
+
+
+// ============
+//    VOTING
+// ============
+// g_allowVote <0|1>
+//        0 - Disables all client voting on the server.
+//      * 1 - Allows clients to vote on server settings.
+//
+// vote_limit <value>
+//      Maximum # of votes allowed during a map for a non-referee
+//      (default = 5).
+//
+// vote_allow_*
+//	  0 - Diables a particular vote item.
+//	* 1 - Allows clients to vote on the item.
+//
+//	---> Note the default behavior for vote_allow_ref
+//	     is set to 0 (disabled).  If enabled, it also
+//	     requires at least 3 players to be connected
+//	     to the server.  The referee status of an
+//	     elected player is removed at the end of the
+//	     map.
+//
+// vote_allow_armordamage <0|1>
+//	Whether armor is stripped off when receiving self-
+//	inflicted blast damage (ClanArena mode only).
+//
+// vote_allow_ca_startrespawn <0|1>
+//	Allows clients to change whther they are respawned on
+//	round start for the CA gametype.
+//
+// vote_allow_ca_warmupfire <0|1>
+//	Allows clients to toggle weapon firing during warmup
+//	in CA mode.
+//
+// vote_allow_capfps <0|1>
+//    Allows clients to vote on the clamp of com_maxfps.
+//
+// vote_allow_cq3 <0|1>
+//    Enables/disables voting for CQ3 settings.
+//
+// vote_allow_falling <0|1>
+//	Enables/disables voting for falling damage.
+//
+// vote_allow_items <item_mask>
+//	Specifies which ITEMS are available for vote by
+//	players.  The <item_mask> value is described below
+//	(default = 1023 -- all items).  Note, at this time,
+//	only the BFG is available for voting.
+//
+// vote_allow_mutespecs <0|1>
+//	Specifies if clients are allowed to vote for spectator
+//    muting.
+//
+// vote_allow_pmove <0|1>
+//    Allows clients to toggle server-imposed enhanced
+//    client sampling (pmove_fixed).
+//
+// vote_allow_poweruprespawn <0|1>
+//    Allows clients to set powerup respawn times under
+//    promode settings.  Only values of 60, 90, and 120 are
+//    allowed for voting.
+//
+// vote_allow_powerups <powerup_mask>
+//	Specifies which POWERUPS are available for vote by
+//	players.  The <powerup_mask> value is described below
+//	(default = 255 -- all powerups).
+//
+// vote_allow_reload <0|1>
+//    Specifies if railgun reload time voting is enabled.
+//    Tbis is applicable only if instagib is enabled on
+//    the server.
+//
+// vote_allow_respawn <0|1>
+//	Whether clients can change g_forerespawn settings
+//	through a vote.
+//
+// vote_percent <1-100>
+//	Specifies the percentage of accepting clients for a
+//	vote to pass.
+//
+set g_allowVote 1
+set vote_allow_altgraphics 1
+set vote_allow_allcaptain 1
+set vote_allow_armordamage 1
+set vote_allow_capfps 0
+set vote_allow_capturelimit 1
+set vote_allow_ca_startrespawn 1
+set vote_allow_ca_warmupfire 1
+set vote_allow_cq3 1
+set vote_allow_dropitems 1
+set vote_allow_falling 1
+set vote_allow_fastrail 1
+set vote_allow_fraglimit 1
+set vote_allow_hook 0
+set vote_allow_instagib 1
+set vote_allow_items 1023
+set vote_allow_kick 1
+set vote_allow_lgcooldown 1
+set vote_allow_map 1
+set vote_allow_machinegun 1
+set vote_allow_maxpackets 1
+set vote_allow_mutespecs 1
+set vote_allow_osphud 1
+set vote_allow_overtime 1
+set vote_allow_pmove 1
+set vote_allow_poweruprespawn 1
+set vote_allow_powerups 255
+set vote_allow_promode 1
+set vote_allow_referee 0
+set vote_allow_reload 1
+set vote_allow_respawn 1
+set vote_allow_roundlimit 1
+set vote_allow_teamdamage 1
+set vote_allow_thrufloors 1
+set vote_allow_timelimit 1
+set vote_allow_timenudge 1
+set vote_allow_weaponrespawn 1
+set vote_limit 5
+set vote_percent 50
+
+
+// ==================
+//    MAP SETTINGS
+// ==================
+// map_file	<filename>
+//	Specifies file containing map info (default = "maps.txt").
+//
+// map_autoload <0|1|2|3>
+//	  0 - disabled (do not auto-search for maps)
+//	* 1 - normal auto-search based on gametype
+//	  2 - Same as 1, except is also adds maps that don't have a properly
+//            specified .arena file.
+//	  3 - Add all maps found in osp/ and baseq3/ directories.
+//
+//	Dynamic map lists!  With Quake 1.27n or higher, OSP now has
+//	the capability of auto-generating map lists on the fly, based on
+//	current game type. The OSP map lists are still useful for forcing
+//	maps to be available in the case where the auto-generation of the
+//	map list misses a particular map (i.e. a map's .arena file doesn't
+//	specify the current active g_gametype).  There is also a new map
+//	entry type:
+//
+//	deletemap <mapname>
+//
+//	To *remove* maps that are auto-added but are not desired by the
+//	server admin.
+//
+//	Note: OSP will regenerate these map lists on map load and map
+//	      restarts, so for remote administration, all one has to
+//	      do is upload the map .pk3 file to the baseq3/ directory,
+//	      and OSP will automatically pick it up and add it to the
+//	      maplist (if the .arena for the map specifies the map is
+//	      intended for the current gametype). OSP will also weed
+//	      out maps that are specified, but are not located on the
+//	      server (i.e. mapname typos in the map config file).
+//
+// map_queue <0|1>
+//	  0 - Disable using the map queue.  Disabling the map queue
+//		also disables all settings listed below.
+//	* 1 - Map queue is loaded and enabled (default)
+//
+// map_rotate <0|1>
+//	  0 - Map queue is enabled, but maps arent cycled at the
+//		end of a match (server stays on the same map until
+//		the current map is voted out).
+//	* 1 - Maps are cycled at the end of each match
+//
+// map_random <0|1>
+//	  0 - Step through the map list in the order it is
+//		specified.
+//	* 1 - Maps are randomly picked in the map queue
+//
+// map_once	<0|1>
+//	  0 - No guarantee that a map will not be picked more
+//		times than any other map (if random cycling is
+//		enabled).
+//	* 1 - Guarantees that a map will only be picked once
+//		in an entire cycling of the map queue
+//
+// map_nocount <0|1>
+//	* 0 - Honors the min/max player settings as specified
+//		by the map queue.
+//	  1 - Ignores player counts and freely selects any map
+//		 in the map queue.
+//
+// map_halt <0|1>
+//	* 0 - No pausing of the nect level load.
+//	  1 - Suspends the next map loading indefinately.
+//
+set map_file "maps.txt"
+set map_autoload 1
+set map_queue 1
+set map_rotate 1
+set map_once 1
+set map_random 1
+set map_nocount 0
+set map_halt 0
+
+
+// ==========================
+//    ITEM/WEAPON SETTINGS
+// ==========================
+// armor_q2style <0|1>
+//	Allows for Q2-style armoring system.
+//		* 0 - Normal Q3 style armor
+//		  1 - Yellow = 100 max armor, Red = 200 max armor,
+//			Shards = 5 w/no limit, armor does not countdown.
+//
+// gauntlet_damage <value>
+//	Specifies the amout of damage that the gauntlet inflicts on
+//	another player (default = 50).
+//
+// gauntlet_disable <0|1>
+//      Enable/Disable the Gauntlet.  This param is also available in
+//      the  weapon_have and weapon_start bitfield as 1024, but is also
+//      provided seperately to maintain compatibility with older server
+//      .cfgs.
+//
+// instagib_reload <100-5000>
+//    Specifies the railgun reload time in instagib only.  Value is
+//    in milliseconds (ms) (defaut = 1500).
+//
+// item_disable <item_mask>
+//	Describes all items (excluding powerups) to be removed from each
+//	map (default = 0).  Note, this value is a sum of all the items
+//	to be disabled, as listed below:
+//
+//		item_mask
+//		------------
+//		* 0	- No items diabled
+//		  1	- All armor
+//		  2	- All health
+//		  4	- BFG
+//		  8	- Machinegun
+//		  16	- Shotgun
+//		  32	- GrenadeLauncher
+//		  64	- RocketLauncher
+//		  128	- LightningGun
+//		  256	- PlasmaGun
+//		  512	- RailGun
+//
+//		---> Note, when a weapon is disabled, its associated
+//		     ammo is also removed.
+//
+//		Example: item_disable value of 511 effectively
+//			   removes all items from the map except for
+//			   the railgun and its ammo (slugs).
+//
+// mg_damage <value>
+//	Specifies the amout of damage that the machinegun inflicts on
+//	another player (non Team DM) (default = 7).
+//	
+// mg_damageTeamplay <value>
+//	Specifies the amout of damage that the machinegun inflicts on
+//	another player (Team DM only) (default = 5).
+//
+// powerup_disable <powerup_mask>
+//	Describes all powerups to be removed from each map (default = 0).
+//	Note, this value is a sum of all the powerups to be disabled, as
+//	listed below:
+//
+//		powerup_mask
+//		------------
+//		* 0	- No powerups diabled
+//		  1	- Quad Damage
+//		  2	- Battlesuit
+//		  4	- Haste
+//		  8	- Regeneration
+//		  16	- Invisibility
+//		  32	- Flight
+//		  64	- Teleporter
+//		  128	- Medkit
+//
+//		Example: power_disable value of 127 effectively
+//			   removes all powerups from the map except for
+//			   the holdable medkit.
+//	
+// railgun_damage <value>
+//	Specifies the amout of damage that a railgun inflicts on
+//	another player (default = 100).
+//
+// replace_*: <replace_mask>
+//	Specifies if a weapon is to be replaced with another on
+//	any map.  Defaults are listed below:
+//
+//	replace_machinegun   (Default: 1    - Machinegun)
+//	replace_shotgun      (Default: 2    - Shotgun)
+//	replace_glauncher    (Default: 4    - GrenadeLauncher)
+//	replace_rlauncher    (Default: 8    - RocketLauncher)
+//	replace_lightning    (Default: 16   - LightningGun)
+//	replace_railgun      (Default: 32   - Railgun)
+//	replace_plasmagun    (Default: 64   - PlasmaGun)
+//	replace_bfg          (Default: 128  - BFG)
+//	replace_invis        (Default: 256  - Invisibility)
+//	replace_quad         (Default: 512  - Quad)
+//	replace_battlesuit   (Default: 1024 - BattleSuit)
+//	replace_haste        (Default: 2048 - Haste)
+//	replace_regen        (Default: 4096 - Regeneration)
+//	replace_flight       (Default: 8192 - Flight)
+//
+//		<replace_mask>:
+//		---------------
+//		1	- Machinegun
+//		2	- Shotgun
+//		4	- GrenadeLauncher
+//		8	- RocketLauncher
+//		16	- LightningGun
+//		32	- Railgun
+//		64	- PlasmaGun
+//		128	- BFG
+//		256     - Invisibility
+//		512	- Quad Damage
+//		1024	- BattleSuit
+//		2048	- Haste
+//		4096	- Regeneration
+//		8192	- Flight
+//
+// start_*: <value>
+//	Specifies strating ammo inventory for a player.  Defaults
+//	for each ammo type are listed below:
+//
+//	start_armor     (Default: 0)
+//	start_health    (Default: 125)
+//	start_bullets   (Default: 50 teamplay/100 all else)
+//	start_shells    (Default: 0)
+//	start_rockets   (Default: 0)
+//	start_grenades  (Default: 0)
+//	start_lightning (Default: 0)
+//	start_slugs     (Default: 0)
+//	start_cells     (Default: 0)
+//	start_bfg       (Default: 0)
+//
+// weapon_deaddrop <0|1>
+//	  0 - Players DON'T drop their current weapon when killed.
+//	* 1 - Players drop their currently held weapon when killed.
+//
+// weapon_have <weapon_mask>
+//	Specifies ALL weapons that a player respawns with when
+//	entering a game or respawning from a death (default = 1).
+//
+// weapon_start <weapon_mask>
+//	Specifies the default weapon has in-hand when entering
+//	a game or respawning from a death.  Note, the HIGHEST
+//	ordered weapon value will be chosen if an exact weapon
+//	number is not selected (default = 257).
+//
+//		weapon_mask:
+//		------------
+//          1   - Machinegun
+//          2   - Shotgun
+//          4   - GrenadeLauncher
+//          8   - RocketLauncher
+//          16  - LightningGun
+//          32  - Railgun
+//          64  - PlasmaGun
+//          128 - BFG
+//          256 - Gauntlet
+//
+set armor_q2style 0
+set gauntlet_damage 50
+set instagib_reload 1500
+set item_disable 0
+set mg_damage 7
+set mg_damageTeamplay 5
+set powerup_disable 0
+set railgun_damage 100
+set replace_battlesuit 1024
+set replace_bfg 128
+set replace_flight 8192
+set replace_glauncher 4
+set replace_haste 2048
+set replace_invis 256
+set replace_lightning 16
+set replace_machinegun 1
+set replace_plasmagun 64
+set replace_quad 512
+set replace_railgun 32
+set replace_regen 4096
+set replace_rlauncher 8
+set replace_shotgun 2
+set start_armor 0
+set start_bfg 0
+set start_bullets 0
+set start_cells 0
+set start_grenades 0
+set start_health 125
+set start_lightning 0
+set start_rockets 0
+set start_shells 0
+set start_slugs 0
+set weapon_deaddrop 0
+set weapon_have 257
+set weapon_start 1

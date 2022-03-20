@@ -1,0 +1,74 @@
+OSP Tourney DM/CA/CTF for Quake 3
+=================================
+Version: 1.03
+Date:    28 Feb 03
+Site:    http://www.OrangeSmoothie.org
+Contact: rhea@OrangeSmoothie.org
+IRC:     irc.enterthegame.com - #osp
+
+
+INSTALLATION NOTES:
+-------------------
+Place the enclosed .zip in your root Quake3/ directory.  You
+should now have a new "osp/" directory just under your main
+Quake3/ directory.
+
+The following files are included with the distribution:
+        osp/INSTALL.txt                  (this file)
+        osp/README.txt                   (main info doc for OSP)
+
+        osp/1v1.cfg                      (1v1 "Tournament" Deathmatch)
+        osp/clanarena.cfg                ("arena" style play, team-based)
+        osp/ctf.cfg                      (Capture The Flag teamplay)
+        osp/ctf-public.cfg               (Capture The Flag teamplay for pubs)
+        osp/ffa.cfg                      (Free-For-All Deathmatch)
+        osp/freezetag.cfg                (FreezeTag TDM w/OSP settings)
+        osp/freezetag-vanilla.cfg        (FreezeTag TDM w/vanilla settings)
+        osp/filters.txt                  (Player filter template)
+        osp/instagib.cfg                 (Instagib FFA with other modes enabled)
+        osp/OSP Config Generator.exe     (Win32 OSP server configurator)
+        osp/OSP Match Quick Start.txt    (basic info for clients)
+        osp/team.cfg                     (Teamplay Deathmatch)
+        osp/spectool.cfg                 (Multi-view bindings)
+
+        osp/zz-osp-client[012].pk3       (OSP-Q3 client content)
+        osp/zz-osp-server[012].pk3       (OSP-Q3 server content)
+
+        osp/cfg-DefaultModeReference/*   (examples of the configs used for internal
+                                          modes)
+
+        osp/cfg-GfxExample/*             (sample for custom graphics usage)
+
+        osp/cfg-maps/*.txt               (example maplist configs for various modes)
+
+        osp/CHN/*                          (Chinese translation of OSP docs)
+        osp/ESP/*                          (Spanish translation of OSP docs)
+        osp/RUS/*                          (Russian translation of OSP docs)
+        osp/Docs/CPM-info.txt              (Info on all CPM settings)
+        osp/Docs/osp-q3-ClientReadme.txt   (OSP client info/settings)
+        osp/Docs/osp-q3-Commands.txt       (OSP client/server commands)
+        osp/Docs/osp-q3-CQ3Info.txt        (Alternate CQ3 settings)
+        osp/Docs/osp-q3-DecalEditing.txt   (Per-map decal definitions)
+        osp/Docs/osp-q3-FreezeTag.txt      (Info on FreezeTag TDM gameplay modes)
+        osp/Docs/osp-q3-History.txt        (mod changes info)
+        osp/Docs/osp-q3-Logging.txt        (Info on OSP's extended logging
+                                            format)
+        osp/Docs/osp-q3-MapConfigInfo.txt  (Info on creating map queues)
+        osp/Docs/osp-q3-ModeInfo.txt       (Info on setting up modes in OSP)
+        osp/Docs/osp-q3-PlayerFilters.txt  (Info on player filters)
+        osp/Docs/osp-q3-ServerGfx.txt      (Info on setting up custom graphics)
+        osp/Docs/osp-q3-Variables.txt      (OSP server variables info)
+        osp/Docs/osp-q3-Viewcam.txt        (editing info for ViewCam)
+
+        osp/locs/*.cfg                     (Various customloc example files)
+
+        osp/voodoo/*                       (Client-side stats parser for Win32)
+        osp/voodoo/server/*                (Server-side stats parsers for Win32
+                                            and Linux.  Linux client-side parser
+                                            can be found here as well)
+
+        osp/vm/qagame.qvm                  (OSP-Q3 for DEDICATED servers)
+
+
+Further information can be obtained in the README.txt,
+Docs/osp-q3-*.txt files, and all example configs contained herein.

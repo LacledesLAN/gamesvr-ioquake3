@@ -1,0 +1,234 @@
+OSP Server Mode Configuration
+=============================
+14 Dec 2001
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+OSP最新的相关中文文本信息你可以在http://www.q3acn.com获得，
+如果有问题请与cat@q3acn.com联系。
+
+OSP允许服务器管理者自己设定客户端可以投票选择的游戏模式。这种设置
+和普通的混战/单挑/组队/夺旗和CA模式一样简单，而且设置的模式可以和
+正常模式有很大的不同（比如instagib夺旗模式中是低重力，而且地图中的
+物品都被BFG的取代了）
+
+虽然这个功能对于服务器管理员之类的玩家制作可选模式的设置很有用处，
+但相对来说它也比较麻烦。
+
+由于很多服务器管理者和玩家希望能在几种模式之间相互转换（比如从
+单挑模式到夺旗模式到组队模式），所以OSP定义了6种内置的被广大玩家
+认可的“标准”模式。
+
+	- FFA						混战
+	- 1v1						单挑
+	- Badlands TDM  (http://badlands.teamplay.net)	Badlands组队
+	- Team DM					组队
+	- CTF						夺旗
+	- Clan Arena					CA
+
+现在，你可以自己定义一种游戏模式来使服务器有更多的模式选择。
+一个服务器的启动设置可以是一个简单的包括
+主机名称、MOTD、最多玩家数等的设置。通过"mode_start"设置
+基本模式方式，从来当服务器启动时可以进入该模式。"mode_start"
+是一个更有用的"g_gametype"，它允许你设置"g_gametype"规定
+以外的参数。
+
+游戏模式被定义在服务器启动的cfg中，通过"mode_customfile"
+设定的设置文件中。格式如下：
+
+
+<新模式名称> [tab] <模式文件名.cfg>
+
+[注意：[tab]是指制表符'tab']
+
+mode_start参数是个动态的基于服务器管理者定义的OSP内部可选
+游戏模式的设置。mode_start的前6个参数被定义为：
+
+	0 - FFA			混战
+	1 - 1v1			单挑
+	2 - QIL TeamDM		QIL组队
+	3 - Team DM		组队
+	4 - CTF			夺旗
+	5 - Clan Arena		CA
+
+所有自定义模式要为6以上的数字。自定义模式的各项设定的文件为
+"自定义模式文件名".cfg中。比如下面这样：
+
+instagib	cfg-modes\instagib.cfg
+instagib-ctf	cfg-modes\instagib-ctf.cfg
+bfg madness	cfg-modes\bfg.cfg
+gauntlet-only	cfg-modes\gauntlet.cfg
+
+所以现在可用的模式为：
+	0 - FFA			混战
+	1 - 1v1			单挑
+	2 - QIL TeamDM		QIL组队
+	3 - Team DM		组队
+	4 - CTF			夺旗
+	5 - Clan Arena		CA
+	6 - instagib		instagib
+	7 - instagib-ctf	instagib夺旗
+	8 - bfg madness		疯狂bfg
+	9 - gauntlet-only	铁拳无敌
+
+服务器可以通过"mode_start 7"设置来实现每次启动调入
+的模式为instagib夺旗模式，其他的所有模式可以通过
+投票来切换。
+
+如果"mode_customfile"设置为"none"，将关闭额外模式
+的设定
+
+现在，你想要什么要的内部设置？就象前面说的，定义模式设置
+是一个比较费时、麻烦的事情。由于很多服务器管理员希望得到
+OSP后，立即可以运行那些基本的游戏模式，所以不要修改这些
+预先设定好了的内部核心设置。这样可以保证每个玩家在任何一个
+OSP服务器上运行相同的模式，其设置都是完全相同的。这也是
+服务器管理员不用再为玩家需要的设置来操心修改，当OSP更新时，
+会同时更新这些“标准”设置。
+
+当然，并不是所有的设置都会被作为核心设置。服务器可以自己设定
+cfg，在本文结尾有一参数列表，这些就是通常用来制定指定cfg的
+参数。
+
+通过"server_availmodes"设置，可以使客户端来投票选择的内部
+设置的参数如下：
+
+	 1 - FFA	混战
+	 2 - 1v1	单挑
+	 4 - QIL TeamDM	QIL组队
+	 8 - Team DM	组队
+	16 - CTF	夺旗
+	32 - Clan Arena	CA
+
+如果设置成56则意味着组队、夺旗、CA（模式3、4、5）可以被
+客户端投票来选择。默认的"server_availmodes"设置为59（除
+了QIL组队以外的所有模式都可以被选择）
+
+
+推荐使用mode_start（和mode_customfile，如果服务器可选设置
+被使用）参数来确保固定的模式。如果mode_start被定义，那么
+服务器被投票决定到其他模式后，在所有人都离开服务器10分钟后，
+服务器会重新恢复到mode_start设置的模式。这样可以保证服务器
+在空闲时，为一个固定的模式。
+
+当定义一个新的设置时，在进入一个新的游戏模式前，你要知道所
+有的服务器参数都被重新恢复为Q3/OSP默认设置。也就是说你只要
+在新的设置中定义那些和默认值不同的参数即可。
+
+你可以查看OSP带的设置文件（team.cfg、ctf.cfg等），来作为你
+的参考。
+
+你要知道，启动服务器的设置是非常简单的：只要定义诸如服务器
+名称、sv_maxclients、rconPassword等即可。所有指定游戏类型
+设置通过OSP内部设置或你的可选服务器设置来实现。
+
+作为参考，在cfg-reference有我做的内部设置的文件，其中每条
+参数的修改都有详细的说明。
+
+*注意*：自定义的设置不能定义sv_maxclients！！！！这个参数会
+导致服务器的不稳定！！！你只能在服务器的启动设置中定义这个
+参数。
+
+设置好后，可以通过投票命令来选择游戏模式：
+	\callvote mode [mode_id]
+
+不带mode_id会显示当前所有可以投票选择的模式。
+
+
+
+内部设置的地图列表。如果你想为不同的模式定义不同的地图列表，可以在osp
+目录下建立一个和模式同名的地图列表文件。如果没有这个文件，则会调用默认
+的内部地图列表：
+=======================================================================
+1v1:       cfg-maps/1v1maps.txt
+FFA:       cfg-maps/ffamaps.txt
+QIL TeamDM:cfg-maps/qilmaps.txt
+Team DM:   cfg-maps/teammaps.txt
+CTF:       cfg-maps/ctfmaps.txt
+ClanArena: cfg-maps/teammaps.txt
+
+默认地图列表：
+==================
+请参考cfg-maps/目录下的文件获得更详细的信息。
+
+每种模式的默认设置：
+===============================
+所有模式改变的参数都在cfg-reference/目录下的相应文件中。
+
+以下是你可以在服务器设置的参数，这些参数没有被默认的内部设置改变。
+===========================================================================
+admin_log
+bot_checktime
+bot_autoload
+com_blood
+filter_file
+g_allowVote
+g_banIPs
+g_debugAlloc
+g_debugDamage
+g_debugMove
+g_filterBan
+g_gravity
+g_inactivity
+g_knockback
+g_listEntity
+g_log
+g_logSync
+g_maxGameClients
+g_motd
+g_needpass
+g_password
+g_podiumDist
+g_podiumDrop
+g_rankings
+g_speed
+g_synchronousClients
+g_smoothClients
+item_disable
+log_default
+log_stat
+map_debug
+map_file
+map_halt
+mg_damage
+mg_damageTeamplay
+mode_customfile
+mode_start
+osp_gamename
+player_always
+player_file
+pmove_fixed
+pmove_msec
+ref_password
+server_availmodes
+server_batcher
+server_customclient
+server_gfxspecfile
+server_maxpacketsmin
+server_maxpacketsmax
+server_ospauth
+server_promode
+server_timenudgemin
+server_timenudgemax
+server_realping
+server_record
+server_motd1
+server_motd2
+server_motd3
+server_motd4
+server_motd5
+server_motd6
+server_motd7
+server_motd8
+sv_cheats
+sv_hostname
+sv_maxclients
+viewcam_directory
+vote_allow_altgraphics
+vote_allow_kick
+vote_allow_maxpackets
+vote_allow_osphud
+vote_allow_promode
+vote_allow_referee
+vote_allow_thrufloors
+vote_allow_truelightning

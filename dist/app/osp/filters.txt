@@ -1,0 +1,42 @@
+# Player filtering definitions (14 Dec 01)
+#
+# See Docs/Player-filters-q3.txt for complete information on the
+# format of the filters.
+#
+# Format:
+# <ban_command> <TAB> <player_name> <TAB> <address_prefix> <TAB> <password>
+#
+# <ban_command>:
+#	banplayer
+#	bantag
+#	banaddr
+#	banpass
+#
+# <player_name>
+#	Name (or partial) of a player to ban/allow.
+#
+# <address_prefix>
+#	Beginning portion of a client's address to ban/allow.
+#	Note that the current version does NOT support specifying
+#	subnet masks, so this method is really a "traditional"
+#	Class C filter at best (although you COULD get away with
+#	smaller subnets if you know what you are doing).
+#
+# <password>
+#	Specifies what a client's public "password" or "osp_password"
+#	(use the "setu osp_password" command) must be set for pass/fail
+#	of the current filter.
+#
+# ----> Note: Specifying "none" in a field will disable that field for
+#		  the current filter.
+#
+# Examples:
+# ---------
+# banplayer	m0m0		none		none
+# banplayer	Johnny	192.168.	my_bad
+# bantag	clan|		none		w3rd
+# banaddr	none		192.168.1.	none	<<--- Most common filter
+# banaddr	none		192.168.2.	imc00l
+# banpass	none		192.168.3.	onthedownlow
+# banpass	none		none		temp_password
+#

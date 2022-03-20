@@ -1,0 +1,104 @@
+#====================================================
+# Traducido al Español por el equipo Rancid:
+#====================================================
+# - Pablo González 	alias Totoro
+# - Roberto Konow 	alias Ratón
+# - Antonio Inocencio	alias Nyto
+# - Mauricio Quilpatay 	alias Phobos
+#
+# WWW:		http://www.rancid.cl
+# Email: 	webmaster@rancid.cl
+# IRC:		#rancid on irc.enterthegame.com
+#
+# --> Visita www.rancid.cl para obtener noticias
+#     del E-Sport y Quake3 totalmente en Español.
+#====================================================
+#====================================================
+#
+# Abajo hay una descripción de como usar archivos de mapas .cfg . El # este ejemplo es para la configuración del "ffamaps.txt".
+#
+#
+# "ffmaps.txt"
+# ------------
+# Ejemplo del formato del archivo texto usado para especificar mapas 
+# usados en OSP Tourney DM para Quake3.
+#
+# Formato:
+#
+#      <mapname> <min_players> <max_players> <fraglimit> 
+#	 <capturelimit> <timelimit> <roundlimit>
+#
+#        Nota: Un valor < 0 para cualquiera de los fl, tl o cl 
+#        	   significa usarlo en la actual configuración del     
+#	         servidor.
+#
+# La cola de mapas solo va a cargar un mapa si es min/max el contador # de jugadores activo en el presente nivel si esta bindeado. Sino, el # mapa NO va a ser cargado.
+#
+# SI tu no quieres ningún limite en cada mapa, solo especifica el 
+# mapa sin el min/max de las variables de cada línea.
+#
+# Nosotros usamos un truco aquí... solo carga mapas usuales entre 
+# niveles cargados.
+# En el caso de unos mapas, es poco probable que hayan 99 personas 
+# mirando en un partido, pero ellos están disponibles por razones de # votación.
+#
+# Usa un min de 0 para que los mapas roten cuando no haya nadie 
+# jugando. Probablemente deberías usar mapas populares para tener 
+# juegos rápidos cuando las personas se conecten inicialmente.
+#
+# También, ahí hay un formato alternado que puede ser usado si uno 
+# quiere para cambiar algo más que solo fl/tl/cl/rl:
+#
+#      configmap <mapname> <min_players> <max_players> 
+#	 <config_to_exec>
+#
+# El config_to_exec será el archivo que va a ser ejecutado desde el 
+# directorio de fs_game (osp/ solo osp_gamename es 1, o baseq3/ si 
+# osp_gamename es 0)
+#
+#
+# Si tu no quieres configurar ninguna lista de mapas, OSP puede 
+# creara una utomáticamente para ti!
+# La configuración "map_autoload 1" va a crear dinámicamente una 
+# lista de mapas, basada en la información de los mapas en sus 
+# respectivos archivos .arena específicamente. OSP va a escoger mapas # de cualquiera de los dos directorios osp/ ó baseq3/, y lo añadirá a # la lista de mapas *solo* si se especifica el tipo 
+# de juego en tu .arena (usualmente incluye en cualquiera de tus 
+# mapas .pk3).
+#
+# Sin embargo, pueden haber algunos mapas que tu NO quieras incluir. # OSP proporciona otro uso para el archivo de lista de mapas en el 
+# que tu puedes especificar mapas para NO ser incluidos. El formato 
+# es simple:
+#
+#     deletemap <mapname>
+#
+# Cualquier mapa que pueda ser dinámicamente añadido que este 
+# especificado en una entrada DELETEMAP NO va a ser añadido a la 
+# lista de mapas.
+#
+q3dm1  00 06 20 0 20 -1
+# "configmap" ejemplo:
+configmap q3dm1 00 06 mapq3dm1.cfg 
+q3dm2  00 07 25 0 20 -1
+q3dm3  00 08 25 0 20 -1
+q3dm4  00 06 25 0 15 -1
+q3dm5  00 06 25 0 15 -1
+q3dm6  04 14 25 0 20 -1
+q3dm7  04 99 30 0 20 -1
+q3dm8  02 14
+q3dm9  02 14
+q3dm10 03 14
+q3dm11 03 14
+q3dm12 04 99 25 0 20 -1
+q3dm13 04 10 30 0 20 -1
+q3dm14 04 14
+q3dm15 04 14
+q3dm16 03 99
+q3dm17 04 99
+q3dm18 99 99 20 0 20 -1
+q3dm19 99 99 20 0 20 -1
+q3tourney2 00 06 20 0 10 -1
+q3tourney3 00 07 20 0 10 -1
+q3tourney4 00 07 20 0 10 -1
+q3tourney5 00 05 20 0 10 -1
+deletemap q3tourney1
+deletemap q3tourney6

@@ -1,0 +1,19 @@
+BODY                   { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: center; color: #CCCCCC; background-color: #6D6E82; }
+TABLE                  { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: center; color: #CCCCCC; }
+TD                     { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: center; color: #CCCCCC; white-space: NOWRAP;  }
+
+A:link                 { color: #66FFFF; }
+A:visited              { color: #66FFFF; }
+A:active               { color: #66FFFF; }
+A:hover                { color: #66FFFF; }
+
+.neutralHighlight      { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #66FFFF; background-color: #0D3F74; }
+.neutral               { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #CCCCCC; background-color: #173655; }
+.neutralLowlight       { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #CCCCCC; background-color: #082746; }
+
+.redHighlight          { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #66FFFF; background-color: #6A0000; }
+.red                   { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #CCCCCC; background-color: #082746; }
+.neutralCtf            { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #CCCCCC; background-color: #173655; }
+.neutralHighlightCtf   { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #CCCCCC; background-color: #000000; }
+.blueHighlight         { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #66FFFF; background-color: #00005D; }
+.blue                  { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; text-align: left;  color: #CCCCCC; background-color: #082746; }

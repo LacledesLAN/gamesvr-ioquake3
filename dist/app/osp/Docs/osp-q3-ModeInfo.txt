@@ -1,0 +1,286 @@
+OSP Server Mode Configuration
+=============================
+23 Feb 2003
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+
+OSP allows server operators to define custom configurations for
+availability to clients to vote on while connected.  These
+configurations can be as simple as strict FFA/1v1/Team DM/CTF and
+Clan Arena play as defined out of the box, with the option to
+define modes of play that are deviate far from the norm (i.e.
+instagib CTF with low gravity and all items on the level
+replaced with BFGs).
+
+While this flexibility can be quite powerful, for the uninitiated,
+and for the players subjected to server operator experimentation
+with alternate config modes, it is also bit overwhelming and
+equally as confusing.
+
+Since most server ops and players just want to be able to switch
+between out of the box modes of play (i.e. to go from 1v1 to ctf
+to team DM), OSP has defined 8 internal configurations with core
+settings that have been accepted by the community as "standard":
+	- FFA
+	- 1v1
+	- QIL TDM  (http://www.qil.org)
+	- Team DM
+	- CTF
+	- Clan Arena
+	- FreezeTag (OSP settings)
+	- FreezeTag (Vanilla 1.51b settings)
+
+Now, another way to view alternate server configurations is to
+define them as new custom game "modes".  OSP takes this to the
+next step by allowing server operators to utilize custom game
+modes in the same manner in which "g_gametype" is used.  That
+is, a server's start-up configuration can be a simple shell of
+a configuration that defines such things as the hostname, MOTD
+to display to clients, maxplayers, etc. with a "mode_start"
+setting that defines the set of core gameplay parameters to
+tweak when the server is launched.  Essentially, "mode_start"
+is a much more powerful version of "g_gametype" that allows
+the setting of parameters in addition to the gametype.
+
+Alternate game modes are defined in a configuration file
+specified in the server's start-up .cfg with the
+"mode_customfile" parameter.  The format of this file is
+as follows:
+
+<new modename> [tab] <mode filename.cfg>
+
+[NOTE: [tab] refers to the "tab" character.  That is, the
+ custom mode name and its .cfg file *must* be separated with
+ a TAB character.]
+
+The mode_start parameter is a dynamic setting, based on the
+internal configurations defined by OSP with the addtion of
+alternate game modes defined by the server operator.  The
+first 8 values of mode_start are always the same:
+	0 - FFA
+	1 - 1v1
+	2 - QIL TeamDM
+	3 - TeamDM
+	4 - CTF
+	5 - Clan Arena
+	6 - FT (OSP)
+	7 - FT (Vanilla)
+
+All custom modes will start at 8 or higher.  The custom mode
+value is based on the order in which it is specified in the
+"mode_customfile" .cfg file.  So, for example, if the .cfg
+specified in the "mode_customfile" is as follows:
+
+instagib	cfg-modes\instagib.cfg
+instagib-ctf	cfg-modes\instagib-ctf.cfg
+bfg madness	cfg-modes\bfg.cfg
+gauntlet-only	cfg-modes\gauntlet.cfg
+
+Then the server's available modes of play would be:
+	 0 - FFA
+	 1 - 1v1
+	 2 - QIL TeamDM
+	 3 - TeamDM
+	 4 - CTF
+	 5 - Clan Arena
+	 6 - FT (OSP)
+	 7 - FT (Vanilla)
+	 8 - instagib
+	 9 - instagib-ctf
+	10 - bfg madness
+	11 - gauntlet-only
+
+The server could then specify "mode_start 7" in its
+start-up script to launch the server as an instagib CTF
+server, yet have all of the other modes available to
+players for voting.
+
+The default setting for "mode_customfile" is "none",
+which disables any additional custom mode settings.
+
+Now, what about the internal configs you ask?  Well, as
+mentioned earlier, this custom mode setting is a bit
+time-consuming and confusing the first go-around.  Since
+most server ops just want to get OSP up and running with
+basic gametypes available, the core internal configs
+define preset settings that cannot be changed.  This
+gives assurances to players that these settings are
+GUARANTEED to be the same on any OSP server.  It also
+lets the server op to not have to worry that they have
+the exact settings that everyone expects.  When upgrading
+to the latest version of the OSP server, they also have
+the latest set of "standard" settings.
+
+Of course, not ALL settings are hard-coded in these core
+configs.  As mentioned earlier, the server shell .cfg is
+used to specify custom non-gameplay-affecting settings.
+The list at the bottom of this file defines what variables
+can be set in the start-up .cfg that won't be affected by
+the internal server modes.
+
+Specific internal configs are made available for client
+voting through the "server_availmodes" setting.  It is
+a bitmask that defines which modes are to be enabled:
+	  1 - FFA
+	  2 - 1v1
+	  4 - QIL TeamDM
+	  8 - TeamDM
+	 16 - CTF
+	 32 - Clan Arena
+	 64 - FT (OSP)
+	128 - FT (Vanilla)
+
+Thus, a setting of "56" means that Team DM, CTF, and Clan
+Arena (modes 3, 4, and 5) are available for client voting.
+The default setting for "server_availmodes" is 59 (all
+modes are available for voting, EXCEPT for "Badlands TDM").
+
+It is *highly* recommended that server operators utilize
+the mode_start (and mode_customfile, if alternate server
+configs are to be used) variables to ensure that proper
+mode rotation is in place.  If mode_start is defined, the
+server will rotate back to this mode if client's have
+voted in alternate server modes and have left after 10
+minutes.  This guarantees that the server will be in a
+known mode state if it has been vacant for some time.
+This goes for ANY mode_start value.
+
+When defining new custom configs, it is useful to note that
+all server cvars are reset to Q3/OSP default settings before
+reverting to a new game mode.  This means that all that is
+needed in the custom configs is to set ONLY the vars that need
+to be tweaked.
+
+As a reference to all of this madness, check out the defualt
+server configs that come with OSP (team.cfg, ctf.cfg, etc.).
+Hopefully, these configs will shed more light on all of this
+"flexibility" :)
+
+One thing to remember, the start-up server config is VERY
+simple: just define stuff like server name, sv_maxclients,
+rconPassword, etc.  All of the specific gameplay settings
+are handled either by the internal configs or your alternate
+server configurations.
+
+For reference, I've also included the internal server configs
+in cfg-reference with each cvar that is modified listed
+explicitly in each of the configs.
+
+*NOTE*: Custom configs should NOT specify sv_maxclients!!!!
+This leads to serious instability for the server!!!!!  Specify
+this parameter ONLY in the server's start up config.
+
+Also, just can vote for alternate modes with:
+	\callvote mode [mode_id]
+
+Omitting the mode_id will show all available modes that can
+be voted.
+
+Good luck!
+
+
+Maplists for internal configs.  If you want an alternate map list for
+a mode, create a file with the same name under the main osp/ directory.
+OSP will load the map list from this file.  If no file is specified, it
+will use a default internal map list:
+=======================================================================
+1v1:          cfg-maps/1v1maps.txt
+FFA:          cfg-maps/ffamaps.txt
+QIL TeamDM:   cfg-maps/qilmaps.txt
+Team DM:      cfg-maps/teammaps.txt
+CTF:          cfg-maps/ctfmaps.txt
+ClanArena:    cfg-maps/teammaps.txt
+FT (OSP):     cfg-maps/teammaps.txt
+FT (Vanilla): cfg-maps/teammaps.txt
+
+Default map lists:
+==================
+Exactly the same as what is shipped with the main OSP distribution.
+Please refer to the files in the cfg-maps/ directory for complete info.
+
+
+Default settings for each mode:
+===============================
+All mode changes from the default settings in Q3/OSP are given in the
+files in the cfg-reference/ directory.
+
+
+Here is a list of variables that you can set in the server config that will
+NOT be erased by the *DEFAULT* internal configs.
+===========================================================================
+admin_log
+bot_checktime
+bot_autoload
+com_blood
+filter_file
+g_allowVote
+g_banIPs
+g_debugAlloc
+g_debugDamage
+g_debugMove
+g_filterBan
+g_gravity
+g_inactivity
+g_knockback
+g_listEntity
+g_log
+g_logSync
+g_maxGameClients
+g_motd
+g_needpass
+g_password
+g_podiumDist
+g_podiumDrop
+g_rankings
+g_speed
+g_synchronousClients
+g_smoothClients
+item_disable
+log_default
+log_stat
+map_debug
+map_file
+map_halt
+mg_damage
+mg_damageTeamplay
+mode_customfile
+mode_start
+osp_gamename
+player_always
+player_file
+pmove_fixed
+pmove_msec
+ref_password
+server_availmodes
+server_batcher
+server_customclient
+server_gfxspecfile
+server_maxpacketsmin
+server_maxpacketsmax
+server_ospauth
+server_promode
+server_timenudgemin
+server_timenudgemax
+server_realping
+server_record
+server_motd1
+server_motd2
+server_motd3
+server_motd4
+server_motd5
+server_motd6
+server_motd7
+server_motd8
+sv_cheats
+sv_hostname
+sv_maxclients
+viewcam_directory
+vote_allow_altgraphics
+vote_allow_kick
+vote_allow_maxpackets
+vote_allow_osphud
+vote_allow_promode
+vote_allow_referee
+vote_allow_thrufloors
+vote_allow_truelightning

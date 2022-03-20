@@ -1,0 +1,19 @@
+BODY                   { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: center; background-color: #000000; }
+TABLE                  { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: center; }
+TD                     { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: center; white-space: NOWRAP;  }
+
+A:link                 { color: #FF9900; }
+A:visited              { color: #FF9900; }
+A:active               { color: #FF9900; }
+A:hover                { color: #FF9900; }
+
+.neutralHighlight      { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_neutral.jpg); }
+.neutral               { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_neutrald.jpg); }
+.neutralLowlight       { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_neutraldd.jpg); }
+
+.redHighlight          { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_red.jpg); }
+.red                   { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_redd.jpg); }
+.neutralCtf            { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-color: #111111; }
+.neutralHighlightCtf   { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-color: #000000; }
+.blueHighlight         { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_blue.jpg); }
+.blue                  { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #CC6600; text-align: left; background-image: url(images/bg_blued.jpg); }

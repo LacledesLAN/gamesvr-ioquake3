@@ -1,0 +1,86 @@
+Playing a Match on an OSP Server
+--------------------------------
+14 Dec 01
+by Fia
+
+Here are the steps you need to know to set up and play a match on an OSP server.
+
+
+1. Set the server to the game mode you want with:
+
+    /callvote mode <available_modes>
+
+The standard OSP modes are Free-For-All, 1v1, QIL TDM, TeamplayDM, CTF, and
+ClanArena. However, the server may not be configured for all configurations
+(or may have additional modes), so to get the list of available modes from
+the server, use:
+
+    /callvote mode ?
+
+In addition, you may need to turn the Railgun-only Instagib mode on or off with:
+
+    /callvote instagib <0|1>
+
+
+2. Change to the map you want to play on with:
+
+    /callvote map <mapname|map_id>
+
+To get a list of available maps and their IDs from the server, use:
+
+    /callvote map ?
+
+
+3. Check any votable options you might be interested in changing with:
+
+    /callvote <option_name> ?
+
+To get a list of all votable server variables from the server, use:
+
+    /callvote ?
+
+
+4. Once the teams are in place, lock the teams with:
+
+    /lock
+
+To unlock the teams to change the players on your team, use:
+
+    /unlock
+
+If needed, you may also prevent spectators from observing a game with:
+
+    /speclock
+
+Once speclock is used, all spectators are left immobile and facing a wall. A team may allow specific spectators to follow their team by inviting them with the specinvite command. First, get a list of players IDs with:
+
+    /players
+
+Then invite a specific player to spectate your team with:
+
+    /specinvite <player_id>
+
+
+5. Have the players set their status to "ready" with:
+
+    /ready
+
+A player may also set their status back to "not ready" with:
+
+    /notready
+
+
+6. Play the game. During the game, teams can call timeouts/timeins with:
+
+    /time
+
+
+That's it. Have fun playing your matches on an OSP server!
+
+There are loads of other options/commands under OSP, but these are the
+main set of commands needed for basic match play.  Type: \? for a list
+of all available server commands.  Any command followed with a "?" will
+give more info on that command.
+
+For further details, check out the osp/Docs directory, sit back, relax,
+and read up on OSP Tourney DM/CA/CTF :)

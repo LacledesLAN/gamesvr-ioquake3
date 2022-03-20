@@ -1,0 +1,71 @@
+[ Note: This is a portion of the readme.txt found in the official FreezeTag distribution found at:
+
+	http://www.planetquake.com/freeze/
+
+  Updates to this text have been added only where applicable for OSP-specific info
+]
+
+
+
+Freeze Tag 1.51b
+for Quake3 1.30
+by Darrell "Doolittle" Bircsak
+
+
+Freeze Tag is a teamplay modification for Quake3 and Team Arena.  It is a lot like that game you may have played as a kid, but without the killing.  In Freeze Tag you try to eliminate the entire enemy team.  If you kill someone then they will become frozen.  So to eliminate all, you'd need to freeze everyone, making them all frozen at the same time.  This will give your team a point and the round will start over again.  If you are ever frozen, a teammate can come rescue you by standing next to your icy body for three seconds.  You'll then be set free and can join the battle again.
+
+	Kill the enemy to freeze them
+	Stand by a teammate for three seconds to unthaw them
+	Freeze the entire enemy team to win
+	Shoot an enemy opponent to "get their attention" and taunt
+	Watch your back, patrol as a group
+	Set traps, guard frozen enemy bodies
+	While you camp your team may be getting slaughtered so make sure to save them
+	You are a good player if you thaw more than one teammate at a time
+	You are a great player if you are the last person alive and you perform a miraculous comeback, take out the other team and revive your teammates
+	You are strategic if you only concentrate on thawing teammates; this kind of activity usually keeps a team alive
+	You understand all things if you can balance this with killing the other team
+	You are sneaky if you wait for enemies to come thaw their guys and then attack from the shadows
+	You are fun to play with if you don't shoot the author
+	For more info see http://www.planetquake.com/freeze
+
+
+- All server options related to FreezeTag can be found in the osp-q3-Variable.txt reference.
+- All commands related to FreezeTag can be found in the osp-q3-Commands.txt reference.
+- There are no client-side options for FreezeTag-specific modes of play, currently.
+- "Roundlimit" is determined by the current fraglmit of the server (in normal FT, it
+  has traditionally been capturelimit)
+- Two server configs have been provided for FreezeTag play:
+
+	- freezetag.cfg:
+		OSP FreezeTag rules:
+			- Team Damage ON
+			- 10s weapon respawn time
+			- 50% ammo if you are already over the default ammo,
+                    otherwise, full ammo loadout for a weapon when picking
+                    up the same weapon
+			- Can NOT manually drop items
+			- Powerups/Items do not drop when the carrier dies
+			- 20min timelimit, no round limit, 5 minute overtime
+			- World death (minus crater) delayed respawn of 7s
+
+	- freezetag-vanilla.cfg:
+		Vanilla (1.51b) FreezeTag rules:
+			- Team Damage OFF
+			- 5s weapon respawn time
+			- full ammo on weapon pickups, regardless of what you
+			  may already have
+			- Can manually drop items
+			- Powerups/Items drop with the dead carrier, and can survive
+			  across rounds
+			- Players keep their health if they are on the winning team
+			  and have a health value higher than the respawn health value
+			- 20min timelimit, no round limit, sudden death overtime
+			- World death (minus crater) delayed respawn of 8s
+
+
+Bot thaw AI by Fergus Dog
+
+Freeze Tag is Copyright 1998, 2001, 2002 by Darrell Bircsak
+http://www.planetquake.com/freeze
+dbircsak@earthlink.net

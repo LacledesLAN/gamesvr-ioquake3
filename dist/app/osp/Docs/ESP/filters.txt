@@ -1,0 +1,58 @@
+#====================================================
+# Traducido al Español por el equipo Rancid:
+#====================================================
+# - Pablo González 	alias Totoro
+# - Roberto Konow 	alias Ratón
+# - Antonio Inocencio	alias Nyto
+# - Mauricio Quilpatay 	alias Phobos
+#
+# WWW:	http://www.rancid.cl
+# Email: 	webmaster@rancid.cl
+# IRC:	#rancid on irc.enterthegame.com
+#
+# --> Visita www.rancid.cl para obtener noticias
+#     del E-Sport y Quake3 totalmente en Español.
+#====================================================
+#====================================================
+#
+# Definiciones del filtrado de jugadores (14 Dec 01)
+#
+# Ver Docs/Player-filters-q3.txt para una completa información en
+# el formato de los filtros.
+#
+# Formato:
+# <ban_command> <TAB> <player_name> <TAB> <address_prefix> <TAB> <password>
+#
+# <ban_command>:
+#	banplayer
+#	bantag
+#	banaddr
+#	banpass
+#
+# <player_name>
+#	Nombre (o una parte) del jugador para bannear/permitir.
+#
+# <address_prefix>
+#	Comienzo de una porción de la dirección del cliente para bannear/permitir.
+#	Nota: la actual versión NO soporta mascaras de sub red, entonces este metodo
+#     es bastante el "tradicional" filtro Clase C (aunque tu PUEDAS obtener la manera
+#	de tener pequeñas sub redes si tu sabes lo que haces).
+#
+# <password>
+#	Especifica el "password" o "osp_password" publico del cliente
+#	(usa el comando "setu osp_password") debe ser seteado para pasar/fallar
+#	el filtro actual.
+#
+# ----> Nota: Si especificas "none" en un campo este quedará deshabilitado en este campo
+#		  para el filtro actual.
+#
+# Ejemplo:
+# ---------
+# banplayer	m0m0		none		none
+# banplayer	Johnny	192.168.	my_bad
+# bantag	clan|		none		w3rd
+# banaddr	none		192.168.1.	none	<<--- Filtro más popular
+# banaddr	none		192.168.2.	imc00l
+# banpass	none		192.168.3.	onthedownlow
+# banpass	none		none		temp_password
+#

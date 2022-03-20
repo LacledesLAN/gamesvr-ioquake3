@@ -1,0 +1,238 @@
+OSP Configuración de Modos de Servidores
+=============================
+14 Dec 2001
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+====================================================
+ Traducido al Español por el equipo Rancid:
+====================================================
+ - Pablo González 	alias Totoro
+ - Roberto Konow 		alias Ratón
+ - Antonio Inocencio	alias Nyto
+ - Mauricio Quilpatay 	alias Phobos
+
+ WWW:		http://www.rancid.cl
+ Email: 	webmaster@rancid.cl
+ IRC:		#rancid on irc.enterthegame.com
+
+ --> Visita www.rancid.cl para obtener noticias
+     del E-Sport y Quake3 totalmente en Español.
+====================================================
+====================================================
+
+OSP permite a los operadores de servidores definir configuraciones 
+personalizadas para que los clientes voten mientras estén conectados. 
+Estas configuraciones pueden ser tan simples o estrictas como 
+FFA/1v1/Team DM/CTF y Clan Arena como aparecen por defecto, con la 
+opción de definir modos de juego que se desvían bastante de lo normal 
+(p.e. instagib CTF con baja gravedad y todos los ítems en el nivel
+reemplazados por BFGs).
+
+Mientras que esta flexibilidad puede ser muy poderosa, para los recién iniciados, y para los jugadores sujetos a los experimentos de operadores de servidores con configuraciones de modos alternativos, también es demasiado grande e igualmente de confusa.
+
+Visto que casi todos los operadores de servidores y jugadores quieren simplemente ser capaces de alternar entre modos predefinidos (p.e. ir desde 1v1 a ctf y luego a Team DM), OSP ha definido 6 configuraciones internas con seteos que han sido aceptados por la comunidad como "estandar":
+	- FFA
+	- 1v1
+	- QIL TDM  (http://www.qil.org)
+	- Team DM
+	- CTF
+	- Clan Arena
+
+Ahora, otra forma de mirar las configuraciones de servidores alternativas sería la de definirlas como nuevos "modos" de juego personalizados. OSP lleva esto al siguiente nivel permitiendo a los operadores de servidores utilizar configuraciones personalizadas
+de modos de la misma manera en que "g_gametype" se usa. Esto es,
+la configuración de inicio de un servidor puede ser una simple 
+configuración que defina cosas como el hostname, MOTD (Mensaje del día) que mostrar a los clientes, jugadores máximos en el servidor, etc, con un seteo "mode_start" que defina el set de instrucciones del juego para modificar cuando el servidor se lanza. Esencialmente, "mode_start" es una versión mucho más poderosa de "g_gametype" que permite modificar parámetros en adición a un gametype.
+
+Los modos de juego alternativos se definen en un archivo de configuración especificado en el cfg de inicio del servidor con el parámetro "mode_customfile".
+El formato del archivo es como se muestra a continuación:
+
+<nuevo nombredelmodo> [tab] <archivo del modo.cfg>
+
+[NOTA: [tab] se refiere al carácter "tab". Esto es, el nombre personalizado del nuevo modo y su archivo .cfg *deben* ser separados con un caracter TAB.]
+
+El parámetro mode_start es un seteo dinámico, basado en las
+configuraciones internas definidas por OSP con la adición de
+modos de juego alternativo definidos por el operador de servidor. Los
+primeros 6 valores de mode_start son siempre los mismos:
+	0 - FFA
+	1 - 1v1
+	2 - QIL TeamDM
+	3 - TeamDM
+	4 - CTF
+	5 - Clan Arena
+
+Todos los modos personalizados comenzarán en 6 o mayor. El valor de cada modo personalizado se basa en el order en que se especifican en el .cfg "mode_customfile". Así que, por ejemplo, si el .cfg especificado en el "mode_customfile" es como sigue:
+
+instagib	cfg-modes\instagib.cfg
+instagib-ctf	cfg-modes\instagib-ctf.cfg
+bfg madness	cfg-modes\bfg.cfg
+gauntlet-only	cfg-modes\gauntlet.cfg
+
+Entonces los modos del servidor que hay disponibles para jugar serán:
+	0 - FFA
+	1 - 1v1
+	2 - QIL TeamDM
+	3 - TeamDM
+	4 - CTF
+	5 - Clan Arena
+	6 - instagib
+	7 - instagib-ctf
+	8 - bfg madness
+	9 - gauntlet-only
+
+El servidor entonces podrá especificar "mode_start 7" en su 
+configuración de inicio para comenzar el servidor como un instagib CTF pero manteniendo todos los otros modos que hay abiertos para que los jugadores voten por estos.
+
+El parámetro por defecto de "mode_customfile" es "none", que
+no permite ningún modo personalizado.
+
+Ahora, qué hay acerca de las configuraciones internas, te preguntas? Bueno, como se menciona al comienzo, este modo de seteo personalizado es un poco consumidor de tiempo y confuso la primera vez. Siendo que la gran mayoría de operadores de servidores quieren simplemente tener un servidor OSP en línea y funcionando con modos de juego básicos
+abiertos, las configuraciones internas de estos modos predefinidos no pueden ser cambiadas.
+Esto le da a los jugadores la seguridad que esos seteos serán los mismos que en cualquier otro servidor OSP. Esto también permite al operador de servidor no tener que preocuparse de tener los seteos exactos que todos esperan. Cuando actualiza a la última versión de servidor de OSP, también tienen los último seteos estandar.
+
+Por supuesto, no TODOS los seteos están totalmente predefinidos y sin posibilidad de cambio.
+Como se menciona al comienzo, el .cfg base del servidor se usa para especificar seteos personalizados que no afectan al juego directamente. La lista en la parte baja de este archivo
+define que variables se pueden modificar en el .cfg de inicio que no se verán afectadas por los modos internos de servidor.
+
+Configuraciones especificas internas estan abiertas para la votación de los clientes a través del seteo "server_availmodes". Es una máscara de bits que define que modos están permitidos/abiertos para votación:
+	 1 - FFA
+	 2 - 1v1
+	 4 - QIL TeamDM
+	 8 - TeamDM
+	16 - CTF
+	32 - Clan Arena
+
+Entonces, un seteo de "56" significa que Team DM, CTF, y Clan
+Arena (modos 3, 4, y 5) estan abiertos para la votación de los clientes.
+EL seteo por defecto de "server_availmodes" es 59 (todos los modos
+están permitidos, EXCEPTO "Badlands TDM").
+
+Es *altamente* recomendado que los operadores de servidores usen
+las variables mode_start (y mode_customfile, si configuraciones alternativas se fueran a usar) para asegurarse que las rotaciones funcionan correctamente.
+Si se define un mode_start, el servidor rotará de vuelta a este modo si los clientes han votado para modos alternativos y han abandonado el juego y 10 minutos han pasado. Esto garantiza que el servidor estará en modos conocidos si ha estado vacío por algún tiempo. Esto va para CUALQUIER valor de mode_start.
+
+Cuando se definen nuevas configuraciones personalizadas, es útil notar que todos los cvars de servidores se cambian a los seteos por defecto de Q3/OSP cuando se cambia a un nuevo modo de juego. Esto significa que todo lo que se necesita en las configuraciones personalizadas es setear las variables que se 
+modificarán.
+
+Como una referencia para toda esta locura, observa las configuraciones por defecto que vienen con OSP (team.cfg, ctf.cfg, etc.). 
+Con suerte, estas configuraciones iluminarán un poco más sobre esta "flexibilidad" :)
+
+Una cosa que recordar, la configuración de inicio del servidor es MUY
+simple: solo define cosas como nombre del servidor, sv_maxclients,
+rconPassword, etc.  Todos los seteos específicos del juego se manejan
+por las configuraciones internas o bien tus configuraciones de servidor alternativas.
+
+Para referencia, también he incluido las configuraciones internas de servidores en cfg-reference con cada cvar que se modifica listada explícitamente para cada una de las configuraciones.
+
+*NOTA*: Configuraciones personalizadas NO deberían especificar sv_maxclients!!!!
+Esto conlleva a serias inestabilidades en el servidor!!!. Pone este 
+parámetro SOLO en la configuración de inicio del servidor.
+
+También, puede simplemente votar por modos alternativos con:
+	\callvote modo [id del modo]
+
+Omitiendo el [id del modo] mostrará todos los modos que se puedan votar.
+
+Buena suerte!
+
+
+Listas de mapas para configuraciones internas. Si quieres una lista alternativa para cada modo, crea un archivo con el mismo nombre bajo el directorio principal /osp.
+OSP cargará la lista de mapas desde este archivo. Si ningún archivo se especifica, usará una lista de mapas internas por defecto:
+=======================================================================
+1v1:       cfg-maps/1v1maps.txt
+FFA:       cfg-maps/ffamaps.txt
+QIL TeamDM:cfg-maps/qilmaps.txt
+Team DM:   cfg-maps/teammaps.txt
+CTF:       cfg-maps/ctfmaps.txt
+ClanArena: cfg-maps/teammaps.txt
+
+Listas de mapas por defecto
+==================
+Exactamente lo mismo con lo que se entrega con la distribuición principal de OSP.
+Por favor refiérete a los archivo en el directorio cfg-maps/ para información completa.
+
+
+Seteos por defecto en cada modo:
+===============================
+Todos los cambios de modos desde los seteos por defecto en Q3/OSP se entregan en los archivos en el directorio cfg-reference/.
+
+
+Aquí hay una lista de variables que puedes setear en las configuraciones de servidor que NO serán borradas por las configuraciones internas *POR DEFECTO*.
+===========================================================================
+admin_log
+bot_checktime
+bot_autoload
+com_blood
+filter_file
+g_allowVote
+g_banIPs
+g_debugAlloc
+g_debugDamage
+g_debugMove
+g_filterBan
+g_gravity
+g_inactivity
+g_knockback
+g_listEntity
+g_log
+g_logSync
+g_maxGameClients
+g_motd
+g_needpass
+g_password
+g_podiumDist
+g_podiumDrop
+g_rankings
+g_speed
+g_synchronousClients
+g_smoothClients
+item_disable
+log_default
+log_stat
+map_debug
+map_file
+map_halt
+mg_damage
+mg_damageTeamplay
+mode_customfile
+mode_start
+osp_gamename
+player_always
+player_file
+pmove_fixed
+pmove_msec
+ref_password
+server_availmodes
+server_batcher
+server_customclient
+server_gfxspecfile
+server_maxpacketsmin
+server_maxpacketsmax
+server_ospauth
+server_promode
+server_timenudgemin
+server_timenudgemax
+server_realping
+server_record
+server_motd1
+server_motd2
+server_motd3
+server_motd4
+server_motd5
+server_motd6
+server_motd7
+server_motd8
+sv_cheats
+sv_hostname
+sv_maxclients
+viewcam_directory
+vote_allow_altgraphics
+vote_allow_kick
+vote_allow_maxpackets
+vote_allow_osphud
+vote_allow_promode
+vote_allow_referee
+vote_allow_thrufloors
+vote_allow_truelightning
+

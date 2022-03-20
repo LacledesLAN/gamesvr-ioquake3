@@ -1,0 +1,91 @@
+OSP - Server-enabled Graphics
+=============================
+14 Dec 01
+rhea@OrangeSmoothie.org
+http://www.OrangeSmoothie.org
+
+====================================================
+ Traducido al Español por el equipo Rancid:
+====================================================
+ - Pablo González 	alias Totoro
+ - Roberto Konow 		alias Ratón
+ - Antonio Inocencio	alias Nyto
+ - Mauricio Quilpatay 	alias Phobos
+
+ WWW:		http://www.rancid.cl
+ Email: 	webmaster@rancid.cl
+ IRC:		#rancid on irc.enterthegame.com
+
+ --> Visita www.rancid.cl para obtener noticias
+     del E-Sport y Quake3 totalmente en Español.
+====================================================
+====================================================
+
+OSP Tourney DM/CA/CTF permite a los operadores de servidores setear
+gráficas personalizadas para mostrar a los clientes mientras que están conectados al servidor. La motivación aquí es permitir a clanes, comunidades y/o organizaciones de torneos implementar gráficas adicionales en el juego para mejorar los screenshots/demos
+del juego.
+
+En ninguna forma estas gráficas adicionales interfieren con el juego normal, porque estas se muestran solamente en dos lugares:
+     - En el screenshot del nivel mientras que te conectas al 	 servidor (pantalla de carga del mapa).
+     - En la tabla de puntajes al final del juego después de que un 	 encuentro ha sido jugado y antes de que el mapa se reinicie o 	 el siguiente mapa se cargue.
+
+El formato para la personalización es bien simple y derecho. He incluido un ejemplo en la distribución principal de OSP-Q3 para referencia en caso de que las cosas no vayan bien.
+
+1. Recoge los gráficos que quieres mostrar. Estos gráficos deberían ser de formato targa (.tga) de tipo 6(?) o tipo 10(?) para máxima compatibilidad (p.e. para capas de transparencia)
+   El formato JPEG (.jpg) puede funcionar, pero no es soportado por OSP todavía.
+
+2. Crea un .pk3 nuevo y añade esos gráficos a la ruta:
+
+        gfx\2d\
+
+3. Nombra estos gráficos de la siguiente manera:
+
+        customXX.tga  (donde XX es 1 a 16)
+
+   Esta nomenclatura DEBE ser progresiva en aumento, comenzando
+   en "1".  En otras palabras, nombra tu primer gráfic "custom1.tga",
+   el siguiente "custom2.tga", y así para todos tus gráficos *HASTA*
+   16. OSP solo soporta 16 gráficos personalizados.
+
+4. Cuando lo completes, pone este .pk3 en el directorio osp/ del   servidor.
+   Deberías nombrar el .pk3 con tu propio nombre, comenzando con el prefijo "z-", para asegurar las semánticas apropiadas de "sv_pure 1".
+
+5. Setear sv_pure a 1 y sv_allowDownload a 1 en el servidor para asegurarse de que los clientes pueden bajar los .pk3 de los gráficos personalizados.
+
+6. Crea un archivo de especificación gfx que define la posición y tamaño para cada uno de los gráficos para la pantalla de carga de mapa y para la tabla de puntajes al final del nivel. El formato es como sigue:
+
+      x y w h:x y w h
+
+      - x = La coordenada X (horizontal) (desde la izquierda)
+      - y = La coordenada Y (vertical) (desde arriba)
+      - w = Ancho del gráfico
+      - h = Altura del gráfico
+
+        ----> Nota: La coordenada X debe ser entre 0 y 640,
+              mientras que la coordenada Y debe ser entre 0 y 480.
+              No te preocupes acerca de la gente con pantallas más 		  grandes o pequeñas, OSP las cambiará de tamaño acorde 		  con la resolución del cliente.
+
+      Como puedes ver, hay dos grupos de coordenadas definidas en
+      cada línea, separadas por un ":". Cada línea representa las 
+      coordenadas para uno de los gráficos, siendo que el primer 	grupo especifica la posición/tamaño del gráfico en la pantalla 	de carga, y el segundo grupo representa la posición/tamaño del 	gráfico para la tabla de puntajes al final del nivel.
+
+      El gráfico especificado depende del número de línea que define 	tamaño y posición. En otras palabras, la primera línea 	corresponde a la información del gráfico "custom1.tga", la 	segunda línea especifica la información para el gráfico 	"custom2.tga", etc.
+
+      Para eliminar la muestra del gráfico en una de las pantallas
+      (p.e. mostrarla solo en la pantalla de carga, pero no al final 	del nivel), entonces ingresa "-1" para todos los "x y w h" del 	gráfico y grupo deseado.
+
+      Especifica solo el número de líneas iguales al número de 	gráficos "customXX.tga" que provees en tu .pk3 de gráficos 	personalizados.
+
+7. Define "server_gfxspecfile" con el nombre/ruta al archivo de especificación de gráficos que acabas de hacer, en el archivo de configuración del servidor.
+
+8. Reinicia el servidor y listo!
+
+9. Si tienes problemas, mira el ejemplo que he hecho en cfg-gfxexample.
+   Simplemente copia esos dos archivos en el directorio principal de osp/ y añade la siguiente línea a la configuración de tu servidor:
+
+        set server_gfxspecfile "gfxdef.cfg"
+
+  Al conectarse, los clientes deberían ver 3 adicionales        mezcladoras en la esquina, de variados tamaños.
+
+
+

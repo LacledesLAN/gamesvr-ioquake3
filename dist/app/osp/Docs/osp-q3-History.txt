@@ -1,0 +1,2451 @@
+04 Mar 03 - 1.03a
+=================
+- Fix: "Godmode" exploit
+- Fix: droppable HIs in modes besides FT
+- Fix: reset server_freezetag to 0 for custom modes (prior to execing)
+- Change: server_freezetag is now a serverinfo cvar
+
+28 Feb 03 - 1.03
+================
+- Fix: turn off showPing in demos
+- Fix: #D doesnt work if the player identified in it is in slot #0
+- Fix: Names can stay greyed out in a match (non-FT)
+- Fix: 0 scores for losing player on spectator views (scorebox)
+- Fix: CA Team overlay
+- Fix: CA player spec issues
+- Fix: CA chat issues
+- Fix: CA multiple team point scoring scenarios
+- Fix: \callvote mode X mapname when the server is already that gametype
+  for the mode doesn't change the map.
+- Fix: followprev/next just teleports like a respawn
+- Fix: no inactivity for coaches/refs
+- Fix: (FT) insta-thaw issues in lava/void
+- Fix: (FT) Dead players getting thrown to spec if team was speclocked
+- Fix: various config handling issues (both internal and custom configs)
+- Fix: CTF scores reset if map vote in the middle of a match
+- Fix: Various issues with the HUD
+- Fix: cf_Scores offset issues
+- Fix: Overlay issue with left vertically-aligned weapon list
+- Fix: Various issues with nextmap voting
+- Fix: follow_powerup option and flag carriers.  You should now always be
+  locked on the current FC even if another PU or Flag is picked up
+- Change: Move from 142->125 (com_maxfps)
+- Change: disable com_maxfps 0 for inet play
+- Change: (FT) team scoring sounds in
+- Change: (FT) OSP FT ammo at 50% on extra pickups
+- Change: cg_drawPing 1 = white, 2+ = color-coded (also changed location)
+- Change: Clamp r_fullbright to 0 for internet play
+- Add: (FT) dropitems set to 1 for FT modes
+- Add: (FT) freezetag_latejoin <0|1>: Toggles whether players joining a team
+  while a match is in progress will spawn frozen.
+- Add: Add ftv in default server_availmodes
+- Add: ch_recordMessage <0|1> : Toggles the display of "Recording" message
+  while a demo is being recorded.  Note: the cvar must be set BEFORE
+  a recording is started.
+- Add: callvote capfps <0|1>: Allows for toggling of com_maxfps clamp
+- Add: vote_allow_capfps <0|1>: Admin control for capfps callvote
+- Add: flag 0x20 (32) on server_customclient (enables no client fps capping)
+
+16 Feb 03 - 1.02
+================
+- HOLY COW ITS BEEN A YEAR ALREADY!!!
+- Fix: Late-joiners not getting their stats properly erased
+- Fix: last non-ready leaves the team, and all are ready.. match doesn't start
+- Fix: A couple of minor updates to config voting/handling
+- Fix: Various updates to instagib to ease issues with dynamic configuration
+- Change: No voting allowed for first 20 seconds after a map has loaded
+- Change: Need to set bot_developer 1 now for all bot AI debug messages
+- Change: Default roundlimit in CA switched to 11
+- Change: Upper bound of 142 for com_maxfps for online play
+- Change: Upper bound of 1 for cg_shadows for online play
+- Change: Upper bound of 125 for the server_maxpackets setting
+- Add: cg_drawPing <0|1> - Displays your current ping (just below the
+  match timer).  Color coding is identical to the format used on the
+  scoreboard
+- Add: FreezeTag TDM gameplay mode.  For full details on FreezeTag, check
+  the osp-q3-FreezeTag.txt doc in the Docs/ directory.
+- Add: server_freezetag <0|1|2>
+    * 0 - FreezeTag TDM (FT) mode not in effect
+      1 - FT with OSP settings in effect (must be in g_gametype 3)
+      2 - FT with vanilla settings in effect (must be in g_gametype 3)
+- Add: 2 new default modes:
+      callvote setft (mode 6) -- OSP FreezeTag ruleset
+      callvote setftv (mode 7) -- Vanilla FreezeTag ruleset
+- Add: 2 new server_availmodes flags:
+      64 - FreezeTag (OSP ruleset)
+     128 - FreezeTag (Vanilla ruleset)
+
+25 Jan 02 - 1.01
+================
+- Fix: Topshots fix
+- Fix: Stats fix
+- Fix: Win/loss fix
+- Fix: Couldn't thirdperson in a demo
+- Fix: Grapple hook skin missing on some maps
+- Fix: Health taken not cleared across games
+- Fix: Several map issues/content
+- Fix: CA maplist tom-foolery
+- Fix: Nick locking issues
+- Fix: Voting in CA (include specs on teams)
+- Fix: tl/fl/cl updates through vote (for proper announcements/hud display)
+- Fix: Small exploit on ban lists
+- Fix: Deadview roll angle
+- Fix: ospca1 not showing up in CA map lists
+- Fix: Broken location repoting for some maps
+- Fix: Colored locations should now work for all CTF maps
+- Fix: New map loads for CA (round start)
+- Fix: wstats for 1v1 after a match is over (win/loss)
+- Fix: #i macro -- you must now be be viewing the item directly
+- Fix: Max # of chat macros (#) limited to 6 per message.
+- Fix: Movers (e.g. platforms on q3dm14) weren't pausing during a timeout
+- Fix: color-code-only names weren't being rejected properly
+- Fix: Timeouts offsets actual player in-game time
+- Fix: Alternate powerup respawn times for promode
+- Fix: Possible erroneous team announce when a ref removes a player.
+- Fix: Various promode irregularities.
+- Fix: 1v1 win/loss counts were being updated improperly on a map vote.
+- Fix: Several aspects of single player play.  Yes, OSP works great under single player :)
+- Add: Font from ThreeWave CTF (thx Casey and crew).  You can toggle this option
+  with: ch_3waveFont <0|1> and ui_3waveFont <0|1>
+- Add: cg_crosshairPulse (0|1) (def=1) for xhair pulse when picking up items
+- Add: Default OSP decals for all OSP maps.. try to find them all! :p
+- Add: "serverversion" command to find out recording information in demos
+- Add: #F macro for naming closest teammate
+- Add: #K macro for nearest available ammo pack
+- Add: #P macro for last item picked up
+- Add: #R macro for nearest available health/armor
+- Add: #W macro for current weapon held (name is abbreviated)
+- Add: cg_NoMOTDDisplayDuringDemo :)
+- Add: Updated demo UI to recognize dm_67 files if under 1.31
+- Add: bottomshots command (analogous to topshots)
+- Add: "select" command for smarter weapon selection (see docs)
+- Add: cg_execVstr - specifies a string to "vstr" upon connect to a server.
+- Add: server_cq3 toggle for CQ3 settings (see Docs/osp-q3-CQ3Info.txt for details).
+- Add: vote_allow_cq3 for enable/disable of cq3 settings.
+- Add: Additional health/armor stats
+- Change: cg_fov clamp raised from 120 to 140
+- Change: #P (powerups held) switched to #U
+- Change: callvote qil replaced with callvote clanbase (for EC5 TDM settings)
+- Change: In 1v1, players can't view their damage/armor/health stats during a match.
+
+
+
+14 Dec 01 - 1.0 
+===============
+- Done: Shit in pants, 1.0 is really going it!
+- Fix: Ready up spammage
+- Fix: small vote bug
+- Fix: team_nocontrols 1 would not update serverinfo score information.
+- Fix: Callvoting a mode that is currently active will now properly reset
+  the mode's setttings (internal modes only).  For example, issuing a command
+  of: callvote setctf (while in mode CTF) will simply reset all default CTF
+  settings.  This is useful for leagues matches where settings may not be
+  guaranteed to be default (i.e. through some callvote).
+- Fix: cg_bobup clamped to +/-0.005
+- Fix: cg_fov upper bound clamped to 120, unless +zoom is active.  cg_zoomfov
+    upper bound clamped to 120 (thin-lightning scripts still work :p)
+- Fix: cg_thirdperson disabled if actually playing in the game
+- Change: roll back to respawn furthest
+- Change: sort topshots <weap> by accuracy percent
+- Change: No big ref announce if kicking a player
+- Change: PU respawn to 60 in CPM
+- Change: All cg_hud_* cpm vars to ch_*
+- Change: Seperate pause and unpause commands explicitly.
+- Change: Seperate team lock/unlock commands explicitly.
+- Update: List of forced settings for each default mode in cfg-DefaultModeReference/
+- Remove: Voting for truelightning and flood protect (also removal of the
+  vote_allow_* vars associated with these options)
+- Add: cg_muzzleFlash for flash suppression if cg_drawGun is set to 1
+- Add: Powerup respawn time settings under promode.  Server vars:
+  ----> vote_allow_poweruprespawn <0|1>
+        match_poweruprespawn <60|90|120> (120 def under ctf, 60 for all other modes)
+- Add: Weapon drop/pickup stats
+- Add: Stats for armor/health taken
+- Add: Initial UI for OSP.  Nothing fancy, just a couple tweaks.
+- Add: List of clamped client settings (documented in osp-q3-ClientReadme.txt)
+- Add: instagib_reload option (server setting + vote) (instagib_reload & vote_allow_reload)
+- Add: option to turn off the seconds portion of the timer
+  ----> vote_allow_notimer <0|1>
+        server_customclient bitmask of 16
+- Add: cpm +fire support
+- Add: cpm "addstr" support
+- Add: cpm +vstr support
+- Add: callvote setffa option
+- Add: chat macros (see osp-q3-ClientReadme.txt for all available macros)
+- Add: .1s for final minutes
+- Add: CPMA's new netcode tweak
+- Add: pro_* and q3tourney6_ctf in default maplists
+- Add: cg_deadbodyfilter option
+- Add: NET stat on TDM scoreboard + some small scoreboard fixes
+
+21 Oct 01 - 0.99w
+=================
+- Fix: inactivity timer only works to about 30s?
+- Fix: can't press fire to go back to mv if fire once to go in-eyes
+- Fix: in non-osp hud, "following" playername doesnt filter ^X escapes
+- Fix: Bug on wstats where guantlet stats would show "-0.0" accuracy
+- Fix: Incorrect error reporting on max ban list counts (hi Ken-dawg)
+- Fix: Fixed map_restart after a mode was voted in
+- Fix: Several HUD bugs for CTF
+- Fix: Bug on CTF flag held times at end of level
+- Fix: Flag time would not be added if the FC suicided
+- Fix: Spec chatting in 1v1
+- Fix: ^X settings for team overlay in non OSP-HUDs and stats summary info
+- Fix: Average ping calculations on q3comp scoreboard
+- Fix: Truelighting is no longer clamped by the server
+- Fix: Server would try to authenticate GTV as an OSP client
+- Fix: Several coaching bugs that allowed free-floating view
+- Fix: Coaching bug where team overlay isn't updated if in chase mode for
+       a player on the team.
+- Fix: r_subdivisions exploit (> 120 bug)
+- Fix: Vote mode (no map) w/vote fail in between
+- Fix: Force map on a cllvote mode during warmup
+- Fix: A successful callvote map during intermission after a map vote doesn't
+       load the new map.
+- Fix: stats for players doesnt filter colors properly (in names)
+- Fix: Refs can't seem to speclock/specunlock
+- Fix: Several issues with the autoaction actions
+- Fix: cg_forcecolors wouldn't work dynically
+- Fix: Unref wasn't clearing all referee privilages
+- Fix: Adjust max r_subdivisions to 80
+- Fix: Some pmove issues with vq3 and cpm
+- Fix: Weapon drop stuff (lg:60, pg:30)
+- Fix: Overlay shows static info when following from MV and not a coach
+- Fix: Don't allow console dumps/commands when in a demo
+- Removed: Version detected! msgs (s_record too)
+- Change: change respawn to be random for non-FFA
+- Change: Allow wstats command to show up in demos
+- Change: Listen servers won't have full anti-bot protection, but are at least
+          now playable (with some protection) if server_ospauth is >= 1.
+- Change: Scoreboard layout for CA + fixed score sorting
+- Change: CALTDM callvote to QIL/KIT (with proper settings and maps).  New default
+          maplist for these modes is "maps/qilmaps.txt"
+- Add: Ping values for players under multiview
+- Add: \viewall command for multiview to view all players
+- Add: "settings" command (green for defaults, red for changes from the default
+       settings for the current gametype)
+- Add: Added a "Following <player>" during demo playback when in a player's POV
+- Add: "statsall"/"statsred"/"statsblue" command to dump the stats for everyone,
+       the red team's stats, and the blue team's stats, respectively.
+- Add: Coaches get stats dump for entire team they are coaching.
+- Add: Stats dump if following a player (and no other autoactions enabled).
+- Add: New autoaction bit settings to allow dump of additional player stats at
+       the end of the game:
+         1 - Save end-level stats/scoreboard
+         2 - End-level screenshot
+         4 - Autorecord match
+         8 - Dump team's weapon stats
+        16 - Dump all players' weapon stats
+- Add: CPMA's ambient stuff: s_ambient enable/disable of speaker entities on
+       a map (default=1, enabled)
+- Add: Speedometer option: ch_drawSpeed (defaults to 0) - displays UPS of
+       current player (units per second)
+         1 - Shows in upper right under time/fps counters
+         2 - Puts a smaller, transparent readout just above your crosshair
+- Add: Checks for r_znear and r_showtris
+- Add: "topshots" that gives the best player accuracy for all weapons.  If followed
+       with a weapon's abbreviation (i.e. RL for Rocket Launcher), this command will
+       show the accuracy for all players of the specified weapon (10 shot minimum to
+       be included in the list). (thanks arqy :) )
+       Supported abbreviations: MG, SG, LG, GL, RL, RG, PG, BFG
+- Add: nomip option for smoke - value 256 under cg_nomip
+- Add: Team overlay and players command is now sorted by nick
+- Add: cg_lightningimpact (from CPM)
+- Add: cg_drawGun 2 (no swing of the weapon while moving)
+- Add: +scores update for demos.  Remember, you need to bind a +scores to something
+       like F1 thru F12 during demo playback to view scores.  Its not the most
+       accurate for CTF/CA until the recorded client uses a score request.
+- Add: "callvote mode" by itself now shows current mode, and indicates if the
+       current mode deviates from its default settings.
+
+07 Aug 01 - 0.99v3
+==================
+- Removed: \callvote pure option (QTV is a thing of the past)
+- Fix: Bug for some overlay formats (weapons + statusbar)
+- Fix: Game starts are always going to FFA?
+- Fix: Not filtering ^X for player filters
+- Fix: Customloc positioning was not getting sent out by chatting players who
+       didn't have it enabled, giving the default map locations to players who
+       DID have customloc enabled. Conversely, when a customloc-using player
+       teamchatted, all of his non customloc-using buddies would see just
+       numbers for his position. Its all better now, got it?  Customloc is
+       officially not buggy anymore! (/me knocks on wood)
+
+05 Aug 01 - 0.99v2
+==================
+- Fix: Force sv_floodprotect to 0 if osp authentication is enabled
+- Fix: Printing of ^^ escapes in the console
+- Fix: ^9 is really light grey now in the OSP HUD
+- Fix: Specs now default models to their cg_enemyModel, if set.
+- Fix: Long strings weren't being printed properly to clients
+  (like if a server has a lot of custom modes, anything after
+   the 6th or 7th mode listed would be cut off).
+- Fix: ch_weaponswitch 6 didnt show proper information for specs
+  or during demo playback.
+- Fix: Various formatting issues with ch_statusbarformat 10
+- Fix: Streamlined stats and wstats commands
+- Fix: Small multiview bug
+- Fix: Blinking name bug
+- Fix: map_restart exploit to bypass the map queue
+- Fix: Removed the no score updates if team_nocontrols was set to 1.
+- Fix: Projectiles are really paused now if a pause is called during
+  a match.
+- Fix: Bots now ignore the match_latejoin 0 option.
+- Fix: Names shown during 1v1 countdown now honor OSP string escapes.
+- Fix: Lock minimum setting of com_maxfps to the min_maxpackets setting
+  of the server.
+- Fix: Reload and limits on player filters for allow-only access.
+- Fix: Client console messages of team joins and match starts.
+- Fix: Custom locations.  Also fixed it to use the default map location info
+  in cases where custom locations were enabled and no loc file is found for
+  the current map.
+- Fix: Various mode changing bugs.
+- Fix: Client crouch at the end of a match, just before intermission.
+- Change: cg_altlightning is now for utilizing the original lg graphic.
+- Change: New format for cg_enemyColors.  Its now exactly the same
+  format as the color1 specification: RHBL, except that it applies
+  to enemy players.
+- Change: Badlands internal mode now renamed to CAL TeamDM.  Its default
+  maplist config file is also named: cfg-maps/caltdmmaps.cfg (also included).
+- Add: Sample customloc file for q3dm6.
+- Add: Viewcam definitions for all of the new id-released pro-* maps (thanks
+  SHoD!).
+- Add: 1.29g source updates.  cg_oldRocket is now an option!
+- Add: cg_lagometer 2 option to place the lagometer in the upper
+  right corner, under time/fps readings.
+- Add: Option to use .jpg instead of .tga for autoscreenshots:
+	cg_useScreenShotJPEG <0|1>  (default = 0 - use .tga)
+- Add: Ability to specify custom team rail colors, cg_teamRails is
+  now:
+	cg_teamRails 0 - Use each players individual colors (default)
+			 1 - Use red for red team, blue for blue team.
+			 2 - Use rail color as specified in the R parameter
+			     of color1 for teammates, and the R parameter
+			     of cg_enemyColors for players of the enemy team.
+
+02 Jul 01 - 0.99v1
+==================
+- Fix: Various model/skin bugs
+- Fix: End-level intermission views
+- Fix: Background shade fading
+- Fix: Bot skill/win info
+- Fix: Join team announcement to the console
+- Fix: ^X formatting/printing
+- Fix: 1v1 scores for in-eyes spectators
+- Fix: Many other cleanup bugs found while testing
+
+22 Jun 01 - 0.99v
+=================
+- Fix: Respawn on round start for CA.
+- Fix: 1v1 overtime defaults to sudden death.
+- Fix: Mispelling in lgcooldown in vote list.
+- Fix: ^X escape chars showing up in chat/messages.
+- Fix: Terminate player names with ^n for teamchat.
+- Fix: q3comp status bars on socrebox placements.
+- Fix: Muting of specatators.
+- Fix: Flags were being auto-returned during intermission.
+- Fix: Various item respawns when voting out instagib.
+- Fix: IP address banning would sometimes start banning everyone.
+- Fix: Player skin viewing while as spectator.
+- Change: Hooks now redish/bluish for team games
+- Change: CA scoring now adds 1 point for every win that you get
+  during a match.
+- Change: CA default settings (25 bullets, 20 shells, 80 rockets,
+  15 grenades, 150 lightning, 15 slugs, 100 cells -- first to 5 wins)
+- Change: map_autoload now has 3 options:
+	0 - disabled (do not auto-search for maps)
+	1 - normal auto-search based on gametype
+	2 - Same as 1, except is also adds maps that don't have a properly
+	    specified .arena file.
+	3 - Add all maps found.
+- Update: Fia's match play info document.
+- Add: Player highlighting for viewcam spectating (works only in non-vertex
+  lighting).
+- Add: Russian documentation on the README and Client settings.  Thanks
+  olzah!
+- Add: New 1.29f client features (cg_oldPlasma, cg_oldRail, color1,
+  color2 ... "color" is now deprecated)
+- Add: CA-specific maplist (camaps.txt)
+- Add: MATCH STARTING announcement in the client console
+- Add: MOD_SWITCHTEAM -> MOD_SUICIDE for default Q3 logging
+- Add: If spec in CA, shown own stats in +wstats IF you were killed
+  and still on a team and are free-floating.
+- Add: g_weaponrespawn now available under CPM (promode).
+- Add: 36 total colors now available for rail/pm skins (0-z).  For
+  example you can now have: "color1 tf3e" for a pretty nuts color
+  scheme.
+- Add: ^8 = orange, ^9 = med gray for non-console text.
+- Add: g_spectatorInactivity for auto-kick of idle spectators.  This
+  command is the same format as g_inactivity.
+- Add: \callvote weaponrespawn <value>  Allows players to vote in new
+  respawn times for weapons. (vote_allow_weaponrespawn also available)
+
+27 May 01 - 0.99u1
+==================
+- Fix: Client was always locking to vertex lighting
+- Fix: Instagib wasn't properly resetting to server settings when
+  disabled.
+- Update: Fia's OSP Client Quick-start guide.
+
+25 May 01 - 0.99u
+=================
+- Fix: Spectators flying through doors.  It was basically impossible
+  to get out of a room that had only doors (i.e. t4).
+- Fix: Occassional errant draw of railtrails and items with new
+  bot protection.
+- Fix: Lock of views on timeouts.
+- Fix: OSP text commands (^B, ^f, etc.) in names for default scoreboard
+  (already worked for the q3comp scoreboard).
+- Fix: Tweaks to autoaction to not do things on voted maps.
+- Fix: The "configmap" option for map lists had some issues.  Fixed.
+- Fix: serverinfo team score resets after a round on servers with no
+  warmup period.
+- Fix: Display of ammo > 200 problems on CPM HUD #4
+- Fix: specinvite command wouldn't invite legitimate spectators.
+- Fix: More tweaks on event (sound) handling.
+- Change: pmove_fixed 1 has been updated to be more consistant for both
+  low and high-end machines (thanks arQon!).
+- Change: Removed some of the default OSP decals on the maps.
+- Change: cg_truelightning settings now in the 0.0 to 1.0 range.  A value
+  of 2 will be reset to 0.5 for backward compatibility (as it is equivalent).
+- Update: CPM tweaks (double-jumps, grenades, LG cooldown, removed
+  backpack model, armor system (new green/jacket armor), countdown timer,
+  XXX'd out seconds timer for 1v1, etc.)
+- Add: You no longer need to have cg_drawTeamOverlay set to utilize the
+  ch_TeamCrosshairHealth or cg_hud_crosshairTeamInfo variables.
+- Add: Team crosshair health is color coded based on health/armor levels.
+- Add: Head/Body/Legs skin coloring options for baseq3 models!! (via CPM skin
+  support).  color, cg_enemyColor, and cg_forceColor (ala CPM) support added
+  for this option (see client readme for usage information).
+- Add: fastrail switch option for CPM (server_fastrail) with obligatory
+  voting (vote_allow_fastrail)
+- Add: LG cooldown switch option for CPM (server_lgcooldown) with obligatory
+  voting (vote_allow_lgcooldown).
+- Add: Alternate grenade graphics.  cg_altGrenades 0|1 (default = 0)
+- Add: callvote unreferee <player_id> option (elect to remove referee
+  abilities for a player).
+- Add: callvote instagib 0|1 -- No more need for seperate instagib configs!!
+  (New obligatory server cvars:)
+	vote_allow_instagib	0|1	(default = 1)
+	match_instagib		0|1	(default = 0)
+- Add: ClanArena rounds can now end in ties (hi toxic :)).
+- Add: Identify coachs/team specs on scoreboard (baseq3 and q3comp
+  scoreboards).
+- Add: Announce of ALL CTF scoring events (the only one missing was
+  a hurt carrier defend peformed by the flag carrier himself).
+- Add: Announce who called a timeout.
+- Add: cg_drawDecals <0|1> (default = 1) Enables/disables drawing
+  of in-game decals.
+- Add: cg_teamRails support [default = 0 (disabled)]
+- Add: Mapname in final console scoreboard dump.
+- Add: Chat balloons and noammo icons are now nomipped.
+- Add: Bot changes from CPMA
+- Add: Mouse "oversampling" from CPMA.  Allows for crisper control
+  of the mouse, even if pmove is not enabled:
+	cg_oversampleMouse <0|1> (default = 0 - OFF)
+- Add: Allow for callvote at map intermission
+- Add: Invis disabled for core CTF config (per CAL/OGL guidelines)
+- Add: More replace_* vars.  The whole list is reprinted below for clarity,
+  since the mask is no longer weapon_mask:
+
+    replace_*: <replace_mask>
+	Specifies if a weapon is to be replaced with another on
+	any map.  Defaults are listed below:
+
+	replace_machinegun   (Default: 1    - Machinegun)
+	replace_shotgun      (Default: 2    - Shotgun)
+	replace_glauncher    (Default: 4    - GrenadeLauncher)
+	replace_rlauncher    (Default: 8    - RocketLauncher)
+	replace_lightning    (Default: 16   - LightningGun)
+	replace_railgun      (Default: 32   - Railgun)
+	replace_plasmagun    (Default: 64   - PlasmaGun)
+	replace_bfg          (Default: 128  - BFG)
+	replace_invis        (Default: 256  - Invisibility)
+	replace_quad         (Default: 512  - Quad)
+	replace_battlesuit   (Default: 1024 - BattleSuit)
+	replace_haste        (Default: 2048 - Haste)
+	replace_regen        (Default: 4096 - Regeneration)
+	replace_flight       (Default: 8192 - Flight)
+
+		<replace_mask>:
+		---------------
+		1    - Machinegun
+		2    - Shotgun
+		4    - GrenadeLauncher
+		8    - RocketLauncher
+		16   - LightningGun
+		32   - Railgun
+		64   - PlasmaGun
+		128  - BFG
+		256  - Invisibility
+		512  - Quad Damage
+		1024 - BattleSuit
+		2048 - Haste
+		4096 - Regeneration
+		8192 - Flight
+
+- Add: Dynamic map lists!  With Quake 1.27n or higher, OSP now has
+  the capability of auto-generating map lists on the fly, based on
+  current game type. The OSP map lists are still useful for forcing
+  maps to be available in the case where the auto-generation of the
+  map list misses a particular map (i.e. a map's .arena file doesn't
+  specify the current active g_gametype).  There is also a new map
+  entry type:
+
+	deletemap <mapname>
+
+  To *remove* maps that are auto-added but are not desired by the
+  server admin.  To enable this auto-generation of map lists, use
+  the following variable:
+
+	map_autoload <0|1> (default = 1 - ON)
+
+  Note: OSP will regenerate these map lists on map load and map
+        restarts, so for remote administration, all one has to
+        do is upload the map .pk3 file to the baseq3/ directory,
+        and OSP will automatically pick it up and add it to the
+        maplist (if the .arena for the map specifies the map is
+        intended for the current gametype). OSP will also weed
+        out maps that are specified, but are not located on the
+        server (i.e. mapname typos in the map config file).
+
+
+04 Apr 2001 - 0.99t
+===================
+- Fix: Overtime mode settings for default configs
+- Fix: Lock scores of CA spectators (players knocked out of the
+  current round).
+- Change: Reward sounds still play if cg_drawrewards is set to 0
+- Fix: team_noteamready server setting.
+- Fix: lock/unlock are no longer toggle commands.
+- Fix: Font shadows for q3comp scoreboard.
+- Fix: Coaches going to free-float spec if the person they are
+  chasing disconnects from the game.
+- Fix: Various statusbar fixes for several statusbars.
+- Fix: Occasional multiview bug that will crash Quake3.
+- Fix: Reward decal placement.
+- Fix: Score updates when match is in overtime.
+- Fix: Badlands warmup mode now starts with 100 bullets.
+- Fix: No suicides allowed during a timeout.
+- Fix: Occasional "jitter" that creeps up on servers.
+- Fix: Compatibility with CPM client "color" format.
+- Change: Grapple is now similar to a white rail trail.
+- Add: Time/date stamp to intermission scoreboard.
+- Add: More anti-cheat measures (read: nopbot thwarting).  This
+  slightly modifies the server_ospauth variable.  Its settings
+  are now:
+	0 - No security
+	1 - Enhanced nopbot protection + authentication
+	2 (or higher) - Authentication only
+
+- Add: The OSP client now has the ability to automatically
+  perform actions at certain points in the game.  The client
+  variable is:
+
+     cg_autoAction <option_bitmask> (default = 0)
+
+       <option_bitmask>:
+             1 - Automatically save stats to a local text
+                 file at the end of a match. Logs will be
+                 stored in:
+
+                   <osp_root>/stats/<date>/<logname>.txt
+
+             2 - Automatically take an end-level screenshot
+             4 - Automatically record a match (requires
+                 a full warmup server - g_warmup = 0)
+
+- Add: More cg_nomip options.  The values are additive:
+	  1 - Lightning Gun
+	  2 - Plasma Gun
+	  4 - Rocket Launcher
+	  8 - Grenade Launcher
+	 16 - Bullets
+	 32 - Railgun
+	 64 - BFG
+	128 - Blood hit marks
+
+  Note: If you use marks, the marks for each weapon are
+        also set to picmip level 0.
+
+- Add: \statsdump to dump current stats/scores immediately
+  to a log (name as described for the cg_statsdump variable,
+  listed above).     
+- Add: Upcoming 1.27l cgame changes.
+- Add: Lag reduction for clients on servers running Quake3
+  version 1.27l or greater.
+- Add: Stat for total time of flag carried in CTF.  OSP also
+  now reports how long a carrier had the flag when they die
+  or make a cap (good for timing different carrier routes).
+- Add: Flag carriers have highest precidence in follow_powerup
+  settings.  Once u are on a flag carrier, you will not switch
+  automatically unless they are killed or cap the flag.
+- Add: In follow_powerup mode, if the current powerup player
+  is killed, you will switch to another powerup carrier, if
+  one exists (rather than switching to the killer).
+- Add: Clientside logging option.  Set cg_clientLog X (where
+  "X" is 1 or higher) to enable logging of messages issued
+  during gameplay.  Time-stamps included!  All entries
+  appended to osp/client_logs/clientX.txt
+- Add: Customizable, per-map, server-side decal graphics
+  placement within a map.  Servers can define up to 32 unique
+  decals for each map.  For more info, check out:
+
+    Docs/osp-q3-Decal-Editing.txt
+
+  This is a handy feature for server-branding, tournaments, etc.
+  A full in-game editor for decal placement is also available!
+  Note: Only spectators will see these decals.  Players will
+  NOT be affected by these customizations (shown in warmup,
+  NOT shown during the match).
+
+Feb 25: 0.99s2
+==============
+- Fix: More fixes to sounds.  This should now be pretty complete.
+- Fix: Scores properly reset for joining specs and late-connectors.
+- Fix: Better clearing of buffered announcements on match start.
+- Fix: Gibbing of players on listen servers in certain cases.
+- Change: +wstats command enabled on end-level scoreboard to allow
+  removal of stats window to see all scores in 5v5+.
+- Change: +wstats window background now colored based on team.
+- Change: Default FFA mode has map_rotate now set to 1.
+- Change: Small tweaks to q3compScoreboard.
+- Update: Backpack code for CPM (thx arqy)
+
+Feb 20: 0.99s1
+==============
+- Fix: Jumppad sounds.  Still not perfect, but more consistant.
+- Fix: Suicide stats cleared properly.
+- Fix: Random double loads on startup.
+- Fix: Bot optimization on maps with/without items.
+- Fix: CPM HUD timer during timeouts.
+- Fix: Some older maps used a lot of configstrings, that would
+  inadvertantly affect OSP.
+- Add: Badlands message if in badlands mode.
+- Correction: pmove_fixed defaults to 0, not 1, as was stated
+  in 0.99s history.
+- Correction: server_availmodes defaults to 59, not 63.
+
+Feb 17: 0.99s (0.99striker)
+===========================
+- Fix: \speconly command
+- Fix: sound problems
+- Fix: nopbot protection
+- Fix: Mode rotate back to default after inactivity should now
+  work for custom configs as well.
+- Fix: Spec couldnt see server settings with \callvote [option]
+- Fix: Map reloads in 1v1
+- Fix: Buffered announcements playing at wrong times
+- Change: pmove_fixed 1 is now default again.
+- Add: Q3Comp scoreboard courtest of ]R[Papa.  Option:
+        cg_q3compscoreboard [0|1] (default = 0)
+- Add: Mouse controls for multiview.  Move the mouse to select a
+  window to listen to, fire to go to in-eyes, fire again to
+  return to multiview.
+- Add: callvote initiation sound.
+- Add: option to disable teamready command
+        team_noteamready [0|1] (default = 0)
+- Add: picmip 0 option some graphics even if r_picmip > 0
+        cg_nomip [flags]
+          lightning shaft - 1
+              plasma bolt - 2
+
+  --> Its a bitmask, so 3 will picmip both lg and pg
+
+- Add: \credits command.  Check it out!!!
+- Add: \callvote badlands for tp.net Badlands TDM settings.
+  Works just like settdm, setctf, etc. in terms of usage.  Note:
+  this mode utilizes a custom map queue that contains maps not in
+  the default id map list.  Do NOT enable this mode for voting unless
+  you have all of the maps.  For a list of maps and where to get them,
+  visit: http://badlands.teamplay.net.  OSP 1.0 will ship with these
+  maps (in addition to others -- send me a list of maps you want to see!).
+  If you want to start a server in badlands mode, use mode_start 2.  This
+  gametype has replaced the "FFA Competition" mode in previous releases.
+- Add: Windowed stats option.  To view current stats while playing
+  or following a player, bind a key to +wstats.  A sliding window
+  will pop out showing your current game stats.  This will also
+  show at intermission below the scoreboard for complete match
+  summary on a single screen.  In multiview, the stats of the player
+  of the highlighted window will be displayed.
+- Add: cg_statscrolltime to control the time for the stats window
+  to slide out and back in (default = 0.15s = 150ms).  Setting
+  this to 0 will result in the stats window appearing and disappearing
+  immediately.
+- Add: Q3Comp Status bars (ch_StatusbarFormat 9-12)
+- Add: Q3Comp Scoreboard (cg_q3compScoreboard 1)
+- Add: Q3Comp -/+ actions (see client readme)
+- Add: flag carrier's names to the hud (cg_drawFlagNames 0-4)
+
+
+Jan 28: 0.99r2
+==============
+- Fix: Problems in logging that resulted in wrong log entries and
+  can cause a crash.
+- Fix: Default CA now has 60s warmup on Round 1.
+
+Jan 27: 0.99r1
+==============
+- NOTE: DO NOT USE 1.27h TO RUN A SERVER.  IT HAS VERIFIED BUGS
+  THAT ARE SPECIFIC TO 1.27h THAT *WILL* CRASH THE SERVER!!
+- Change: server_customclient no longer reset by internal configs.
+- Fix: Default configs had ".cfg" extension instead of ".txt"
+  extention.
+- Update: All default configs have been changed for more convenient
+  editing for server admins.  RECOMMEND to move to these configs
+  for the basis of server config for your own server.
+- Add: Docs on map settings for default modes.
+- Add: Docs on mode settings for default modes.
+- Fix: map_restart after mode change will keep current map if it
+  is in the map queue (for default modes only).
+- Removed: All teamvote references.
+- Tweak: On potentially faulty address bans.
+- Add: More admin logging info.
+- Fix: Some default listings in callvote help.
+- Tweaks: More for mode switching.
+- Tweaks: Score_* server info cvar updates.
+- Fix: Countdown does not start until clients fully connected.
+- Fix: Weird cam views in 1v1 for spectators on delayed player
+  connects.
+- Fix: Referee callvote help info.
+- Add: "speconly" command for 1v1 to remain permenantly a
+  spectator, if so desired.
+- Fix: Some color escapes in \scores command.
+- Fix: [id bug] Lost CTF flags for abnormal client disconnects.
+  This will be removed when id fixes the root cause of this bug
+  in an upcoming point release.
+- Fix: Referee commands and help wasn't working properly in some
+  cases.
+- Fix: Some callvotes were automatically failing if vote_percent
+  was greater than 50.
+- Fix: Tweaks on multi-view view removal.
+- Fix: Small tweak to events to remove double/triple sounds.
+- Fix: Shotgun pattern now in sync between client and server.
+- Add: Time/date stamp in game log for convenience of log parsers.
+- Fix: Time debouncers to prevent command flooding that affects
+  other clients.
+- Change: End-level custom graphics now sit behind text overlays.
+- Fix: Several client bugs + enhancements.
+
+Jan 15: 0.99r
+=============
+- Fix: Team lead score announcements in TDM
+- Fix: Server crashes due to passwords
+- Fix: Filter fixes for weird server states
+- Fix: Teamchat and overlay problems
+- Fix: Crasher with dropped flag pickups and cg_predictitems 0
+- Fix: Useles console error msg when dropping flags
+- Fix: Suicides do not auto-return flags
+- Fix: Multi-view + zoom and high cg_fov
+- Fix: LOUD quad sounds when firing fast weapons
+- Fix: Internal menu warning errors
+- Fix: Falling damage resets on mode changes
+- Fix: Door openings due to splash if thrufloors is 0
+- Fix: Score_* vars cleared if go_doWarmup = 0
+- Fix: Score_Time updated properly for Overtime
+- Change: Removed CPM logo overlay for background and added
+  OSP blender graphic on connect and end-level views.
+- Add: \currenttime command to display client's current
+  time and date.
+- Add: More options/cleanup of cgame \menu command.
+- Add: Disable of model leaning option:
+        cg_showPlayerLean 0|1 (default = 1)
+- Add: Allow the use of old (pre-1.27) CTF sounds:
+        cg_oldCTFSounds 0|1 (default = 0)
+- Add: Real time/date stamps for demos/screenshots
+- Add: Real time/date stamps in admin log
+- Add: Gauntlet enable/disable feature.  Its added in the
+  weapon_have and weapon_start bitfield as 256, but to maintain
+  compatibility with older server .cfgs, I've also added a new
+  var: gauntlet_disable <0|1>, which defaults to 0.
+- Add: \autoscreenshot command (like \autorecord)
+- Add: Sliding option for MOTD
+- Add: team_nocontrols option for public servers to remove
+  captainship, team commands, and score updates
+- Add: console "loadmaps" command to manually reload map queue
+- Add: Team score logging under OSP format
+- Add: motd config file option.  If new var (server_motdfile) is
+  set to anything beside "none" (the default), the server will
+  reload the MOTD after every level load.  Note, if this file
+  is not specified, then the normal server_motd[1-8] will be
+  used instead.
+- Add: Option for custom server-specified graphics.  Check out
+  the osp-q3-server-gfx.txt for complete details.
+- Add: New mode server specification/voting format. Check out
+  osp-q3-mode-info.txt for complete details.  This is a radically
+  different format, so please check this stuff out.  It makes
+  adminning OSP servers 10x better!
+- Add: \callvote set1v1/setctf/settdm/setca [map] for standard
+  server settings.
+- Add: New server .cfgs to follow new mode setting specifications
+  Old reference configs are now in osp/cfg-custom/ directory.
+
+Dec 29: 0.99q
+=============
+- Fix: More issues with mode switching
+- Fix: CA warmup ammo loss
+- Fix: VM with game.qvm.  Can now run under vm_game 1.
+- Fix: VM with cgame.qvm.  Can now use the \menu option again.
+- Fix: Couldn't properly vote client options.
+- Fix: FIRE didnt properly rotate through spec modes.
+- Fix: Suicide damage stats.
+- Fix: Scoreboard layout.
+- Fix: Linux thrufloors splash bug always being on.
+- Fix: cg_drawTeamOverlay 1, 2, 3 now work under OSP hud (just like
+  it does under baseq3 hud).
+- Fix: Weapon pushes in warmup for CA.
+- Fix: QTV/GTV clients dont automatically receive record commands
+  if the server has them enabled.
+- Fix: Pickup sounds now under cg_predictitems 0 now sound identical
+  to item pickups under cg_predictitems 1.  No point in using
+  cg_predictitmes 1 anymore :)
+- Fix: Vote/ref client kicking now works properly.
+- Tweak: Various colors and message format changes in several areas.
+- Change: New format for client authentication.
+- Add: Can now drop items (in addition to flags) in CTF, if the
+  option is enabled.
+- Add: cg_nochatbeep as an option to turn off non-team chat.
+- Add: CPM hud is now available under non-CPM modes. This pushes
+  the number of status bar formats up to 8 or 9, and the number of
+  weapon status layouts to 6.
+- Add: Weapon status bar and CPM status bars have been added to the
+  \menu command under HUD options.  Very easy now to properly set up
+  your personalized HUD.
+- Add: Server-side MOTD messages.  Server ops can specify up to 8
+  lines of 64-character per line text.  Server vars (for each line)
+  are:
+        server_motd1
+        server_motd2
+        server_motd3
+        server_motd4
+        server_motd5
+        server_motd6
+        server_motd7
+        server_motd8
+  ---> The first NULL ("") var encountered marks the end of the
+       MOTD message displayed for clients.
+- Add: \motd client command to re-view server's MOTD.
+
+Dec 18: 0.99p
+=============
+- Fix: pmove_fixed, pmove_msec, and g_smoothClients can now be set
+  properly by the server.
+- Fix: Can now utilize OSP-enhanced client features during demo
+  playback.
+- Add: "pmove" is now enforced by the server, but can be voted
+  on/off by clients (new server var: vote_allow_pmove defaults
+  to 1).
+- Fix: Fire button handling if in chase while speclocked from the
+  other team now does nothing.
+- Fix: vq3 compatibility (i.e. for demo playback w/o OSP client,
+  and baseq3 server spoofing).
+- Update: All server configs now set with proper defaults.
+
+Dec 16: 0.99o1
+==============
+- Fix: Flag pickups were crashing the client.
+
+Dec 16: 0.99o (0.99"o"lzah)
+===========================
+- Upgrade: Ported OSP to Quake3 point release 1.27.  Most every
+  feature in 1.27 baseq3 is now also in OSP.  This port has a couple
+  of notes:
+      - Splash-through-floors is still an option in OSP.  However,
+        I've set the default to OFF to maintain consistancy with
+        id's current baseq3 model.
+      - Head models are NOT supported
+      - Only base3 is support, no TA support yet (no source!)
+      - Left most OSP sound code in as it works better :)
+      - menu commands for cgame are temporarily disabled (bug)
+      - disable_<weaponname> option not included (OSP's is more
+        flexible).
+      - Variables are getting reset due to improper loading of
+        q3config.cfg (quake3.exe problem).  This should really
+        only affect listen servers presently.
+      - Removed 125Hz support as 1.27 supports its own version
+        of this option.
+      - This version will NOT work with any Quake3 version prior
+        to 1.27.
+      - I've kept the 1.17-compatible source around in case the
+        need arises to create an updated version of OSP for this
+        version of Quake3.  Just FYI :)
+
+** SERVER OPERATORS: **
+  Delete ALL cgame.pk3 files in your osp/ directory!! Old versions
+  of the cgame will NOT work with this version of OSP.  Dedicated
+  servers should only have the current cgame.pk3 in the osp/
+  directory anyway, but this is an additional warning :) REMEMBER
+  TO KEEP THE Z-OSP-EXTRAXXX.PK3 -- DO *NOT* DELETE IT!!!  Also,
+  be sure to remove ALL files in the osp/paks/ directory.
+***********************
+
+- Add: Kill/death weapon stats
+- Add: Gauntlet stats
+- Fix: team_maxplayers and team locking fixed for CA
+- Change: team_weaponrespawn variable to g_weaponTeamRespawn (for
+  vanilla quake3 compatibility).
+- Fix: Backpack pickup problems for CPM
+- Fix: CPM fire rate for GL changed to CPM 1.0 setting of 700
+- Fix: Ref "ban" command can now be used (again)
+- Fix: Mode voting more streamlined
+
+Dec 05: 0.99n
+=============
+- Fix: Lag from networking overhead.  A lot of this is due to server-
+  info variables.  I've paired down what OSP puts out, but server
+  admins also need to limit the size and number of sets variables
+  they add to their configs.  If your server seems laggy, try to
+  eliminate all serverinfo vars.
+- Add: \callvote facility has been seriously revamped.  Every votable
+  option now has a usage, description, and current setting listing
+  assigned to it.  Just type: \callvote ? and \callvote <command> ?
+  to see all the juicy details.
+- Add: Overtime voting.  \callvote overtime for its options :)
+- Clarification: cg_enemyModel and cg_swapSkins were functional in the
+  0.99m release.
+- Add: vote_allow_overtime for enable/disable of overtime voting.
+- Fix: server_maxpacketsmax wouldn't get reset if it was changed
+  through vote.
+- Fix: .loc support.  The main fix is that clients need to use .cfg
+  files rather than .loc files.  This is to allow clients to read
+  location files while connected to pure servers.  Location files
+  still need to live in osp/locs/, with <map_name>.cfg naming
+  convention. Location text markers are cool!  Make em with color!
+  64 per map!
+- Fix: Switch from multiview to viewcam was broken.
+- Fix: g_forcerespawn times are now correct.
+- Add: \followprev and \follownext while folling individual players
+  under viewcam allows easy switching between players.
+- Add: TeamDmg: <x> log entry for teamplay-based games
+- Add: More viewcam files!! Thanks to Gouki for rounding out the ctf
+  viewcam definition files, and thanks to Olzah for ztn3dm1.
+- Add: cg_followviewcam: sets the default action of the viewcam, when
+  it is used by the client (client cvar).
+
+	cg_followviewcam 0 - Sets viewcam in dynamic mode, following
+                             where most of the action is located.
+                         1 - Sets viewcam to follow only a single
+                             player (default).
+- Add: cg_followkiller: Auto-switches to killer of chases player.
+  (client cvar)
+
+	cg_followkiller 0 - Do NOT auto switch (default)
+                        1 - Switch to killer, if havent switched
+                            recently.
+  ---> This option while following a player is great for 1v1 matches.
+       Using this option while viewcamming a team game is quite nice
+       as well.
+- Add: A lot of consistancy has been added when switching spec modes.
+  For instance, if you have cg_followviewcam 1 and are in-eyes chasing
+  a player, issuing a \viewcam command will automatically switch to
+  viewcam follow of the player you were just chasing.  Conversely,
+  if you type the \follow command when chasing a player with the viewcam,
+  you will automatically switch to the in-eyes view of a player that
+  you were just following with the viewcam.  This allows for easy
+  viewing transitions with simple binds and not needing to pull up
+  player info to switch spec modes on a particular player.
+- Change: Some clean up of the \players command to view connecting
+  players (i.e. for kicking purposes).
+- Add: cg_fov is now used for panels in multiview
+- Add: How to get started under OSP document from Fiafiaga.  Thanks man!
+- Add: Ability to rotate through members of the same team in a
+  multiview pane:
+       \viewcyclenext
+       \viewcycleprev
+  (works also in FFA/1v1 mode, but cycles through the players)
+- Update: Updated spectool.cfg to include viewcycleprev/next cmds.
+
+Nov 12: 0.99m
+=============
+- Fix: QTV/GTV authentication problems.
+- Fix: Some cvars not resetting properly when going from promode->vq3.
+- Fix: Another exploit on callvote command.
+- Fix: Lag spikes on client connects.
+- Add: Time remaining info on \scores command.
+- Add: \coachkick command to remove a coach on your team.
+- Add: Team damage stat for TDM game scores (noted as TD).
+- Change: ch_crosshaircolor is the default variable for changing
+  crosshair in all modes of play (cg_hud_crosshaircolor is no longer
+  used).
+- Fix: Suicide kick/ban error.
+- Change: Client info streamlined for better network performance
+- Fix: If in thirdperson while in teamplay, player's team symbol
+  doesnt appear above head (easier to see).
+- Fix: Update ctf.cfg and ctfmaps.txt files.  PLEASE UPGRADE TO
+  THESE AS REFERENCE!!!!
+- Fix: The +modif(1-5) commands didnt work properly.  +/- commands
+  should again work.
+- Add: Optimizations on client cgame for better framerates.  Will
+  work on server optimizations next.  I vow to introduce optimiza-
+  tions up until 1.0 :)
+- Add: Admin logging information on banned/illegal player connects
+  (stuff that will be logged to admin_log file, if enabled).
+- Add: New spectool.cfg config
+- Add: Totally redesigned help system.  \help now just lists available
+  game commands.  Descriptions of commands can now be found by:
+        \command_name ?
+- Add: ? as a command for easy help info.
+- Update: Updated rail-only ctf and teamplay .cfgs
+- Add: Logging-OSP.txt to OSP/Docs directory.  Several people from
+  the community have asked about some of OSP's extended logging
+  format, so this should help budding log parser programmers who
+  are interested in adding OSP-enhanced logging support.  If you
+  add OSP-enhanced logging to your parser, let me know and I will
+  pimp your parser in OSP! :)
+
+Oct 24: 0.99l
+=============
+- Fix: QTV/GTV connect support
+- Change: Voting for QTV/GTV is now simple, just:
+	\callvote qtv  (or gtv)
+  To automatically call a vote to allow these clients to connect to
+  a pure server.
+- Change: Default vote_allow_machinegun 0 and match_matchsuicides 0
+
+Oct 24: 0.99k
+=============
+- Fix: Chat for coaches
+- Fix: r_allready and console-based allready commands now work as
+  expected.
+- Tweaks: team.cfg, ctf.cfg, 1v1.cfg, clanarena.cfg configs.  Please
+  update your configs with these as reference!
+
+Oct 22: 0.99j
+=============
+- Change: Server configs.  Server operators, PLEASE update to the
+  provided configs settings (team.cfg, ctf.cfg, 1v1.cfg, clanarena.cfg)
+  and osp/modes-cfg/compmodes.cfg.  All of these files have been updated
+  to facilitate better online match play.  The ctf.cfg has been signi-
+  ficantly changed such that the original ctf.cfg has been replaced
+  with OGL-style match settings.  It's previous settings have been
+  preserved in ctf-public.cfg.  *Please* migrate all configs to these
+  settings.. thanks!
+- Fix: Sometimes a player's name doesn't show up when being followed.
+- Fix: Would try to rotate to the viewcam, even if it wasnt enabled.
+- Fix: g_forcerespawn settings wouldn't survive across map loads.
+- Fix: No lagometer in vq3
+- Add: Allow transparency of scoreboard: cg_scoretransparency (default
+  = 1.0 -- no transparency).  This setting just adjusts the alpha
+  channel of the font on the scoreboard.  The lower, the more
+  transparent the scores will be.
+- Add: Configurable # of suicides before a client is kicked (default
+  = 5).  A client will be kick/banned for a map that /kill themselves
+  the set # of times, or suicide (lava jumping) 2*setting.  New var:
+	match_maxsuicides <value>
+- Change: If ch_crosshaircolor is set to 0, then the crosshairs
+  provided with baseq3 will be used to allow better scaling (though
+  you can only have the color of the crosshair set to white).
+- Change: "\callvote ref" without specifying a player will put your-
+  self up for referee vote.
+- Add: Show a player's score in multi-view.  If TDM, the team score
+  is also shown.
+- Add: Color overlay of a player's team in multiview.
+- Fix: Box scores in 1v1 if spectating.
+- Add: Allow the \players command to be issued as a console/rcon
+  command.
+- Fix: Lagometer doesnt show up if OSP hud is enabled.
+- Fix: Ammo pickup even if full in CPM mode.
+- Add: Bit for enable/disable OSP hud from the server.  Current
+  settings for server_customclient are now:
+       server_customclient <flags> (default = 8, only OSP-HUD)
+           <flags>:
+                  1 - Enable 125Hz sampling.
+                  2 - Allow cg_truelightning usage.
+                  4 - Custom graphics used with cg_altPlasma and
+                      cg_altLightning is allowed.
+			8 - Toggles client usage of OSP-based HUD.
+       ---> This is also votable with vote_allow_osphud setting.
+- Fix: Another vote loophole.
+- Fix: Problems with "\callvote mapnext".
+- Add: Allow GTV to work like QTV in OSP servers.
+- Add: Allow QTV/GTV to use multiview, if desired.
+- Add: Allow specifying machinegun damage.  Can also vote for mg
+  respwan ammo and damge:
+	mg_damage (default = 7) -- For non-Team DM
+	mg_damageTeamplay (default = 5) -- For Team DM
+	vote_allow_machinegun (default = 1 - enabled)
+- Add: Force-model/skins (thanks a bunch arQon!) for clients:
+	cg_enemyModel <modelname> (default = "" - disabled)
+		--> Setting this will force all players on the enemy
+		    team to appear to have this model.  Your teammates
+		    will retain their models unless you specify
+		    g_forcemodel 1, which will force all of your
+		    teammates to your current model.
+	cg_swapSkins <0|1> (default = 0 - normal team colors)
+		--> Allows you to reverse skin colors as displayed
+		    on-screen.  Note: announcements, overlays, and
+		    the scoreboard will still maintain your "real"
+		    server-controlled team color.
+- Change: \speclock is not enforced on referees.
+- Add: Time debouncer to prevent multiple pauses to be issued by
+  seperate referees too close together.
+- Fix: Maintaining multi-view viewing across map_restarts.
+- Fix: server_maxpacketsmax/min and server_timenudgemax/min
+  weren't updating right to clients.
+- Fix: Player handicap sometimes getting set to -1.
+- Add: \viewfollow on a selected view while multi-viewing will switch
+  the viewer into chase mode of the selected player.
+- Fix: Occasional NULL snap error for clients.
+- Fix: g_weaponrespawn settings from being overwritten on map load.
+- Add: Spectator coaching capabilities!  This feature is designed
+  to facilitate the new "coach" viewing requirements for competitive
+  teamplay.  A coach can:
+	- View and rotate through any single player on the assigned team.
+	- Multi-view all players on the team at once.
+	- Team chat works just as if the coach is a player on the team.
+	- Can issue timeouts, lock/unlock, player invite, teamready, etc.
+        like a "captain" team member.
+	- Can ONLY multiview or chase players on the coached team.
+
+	To become a coach, a member of the team to coach must issue
+	the invitation: \coachinvite <player_id>.
+
+	The receiving player can accept with : \coach
+	The receiving player can decline with: \coachdecline
+
+	A player can resign as coach for a team at any time by
+	issuing: \coachdecline
+
+	The \coach command can be used at anytime to resync viewing
+	status of the team (which is given when first becoming a team's
+	coach).
+	
+Sep 27: 0.99i
+=============
+- Change: Player IDs in the \players command are not colorized if in
+  a teamgame.  Also have timenudge in as additional info for each
+  player.
+- Add: Clamp r_lodCurveError to curb cheaters.
+- Add: Clamp handicap during a match to curb cheating.
+- Removed: server_125hz variable (replaced with new var below).
+- Fix: Small prediction problem with 125Hz sampling.
+- Fix: dozens of tweaks and bugfixes on client-side hud interface.
+- Add: cg_maxlocationwidth 16, to set maximum locationlength for
+  teamoverlay and teamchat when in custom location mode.
+- Add: cf_WeaponName sets weaponname font if ch_weaponswitch is 1.
+- Update: Changed cf_statusbarammo to cf_ammostatusbar.
+- Add: ch_crosshaircolor
+	usage: ch_crosshaircainolor 0xRRGGBB|<color>
+	color=white, black, red, green, blue, yellow, magenta, cyan, white, grey
+	f.i. ch_crosshaircolor 0xFF3377 will yield some nice weird color.
+- Change: ch_crosshaircolor now replaces cg_hud_croshaircolor for custom
+  crosshair color in vq3.
+- Add: Server-side control of many of the new client options:
+       server_maxpacketsmin <value> (minimum client maxpackets)
+                                    [Default = disabled]
+       server_maxpacketsmax <value> (maximum client maxpackets)
+                                    [Default = disabled]
+       server_nudgemin <value> (minimum timenudge)
+                                    [Default = disabled]
+       server_nudgemax <value> (maximum timenudge)
+                                    [Default = disabled]
+       vote_allow_altgraphics   [default = enabled]
+       vote_allow_maxpackets    [default = enabled]
+       vote_allow_timenudge     [default = enabled]
+       vote_allow_truelightning [default = enabled]
+
+       server_customclient <flags> (default = 0, ALL disabled)
+           <flags>:
+                  1 - Enable 125Hz sampling.
+                  2 - Allow cg_truelightning usage.
+                  4 - Custom graphics used with cg_altPlasma and
+                      cg_altLightning is allowed.
+
+Sep 23: 0.99h
+=============
+- Ugh, 1.25 patch breaks everything =(  However, I still have some
+  goodies for 1.17 admins/players.
+- Fix: Announce message on spectator locking.
+- Fix: Failed map votes would still load the map at the end of the
+  round.
+- Add: Check if r_shownormals is NOT 0 when cheats aren't enabled.
+- Change: g_warmup 0 for team.cfg
+- Add: cg_truelightning options for non-CPM modes (settings 1 and 2
+  are enabled).
+- Change: followpowerup is now a client option: cg_followpowerup,
+  which defaults to 0.
+- Fix: Client crash if using team menu to rotate through teams.
+- Fix: CTF score updates on flag status if cg_enableOSPHUD is set
+  to 1 (enabled).
+- Update: New tweaks for 125Hz sampling.  There are now TWO options.
+  Set with:
+       cg_125hz 1   -or-
+       cg_125hz 2
+          Try each one to see which is better for you.
+- Add: Server-side control of the 125Hz option:
+      server_125hz 0 - Disables 125Hz sampling on client (default)
+                   1 - Allows clients to use 125Hz sampling on the server.
+- Add: Votable option for 125Hz sampling:
+      vote_allow_125hz 1 - Enabled (Default)
+- Fix: Player info updates for multi-view.  This sorta breaks multi-
+  view demos recorded on 0.99g and played back in 0.99h
+- Add: Detection for nopbot quake3.exe hack.
+- Add: New server_record option 16 (refer to variables doc on its
+  rather limited use for public consumption).
+- Add: Option to use alternate graphics for plasma and lightning
+  that really look better than baseq3 graphics.
+         cg_altPlasma   1 (not default)
+         cg_altLighting 1 (not default)
+            ---> This requires the use of the extra.pk3 that
+                 may or may not be in use on pure servers.
+- Add: alias "qtv" to "pure" vote/ref settings.
+- Add: spectool.cfg for easier management of all multi-view operations
+  while connected and utilizing the multi-view facility.
+
+Sep 18: 0.99g
+=============
+- Add: Ability for cool floating feature of the scoreboard/scoreboxes.
+	cg_float 0 - disables floating (default)
+		   1 - enables floating
+- Add: 125Hz client sampling feature designed by Alan "Strider" Kivlin.
+  This is still experimental, but is showing a lot of promise for
+  clients on low-end machines.
+	cl_125hz 0 - Disable and use normal Q3 sampling (default)
+		   1 - Enable 125Hz client sampling
+- Change: \players command now shows cl_maxpackets and snaps informa-
+  tion for each client.
+- Fix: Various client messages throughout the game.
+- Add: MULTI-VIEW SPECTATING!!!!!!  I have to admit, I am still in
+  awe of this new feature.  OSP will now allow players to view multiple
+  clients on the same screen, with full views of each player's perspecive,
+  sounds, armor, health, weapon and ammo.  Demos work fine with this,
+  capturing the entire multi-screen view taken by the recording player.
+  Here are the commands:
+	- viewadd <player_id> - Adds in-game player pov to screen.
+	- viewremove [player_id] - Removes currently viewed player pov
+					   that is highlighted.  Using the optional
+					   player_id field selects the specific
+					   player pov to remove.
+	- viewred/viewblue - Adds views of the entire red/blue team.  As
+				   new players join or leave the team, your
+				   screen will be updated.
+	- viewnone - Removes all active views
+	- viewnext/viewprev - Moves forward/back through views to select
+				    which player to listen in on.
+				    (Note: follownext/followprev alias to these
+				    commands while in multi-view mode).
+
+	--> Ideal key mappings for multi-view viewing:
+		bind ";" viewprev
+		bind "'" viewnext
+		bind backspace viewremove
+
+Aug 26: 0.99f
+=============
+- Fix: cgame was crashing based on default settings
+- Add: max_packet estimator for clients in the \players command.
+
+Aug 25: 0.99e
+=============
+- Add: Initial release of custom OSP client settings!!  There is way
+  too much info to describe here on all the new features, so check out
+  the Docs/osp-q3-ClientReadme.txt for the full scoop.  For a quick
+  peak without reading the docs, type: \set cg_enableOSPHUD 1
+  in the console.  The \menu, \menuright options let you change things
+  in-game.
+- Add: Initial release of the OSP Config Editor by Shawn "Og" Hampton.
+  This is a very cool editor that allows you to configure ALL
+  OSP-related (and some default Q3 server) options.  I can't believe
+  I've added all these options to Q3 =)
+- Add: Lock on client \cl_timenudge setting to prevent too high of a
+  setting that is considered cheatable.
+- Fix: Demos/screenshots wont be taken when playing back OSP-based
+  demos using the OSP cgame.
+- Add: Mode name to autorecord demos
+- Add: Highlight stats of chased players in \scores list.
+- Add: Tweaks to \scores command
+- Add: Tweaks to \players command
+- Fix: "ready" status in scoreboard
+- Fix: Hit sounds in certain scenarios of client .pk3
+- Change: Allow ^0 as a color option for names.
+- Change: Longer delays between \time calls to prevent accidental
+  time-out/time-in in quick succession.
+- Fix: On mode config reset, map queue is now properly reloaded.
+- Fix: Voting bug for spectators
+- Add: Vote info/restrictions while in warmup
+- Add: Ability to chase only red or blue team.  Type: "\follow red"
+  to rotate through players on the red team and likewise
+  "\follow blue" for players on the blue team.
+- Add: Big CPM/Promode announcement when CPM is voted in/out.
+- Add: Dump of current match stats when a map is voted to restart
+  (i.e. \callvote map_restart).
+- Add: Fixes on pute vote setting
+- Add: Allow skill levels 1-5 with arbitrary \addbot command.
+- Add: Teams now have the ability to lock out spectators from
+  observing their team, which is a decent anti-cheat mechanism to
+  prevent specs from relaying info to players on the other team
+  through such facilities as Battlefield Commander, TeamSound, etc.
+  To enable this:
+	\speclock
+		Spectators will then be foced to follow only the other
+		team or sit in a fixed position on the map.  If both
+		teams issue the \speclock command, then they cant move
+		at all, frozen at some viewcam position or intermission
+		point.  This command is a toggle, so issuing it again
+		will reverse the current speclock setting of the team.
+	\specinvite
+		This command can be issued to allow a spectator to
+		observe a team that has been speclocked.
+
+Jul 30: 0.99d
+=============
+- Add: New command "autorecord" for clients that allows them to
+  create demos with game-specific naming that is auto-generated
+  by the server.  Note, this only works for clients who are using
+  the OSP cgame.
+- Fix: Picking up dropped backpacks in CPM mode under certain
+  scenarios.
+- Fix: "server_thrufloors" now works as documented for vq3.
+- Fix: Hit tones in vq3 modsfacilities e.
+- Add: Damage given/received per player in TDM gameplay mode.
+- Add: Documentation of the "admin_log" variable for servers.
+
+Jul 25: 0.99c
+=============
+- Add: Several client cgame tweaks.
+- Add: Complete list of client/server commands.
+- Change: Rename of info files in the Docs/ directory.
+- Add: New .pk3 file: z-osp-extra099b.pk3.  This has several
+  client-side updates/enhancements to accomodate the ProMode
+  add-on.
+- Update: More tweaks on OSP authentication
+- Fix: Referee commands now applicable to captain-only commands,
+  even while in spectator mode.
+- Change: Players can now vote for themselves as ref.
+- Fix: Problems with people able to use protected/banned nicks.
+- Fix: No per map vote count for referees.
+- Add: New client variables for smoke puffs for rl, gl, and sg
+  (only for promode):
+	cg_smokeradius_rl <value>  (default = 64)
+	cg_smokeradius_gl <value>  (default = 32)
+	cg_smokegrowth_rl <0|1>  (default = 1)
+	cg_smokegrowth_gl <0|1>  (default = 1)
+	cg_smoke_sg <0|1>  (default = 1)
+- Add: New graphics for lg and pg when under promode.
+- Add: Setting to limit # of votes a regular player can make per
+  map.  Referees are not affected.  Use a value of 0 to disable
+  this limitation.  New variable:  vote_limit  (default = 5)
+- Fix: On "pure" vote to disable, the next client can only be
+  a QTV client (and thus forced to spec the entire match).
+- Fix: Voting for a map in 1v1 no longer makes a player a "loser".
+- Add: Tag for servertime in auto-demorecord name for unqiueness.
+  Its value is 8 in the server_record bitmask.
+- Change: In-eyes view is now the first change of view from the
+  starting "observer" mode (again).
+- Fix: Specs can now freely chat at intermission, even if mutespecs
+  is set to 1 (enabled).
+- Fix: ViewCam switching problems if someone is in the process of
+  connecting and there are no other players on the server.
+- Fix: Weird voiceovers while in warmup or pause.
+- Fix: Allow switching to a team before the end of a round in CA.
+- Fix: Occasional respawn in teammates bug (id bug)
+- Fix: Drop weapon bug
+- Change: Entire referee (\ref) command interface.  Just type:
+	\ref
+  to see a summary of all commands available.
+- Add: New client cgame variable for the "view" of the lightning
+  gun (promode only):  cg_trueLightning
+      0: Default id (lagged) style.
+      1: Lightning graphic displayed on crosshair always.
+      2: Good mix between server and client view (default).
+- Add: All CPM cg_hud* client console variables for HUD changes.
+- Add: ProMode (CPM) Q3 playstyle toggle.  ProMode is a tweak on
+  the basic game elements to facilitate a faster playing style.
+  For complete info on the Challenge ProMode style of play, check
+  out http://www.challenge-world.com/.  Big thanks to Khaile for
+  giving out the "reference model" ;)  Two new variables associated
+  with this new gameplay feature:
+	server_promode <0|1>      (default = 0)
+	vote_allow_promode <0|1>  (default = 1)
+
+      ---> ProMode gamestyle can be applied to ALL modes of play
+           (FFA, 1v1, TDM, CTF, CA).
+
+Jun 08: 0.99a
+=============
+- Fix: Don't allow vote for self as ref
+- Fix: vote_allow_armordamage variable spelled wrong internally
+- Fix: match_dropitems now also applies to CTF and flags
+- Fix: Slight change in client validation scheme to accomodate
+  differences in Win32 and Linux server architectures (which IS
+  different) (id bug)
+- Fix: CA resetting of scores if match_carespawn is set to 1
+- Add: Updated documentation to reflect accurate info on the
+  server_record variable.
+
+Jun 03: 0.99
+============
+- Fix: vote_percent of 100 always failed
+- Fix: \r_allready did not work for CA
+- Fix: Small CA stats fix
+- Fix: Bouncing in CA warmup with hitscan weapons
+- Fix: Bot AI "fatal" error
+- Add: Ability to allow OSP to run as "baseq3" for UI server browser
+  filtering.  This allows server ops to let clients use the in-game
+  browser and select their server if the client uses the FFA/1v1/etc.
+  filter types.  Server variable:
+	osp_gamename  0 - Shows up as "FFA/1V1/TDM/CTF/???"
+			  1 - Shows up as "osp" (default)
+  ---> Note: To use this properly, you will have to put everything
+	 (configs, subdirectories, etc.) in the baseq3/ directory, copy
+	 the "game" .pk3 in the paks/ directory into the baseq3/
+	 directory and rename it to something like "zzzosp-game099.pk3"
+- Add: Ability for callvote to enable/disable "sv_pure" setting of the
+  server.  If the server is voted to "sv_pure 0", the server will revert
+  back to "sv_pure 1" after a client connects and enters the game
+  (ideal for getting a QTV spectator into the game in an easy fashion
+  if a server admin is not around).
+	vote_allow_pure <0|*1>
+- Add: Any connecting player whose name begins with "QTV" will not be
+  allowed to enter the game and will skip client authentication (if
+  configured with server_ospauth).  Once connected, this player can
+  NEVER enter the game nor remove the "QTV" tag from their name.
+- Add: 650ms pause of firing after respawn.
+- Add: Q2 style armor system.  Yellow = 100 max.  Red = 200 max.
+  Armor Shards = 5 and no max.  No countdown of armor.
+	armor_q2style 0 - Normal Q3 armor system (default)
+			  1 - Q2 style armor system
+- Add: Ability to drop weapons/ammo/flags.  Weapon/ammo drop is
+  available ONLY in TDM mode.  Flag drop is allowed ONLY in CTF mode
+  (and is always available, regardless of server settings).
+  Type: \drop for list of items that are droppable:
+	vote_allow_dropitems <0|*1>
+	match_dropitems  0 - Item dropping disabled (default)
+			     1 - Item dropping allowed
+
+	Client command:
+	\drop <item_name>
+- Add: Initial client-side cgame for OSP-Q3.  This is a very
+  barebones client cgame, but it does include functionality for
+  auto-demos/screenshots, client-side authentication, and various
+  little cleanups of things (like command auto-completion of all
+  OSP_specific commands).  It is recommended this be included
+  on sv_pure 1 servers and to enable the server_ospauth 1
+  variable to eliminate aim/radar cheaters.
+
+May 20: 0.98
+============
+- Fix: Parser for map/config/filter files.  Problems with spaces/tabs
+  not getting stripped between tokens
+- Fix: BFG was showing up in warmup items improperly
+- Fix: Tweak on CA player stats between matches sometimes carrying
+  over if the server is improperly changed via rcon.
+- Change: No knockback in CA warmup on opposing players.  Can still
+  RJ in warmup to get to areas quicker, however.  This doesn't affect
+  normal gameplay.
+- Fix: If match_warmupfire is enabled for CA.  Items fired just before
+  round start will not do damage once the round has started
+  (for example: grenades/rockets/plasma).
+- Change: match_warmupfire now defaults to 1 for CA.
+- Fix: Maps with configs after a map is over
+- Fix: start_armor and start_health documented.  They've been there
+  for a while, just forgot to comment them =)
+- Change: match_followpowerup is just a default for clients who are
+  following.  Clients can manually toggle their current setting with
+  the client command: followpowerup
+- Tweak: Beginning of performance enhancements: cvar_check
+
+May 16: 0.97
+============
+- Add: Merged with 1.17 code base (woo! 2 irrelevant #defines)
+- Change: Chanmged TDM overtime default to unlimited 5 min overtime
+  periods.
+- Change: Allow r_kick and r_map at intermission.
+- Fix: Certain starting weapon configurations were hosed.
+- Change: Kick voting now requires > 75% acceptance.
+- Add: Variable acceptance voting percentages:
+	vote_percent <value>  (Default = 50)
+- Fix: Item banning fixes.
+- Add: Players are banned if they mass suicide (1 map only).
+- Add: # of votes per map limited to 5 per player (excluding refs).
+- Add: r_ban referee command.
+- Add: Console commands: ban, filterlist, filterload.
+- Hack: Small hack to get bots working.  Will try to make it less
+  "hackish" in next rev.
+- Add: Additional log entries for CTF_specific events.
+- Add: Extensive player filtering capabilities.  Check out the
+  Doc/Player-filters-q3.txt file for complete information on the
+  format and features available for client filtering (yes, it is
+  just more than simple address banning).  Filter file specification:
+	filter_file <filename>	(Default = "filters.txt")
+
+May 10: 0.96
+============
+- Fix: Invalid voting possible for fl/tl/cl/rl
+- Fix: Spectator "team" chat in FFA mode
+- Fix: \callvote nextmap now works as expected on servers that rotate
+  maps.  This option does not work on servers that dont automatically
+  rotate maps.
+- Change: Timestamp in admin logs
+- Change: Redid external config file parsing (maps, configs, etc.) so
+  it should be more stable now with fewer surprises on different
+  platforms.  Please let me know if any problems arise.
+- Add: New viewcam definition files from VK-Hunter.  Thanks man!
+	overkill
+	q3dm14, q3dm15, q3dm16, q3dm19
+	q3tourney1, q3tourney3, q3tourney5
+- Add: (Old undocumented option) Forcing minimum player count before
+  a game can start:
+	
+	match_minplayers <value>
+		Specifies the minimum # of players that must be in the
+		game before they can "ready" up to start the match
+		(default = 2).  Note, this option is useful only if
+		g_doWarmup = 1 and g_warmup = 0.
+
+- Add: Ability for a map to load an entire server .cfg file, based on
+  what is specified in the map queue.  Check the ffamaps.txt file in
+  the cfg-maps/ directory for more information.
+- Add: Overtime modes.  There are now several ways for OSP to handle
+  match overtime periods:
+	0 - Sudden Death: Match continues indefinately, first score
+	    wins (1v1 default -- id default overtime handling)
+	1 - Timed overtime: If the match is still tied after x overtime
+	    rounds, the match will move to sudden death with first
+	    score to win (Team DM default -- 2 5-minute periods)
+	2 - No overtime: matches can end in a tie (CTF default)
+	3 - Timed overtime: If match is still tied after x
+	    overtime rounds, the match ends in a tie (like hockey).
+
+	----> In the case of timed overtimes, the admin can specify the
+		number of overtime periods (0 for unlimited) and the
+		length of each overtime period (in terms of minutes).
+
+	----> See the Docs/server-settings-q3.txt file for additional
+		information.
+
+May 05: 0.95
+============
+- Fix: r_remove didnt work quite right
+- Add: r_abort referee command.  Allows referee to abort a match in
+  progress and move all players to spectator mode.
+- Update: Teamplay configs for standard 20min matches.
+- Fix: Various item banning fixes
+- Fix: CTF maps that dont have initial team player spawn points were
+  causing weird respawn problems (e.g. japanctf).
+- Add: Ability to not allow players to hurt themselves:
+	match_hurtself 0=disabled 1=enabled (default)
+- Add: Administrative logging.  This type of logging allows admins to
+  see addresses of connecting players, referee attempts and usage,
+  votes and their outcomes and other types of events not normally
+  found in the game/console logs.  To enable:
+	set admin_log <filename>  (Default is "none", which disables
+					   administrative logging.)
+- Add: New gameplay config: 1v1-Arena.  This is a type of play similar
+  to 1v1 rocket arena Quake 1 and Clan Arena mode combined.  Its quite
+  fun and very fast.  Good for practicing up on RL tactics =)  Check it
+  out!
+		arena1v1.cfg
+
+  ---> Note, I've also included 2 maps for use with this mode:
+	 carnagearena1b and q3arenax.  If the author can get with me on
+	 including it in the official 1.0 release of OSP, I'll feel much
+	 better =)
+
+May 02: 0.94
+============
+- Add: Anti-telefragging feature for respawns.  Note, you can still
+  telefrag people by moving through teleporters.
+- Add: Forogot to document the vote options for the new CA warmup
+  firing and round start respawn features available for players.
+  The new vars are:
+	vote_allow_ca_startrespawn
+	vote_allow_ca_warmupfire
+  ---> These variables are thoroughly docuemtned in the
+	 server-settings-q3.txt file in the Docs/ directory.
+- Add: More lerp prevention to provide smoother transitions on
+  sudden scene changes (i.e. from cameras, etc.)
+- Fix: Unpausing was problematic under CA.
+- Add: r_unlockred/r_unlockblue referee command aliases
+- Add: 2 new viewcam definition files: q3dm13 (rework) and q3jdm8a
+- Add: Ability for specs to automatically switch to a player who
+  picks up an active powerup.  The new server variable to toggle
+  this feature is:
+	match_followpowerup (0 = off, 1 = on [the default] )
+  ---> This only affects players who are following other players
+	 and does NOT lock them to the player while the powerup
+	 is in effect.
+
+Apr 30: 0.93b - Pre/During/Post RazerCPL build(s)
+=================================================
+- Wow, it survived RazerCPL pretty well =)  Experimented with some
+  client-side stuff that *really* helped in demo/screenshot
+  collection that turned out to be fairly robust.  Thanks Dess!
+- Add: Ref can talk to all, overriding match_mutespecs option, if
+  it is enabled.
+- Add: Allow option to shoot during CA warmup period.  This doesnt
+  take away ammo/health/armor, just helps players get a feel for
+  the lag on the server:
+	match_cawarmupfire  * 0 - Warmup firing disabled
+				    1 - Warmup firing enabled
+- Add: Allow option to force client repsawn on round start in CA.
+	match_carespawn  * 0 - Players do NOT respawn on round start.
+				 1 - Players *DO* respawn on round start.
+- Add: Option to use default id logging format.  I may not have it
+  all correct, so someone please tell me if there are still any
+  inconsistancies.
+	log_default  * 0 - Use OSP-enhanced logging
+			   1 - Usae default id logging format
+- Add: More sound bug tweaks.
+- Fix: All chat stuff for all modes (1v1 was especially affected)
+- Change: Rearranged spec mode ordering.  Order is now: freefloat,
+  ViewCam, and then Follow.
+- Change: Health/Armor info not reported during a CA round in the
+  \scores command.
+- Add: q3tourney4 ViewCam definition file.
+- Add: team_weaponrespawn in the server_settings_q3.txt document.
+- Add: replace_* variables in the server_settings_q3.txt document.
+- Change: Hook restrictions are now at 2000/2000 with default
+  changed to 1200/950.  Have fun =)
+- Add: Client autorecord (Requires OSP client cgame):
+	server_record  * 0 - Clients do NOT auto-record matches
+			     1 - Clients have forced demo record.
+- Add: Client-side cgame verification (requires OSP client cgame).
+  This option is used in conjunction with the sv_pure settings of
+  a server to fight client .exe hacks that bypass "pure" settings:
+	server_ospauth  * 0 - Client cgame modules are not verified
+				1 - Client cgame modules must register
+				    with the server.
+
+Apr 09: 0.92
+============
+- Add: Option to not have viewcam track players and use static
+  views.  New command is: "\vc_view" to toggle views locking.
+- Add: Use the "USE_ITEM" key (+button2) to toggle cam viewlock.
+- Add: Ping copy option for specs following players:
+	server_realping	* 0 - Copies the chased player (id default)
+				  1 - Shows real ping of spec
+- Fix: Player stats not showing in CA at end of match if a player
+  has died during the round.
+- Fix: No end-level announcement if a map is voted in.
+- Change: team_allcaptain now defaults to 1
+- Add: Aliased "\pause" to work as the same as "\time" and "\r_pause"
+- Fix: Overhaul of the pausing system to prevent weirdo corner
+  cases from occurring.
+- Add: Health/armor/modifier logging:
+	log_stat	* 0 - Disabled
+			  1 - Logs all health/armor-related events,
+				but no dump to console.
+			  2 - Logs everything and dumps to console.
+	----> This is a LOT of logging.  If you are going to use
+		it, I advise to use option 1 to avoid slowdowns from
+		console updates.
+- Change: Logfile times now in ss.s notation (seconds and tenths of
+  seconds).
+- Fix: Line parsing for external file reading tweaked.  Should
+  address some of the problems Linux users were seeing where the
+  last character of a line was being cut off.
+- Add: Logging of player accuracy stats at the end of a match.
+- Add: 2 new console commands:
+	pause		- Pauses the server
+	allready	- Readies all players up
+- Fix: Spurious nextmap messages for CA mode that rotates maps at
+  match end.
+- Fix: Floating point output for QVM on |values| < 1.
+- Change: Refs can be voted in only if there are 3 players IN the
+  game (2 for 1v1).
+- Note: Try to remove any extra linefeeds in viewcam files to prevent
+  weird 0,0,0 positions (will fix).
+- Update: More tweaks on Score_* public server cvars.
+- Add: "allcaptians" as a vote option.
+	vote_allow_allcaptains	(default = 1)
+- Add: "thrufloors" as a vote option to toggle damage through floors.
+	vote_allow_thrufloors	(default = 1)
+- Fix: The "mutespecs" option now also applies to 1v1 mode as well.
+- Fix: On map rotation in 1v1, loser wouldn't get pushed to spec mode.
+- Change: Hook speeds.  Default is now 900/800, max is 1200/900.
+- Change: "Shoot through floors" option now specified as:
+	server_thrufloors   0 - Disables splash through floors
+				* 1 - Enables splash through floors (id default)
+- Fix: Server crash on rcon'd server changes and a map_restart issued.
+  (Thanks ]R[Papa).
+- Fix: Last but *definately* not least: Several fixes to id's internal
+  event system.  These changes (in conjunction with ]R[Papa and Strider)
+  now decrease the likelihood of dropped sounds in Q3A dramatically.
+  Its still not perfect, but it is a whole lot better now, for sure.
+
+Mar 30: 0.91
+============
+- Add: Many more viewcam definition files.  These aren't yet
+  set in stone, so if you have alternates or improvements on
+  the included viewcam definition files, then by all means,
+  send them in!  Still missing a few on several of the default
+  id maps (hint hint).
+- Change: Voted refs now survive across level loads
+- Add: Shoot through floors option toggle:
+	match_thrufloors	0 - No blast damage through floors
+			     *1 - Default Quake3 behavior
+- Fix: Ref auto-pass votes
+- Fix: Persistant ready info on 1st round of CA
+- Add: Announce people becoming referees
+- Fix: Dont give loss if switching to spec in warmup for 1v1
+- Add: Auto reset of voted parameters on server after 10min
+  of inactivity (no clients connected)
+- Add: Viewcam now tracks quad/flag carriers automatically
+- Add: Allow "ref" command in intermission
+- Tweak: Public cvar reduction/changes
+- Fix: Public info on matches was not updating in certain
+  circumstances.
+- Cleanup: A lot of small message cosmetics throughout many
+  areas of the mod.
+- Update: Some floating point operations in the qvm have
+  been enhanced with greater precision (id issue)
+- Change: Voting cosmetics on what has been voted in.
+- Add: OSP URL on opening plug
+- Add: Referee "vote" is now announced as a "referee change"
+  rather than a vote to reduce confusion.
+- Add: Ability to specify any bot name in the "addbot"
+  command.  So, something like:
+
+	\addbot my_bot
+
+  Will load a bot without any errors.  Just makes it easier
+  to add a bot without having to remember all the parameters =)
+  The actual bot character and skill is calculated on the
+  numeric representation of the name you provide.
+- Add: Ability to load custom bots easily on server start:
+	set bot_autoload "bot1 bot2 ... botN"
+  This command just acts like you have issued consecutive
+  "addbot" commands on server startup.
+- Note: Snapshots are also written to the games.log file in
+  case you forget to do a \condump after camming a level.
+- Note: Found that if sv_pure is set to 1 for listen servers,
+  strange things can happen on map reload.  I've adjusted
+  the "cfg-SinglePlayer" configs to reflect this.
+- Add: Additional OPTIONAL paramter on viewcam positions to
+  dynamically change the range on a particular position.
+  For example, the \snapshot command can dump something like
+  this:
+
+	5 668.980 2338.872 173.705 42.709 -88.748
+
+  The position for each viewcam can also be augmented with a
+  length argument:
+
+	5 668.980 2338.872 173.705 42.709 -88.748 [length]
+
+  So to change from the default 450 range to say, 900, FOR
+  THIS PARTICULAR POSITION, just change the original line
+  (by hand) to:
+
+	5 668.980 2338.872 173.705 42.709 -88.748 900
+
+  This is especially helpful for covering wide open areas
+  where too many viewcams can get to be confusing and
+  cause a lot of quick position changes.
+
+  Note: NOT specifying a range will just have the position
+  default to the normal 450 range.
+
+Mar 25: 0.9
+===========
+- Add: Put player IDs in cvars to show who is playing.
+	For team-based games:
+		Players_Red
+		Players_Blue
+
+	For all others:
+		Players_Active
+
+	The IDs correspond to the player IDs you see given
+	in the server's player info fields.
+
+- Add: Respawn configuration for items in Team DM:
+	team_weaponrespawn (default = 30)
+- Fix: Reset reload time just when a CA match starts.
+- Fix: Don't allow gaunlet damage in CA warmup.
+- Fix: Telefrags now only add 100 points to damage_given stats.
+- Fix: Buffer ref and team timeouts.
+- Fix: Allow auto-map rotation in CA.
+- Fix: Also now removes items that are spawned by triggers if
+  the item is banned by the admin.
+- Add: "map_halt" to absolutely prevent the next level/map from
+  loading (good for big FFA tourneys.. hint hint =) )
+- Add: Bot load time intervals
+	bot_checktime (default = 10)
+- Add: All ALL memebers on a team to have limited captain privys:
+	team_allcaptain (default = 0)
+
+	A refere can also toggle this with:
+		r_allcaptain
+
+	----> The normal "captain" is still assigned and can be the
+		only one to remove players.  All other players can
+		invite and call a time-out.
+- Fix: Small map rotation bug fix for min_players = 0 setting.
+- Add: Ref command for mutespecs option (r_mutespecs)
+- Add: Option for armor during warmup
+	warmup_armor (default = 0)
+- Add: Honor server sv_maxrate setting (if set) in \players
+  listing.
+- Change: The "Score_Time" server var now properly reflects start
+  and end times, and is also updated every 7 seconds.  It also shows
+  various match-ending info.
+- Add: Play team lead/tied announcement at the end of a team-based
+  match.
+- Add: Win by margin mode.  This allows the server admin to have a
+  match end based on point-spread rather than reaching a particular
+  fraglimit.  This value, in conjunction with a low fraglimit, can
+  help speed up 1v1 matches.  Consider it as a "skunked" factor in
+  the game.  For instance, with a defined point spread of 10 and a
+  fraglimit of 15, a 1v1 match could end on a score of 15-10, 11-1,
+  or even 6 - -4 =)
+
+	match_winbyscore (default = 0 [DISABLED])
+
+- Change: The FIRE button now cycles through free-float, chase and
+  viewcam modes.  Use the jump/croutch keys to cycle through players
+  in chase/viewcam modes.
+- Updated all relevent documentation.
+- Add: New spectator viewing mode: the ViewCam.  This is a home-brewed
+  viewing mode that is most like the views seen in the game: Nocturne.
+  The viewcam is a cinematic view of the game that gives action cut
+  -scenes for a better "feel" for the action.  There are several ways
+  to use the viewcam.  To enable:
+	- Type: \viewcam in the console
+	- Join: \team vc
+	- Cycle through to it when in spectator mode
+
+  This mode of operation will always locate the most action going
+  on in the map.  To manually move to different viewcam locations,
+  type:
+	\vc_free
+
+	----> This option toggles either manual or automatic viewcam
+		positioning.
+
+  You can optionally track a single player with this mode through:
+	\vc_follow
+
+  To follow a SPECIFIC player, type:
+	\vc_follow [PLAYER_ID|PLAYER_NAME]
+
+	----> Note you can just cycle through to a player using the
+		jump/croutch keys as well.
+
+  The viewcam positions are defined by configuration files that are
+  map-specific.  Right now, OSP has viewcam definition files only for
+  maps: q3ctf1, q3ctf2, q3dm5, q3dm6, and q3dm7.  I plan on incor-
+  porating these into the mod/maps at some point, but there will
+  always be the option to override with .cfg files.
+
+  Creating new viewcam definition files is pretty easy and kinda
+  fun =)  All the documentation you will need (+ additional commands)
+  is given in the included Docs/Viewcam-info.txt file.
+
+  If you make viewcam definition files that are not included with
+  the OSP distribution, please send them to me and I will include
+  them in the next release.  Full credits will of course be given.
+  Please!  For the love of God!  Make some new viewcam def files!!
+
+Mar 17: 0.8
+===========
+- First official public beta release!
+- Add: Current server setting of a vote option is displayed
+  even if its corresponding vote option is disabled when the
+  vote is attempted.
+- Add: Blurb in \r_help to referees that vote commands are
+  also available as additional "commands".
+- Fix: Potenetial buffer overflows (id bug)
+- Fix: Still showed CA win info even after all players have
+  left.
+- Change: Remove maxpackets info from \players command.
+- Change: Keep scores from last CA match in first round
+  of next match (during warmup).
+- Merged with 1.16n source
+- Add: Precache weapons if players are configured to respawn
+  with them, but they are not available on the current map.
+- Add: The hook!  New server vars:
+	hook_enable <0|1>		(default = 0 (off))
+	hook_sky	<0|1>		(default = 0 (off))
+	hook_holdtime <secs> 	(default = 3 seconds)
+	hook_delaytime <msecs>	(default = 400 milliseconds)
+	hook_speed <value>	(default = 600)
+	hook_speedpull <value>	(default = 600)
+
+	----> And yes, the model DO croutch when hooking for
+		better asthetics.  The hitbox is still the same
+		as if they were standing, however.
+
+Mar 14: 0.71
+============
+- Add: Dump both player stats at the end of a 1v1 match.
+- Fix: (id bug) No spawnpoints on q3tourney3 if in teamplay
+  mode.  I hacked this fix in the server, so no need for any
+  custom q3tourney3 maps to fix this error.
+- Fix: Redid the variable wipe when a config mode vote is
+  passed.  This should allow for greater server flexibility
+  that use both command line args or for listen server
+  operators, while still resetting the critical OSP variables.
+- Fix: Bots no longer shoot each other in ClanArena mode.
+- Fix: Bots no longer included in "players ready" count for
+  match play.
+- Add: Vote announcement is also center-printed.
+- Add: Configs for single player/bot matches.
+- Fix: Stats were being carried over in FFA mode.
+- Fix: Small bug in config-mode file read (last char was
+  getting chopped).
+- Cleanup: Various messages and vote info.
+- Change: "team_damagearmor" to "team_armordamage" in CA mode.
+- Add: 2 new voting options (both default to "ON" (1)):
+	vote_allow_armordamage (for armor damage in CA mode)
+	vote_allow_falling (for falling damage enable/disable)
+ 
+Mar 11: 0.7
+===========
+- Add: Armor damage for self-inflicted blasts.  This is ONLY
+  for CA mod:
+	set team_damagearmor   0 - No loss of armor
+				   * 1 - Loss of armor (20% of dmg)
+- Fix: Clear "ready" markers on match start for CA.
+- Fix: No ammo reset if held ammo > 200.
+- Add: Mode "config" voting.  This option deprecates the
+  previous "gametype" voting with a more flexible ability for
+  server ops to specify entire server configurations to be
+  voted upon that allow for fine-tuning each mode of play.
+  This new format also allows for server ops to specify a
+  default config that the server will fall back upon after
+  all clients leave for 10 minutes.
+
+	mode_default <default server config>
+		Specifies the server configuration that the server
+		will roll back to after 10 minutes of no clients
+		connected, while the server is not in the default
+		configuration (default = "none").
+
+	mode_file <mode specification config>
+		Specifies the name / config of each server config
+		available for voting.  The "name" is what clients
+		vote for, while the "config" is the server config
+		that will be execed if the vote passes.  These
+		alternate modes of play can be disabled for voting
+		if the value for "mode_file" is set to "none"
+		(the default).
+
+	----> The configs that are to be used in the mode config
+		voting *must* have a "map" command as the very
+		last statement in the config file.
+
+	----> Server vars are completely erased when a new config
+		is voted in, so make sure you have the critical
+		variables (like rconPassword and ref_password) set
+		in all votable configs for consistancy's sake.
+
+	----> The included "ffa.cfg" shows an example of the
+		correct settings and mode-config .cfg file to enable
+		these features.
+
+- Removed: All of the "vote_allow_mode*" variables are no
+  longer honored as the config voting has fully taken its place.
+  If you dont update with the new config files included with this
+  release, then please delete these entries in your existing
+  server .cfg files.
+- Update: In preparation for an official release, I've reorganized
+  the layout of the osp/ directory and freshened all server .cfg
+  files to the latest settings.  I've also started adding the
+  qagame.qvm to a .pk3 for better compatibility with the Quake3
+  executable.  Please delete the vm/ directory and its contents
+  and replace it with this new .pk3.  I also HIGHLY advise adjusting
+  your server configs with this latest set of config files.  Yes,
+  this is beta software, and it DOES change, but change is good =)
+
+Mar 08: 0.67a
+=============
+- Fix: End-of-level timelimit crash bug (doh!)
+- Change: railctf.cfg format
+
+Mar 08: 0.67
+============
+- Fix: No joincode dumped at match start if match_latejoin
+  is set to 1 (or higher).
+- Add: Highlight vote messages for better clarity.
+- Note: New beta release (1.16m) require sv_pure to be set
+  on the command line (it defaults to 1 on load).
+- Fix: Plasmagun does NOT show up now in CTF warmup if it
+  is disabled (i.e. railCTF.cfg).
+- Fix: stats/scores console dump doesnt occur if a map is
+  changed during warmup.
+- Fix: Scores and damage scoring residuals would be carried
+  over for surviving players in CA mode after a match is
+  finished.
+- Fix: "Score" column in CA mode showed damage + kills, not
+  damage/100 + kills.
+- Add: "Sudden death" tie in FFA if it is a time-based match
+  (i.e. timelimit with no fraglimit) is fixed (id bug).  Tie-
+  breakers are listed below.  Result is that what the order
+  shows on the scoreboard is the correct ordering.
+- Add: Frag ties still sort players by additional parameters.
+  The format is as follows:
+	1. Player score (most)
+	2. Player deaths (least)
+	3. Player suicides (least)
+	4. Damage Given (most)
+	5. Damage Received (least)
+	6. First player to achieve the higher rank (rare)
+
+Mar 06: 0.66
+============
+- Fix: Callvote on item/powerup enable/disable apparently
+  triggered some bug in the qvm.  It worked in the .dll
+  version of OSP-Q3.. I swear!
+- Fix: Callvote map by ID now shows the mapname correctly
+  in the vote announcement.
+- Fix: In CA, dead specs shows proper team colors (not all
+  red as it used to be).
+- Fix: Honor match_latejoin 0 in FFA if g_doWarmup is set.
+  Late-connecting players are forced to spectator mode until
+  the end of the match.
+- Change: Referees can vote on ANY vote option (and have it
+  pass immediately) even if the server has the vote option
+  disabled.
+- Fix: "ready" now works properly under FFA if g_doWarmup is
+  set to 1.
+- Add: "READY" shows up for a player on the scoreboard when
+  they ready up to start a match.  Been meaning to do this
+  for a while =D
+- Fix: Can now properly vote-kick players that have a space
+  in their name.
+
+Mar 03: 0.65
+============
+- Add: Option to specify starting health when a player
+  respawns.  Server var:
+	start_health <value> (default = 125)
+- Change: g_forcerespawn defaults to 10 in 1v1, 20 in all
+  other modes.
+- Fix: Stats in 1v1 mode were hosed.
+- Add: Ability to change weapons/ammo on a map:
+	replace_machinegun <item_mask> (default = 1)
+	replace_shotgun	 <item_mask> (default = 2)
+	replace_glauncher  <item_mask> (default = 4)
+	replace_rlauncher  <item_mask> (default = 8)
+	replace_lightning  <item_mask> (default = 16)
+	replace_railgun	 <item_mask> (default = 32)
+	replace_plasmagun  <item_mask> (default = 64)
+	replace_bfg		 <item_mask> (default = 128)
+
+	----> Note: replacing a weapon for another also
+		replaces the ammo for that weapon.  The
+		<item_mask> setting uses the HIGHEST bit
+		in order to specify the weapon.  Suggest
+		using only exact values for weapons to
+		replace with the right weapon.
+
+Mar 02: 0.64
+============
+- Change: Added end-level sound (for time-based games) and
+  changed time-out sound.
+- Add: Additional logging for special events (votes, timeouts,
+  etc.)
+- Add: Per-item vote banning/allowances.  New server vars are:
+	vote_allow_items <item_mask> (default = 1023)
+	vote_allow_powerups <powerup_mask> (default = 255)
+
+	---> These values are derived from a sum of the the
+	     values found in the item_mask and powerup_mask
+	     specifications.  Defaults are to allow vote on ANY
+	     item.  Note, for items, only the BFG can be voted
+	     upon.  This DOES work for ent-teams, where a
+	     powerup can cycle between different powerup types
+	     (i.e. q3dm10: invis, regen, quad).
+
+- Add: Voting for g_forcerespawn variable.  New server var is:
+	vote_allow_spawn <0|1> (default = 1).
+- Add: Allow for gauntlet damage settings.  Server var is:
+	gauntlet_damage <value> (default = 50).
+- Fix: No accuracy hits for hitting teammates.
+- Add: Allow \players command at intermission.
+- Add: 3-column output for map listings.
+
+Feb 27: 0.63
+============
+- Add: Can now specify map by number in map voting.
+- Fix: Players can't join full teams in CA during intermission.
+- Fix: Stat resets for TDM/CTF/1v1 when matches commence.
+- Fix: More Score_Time cvar enhancements.
+- Fix: 1v1 win tracking.
+- Fix: \team any to join any available team.  Anything besides
+  standard "r", "red", "b", "blue", "s", or "spectator" puts
+  a player in free spec mode.
+- Fix: Joincode msg not showing up when a match starts in TDM/CTF.
+- Fix: More on player removal problems from teams when a map reloads.
+- Fix: Scoreboard not showing when a map is voted while in warmup.
+- Add: "NET" stat for TDM scores console dump.  NET is the overall
+  contribution a player gives to his/her team.  It is computed as
+  follows:  NET = kills - deaths - suicides - team kills
+- Add: Allow \stats and \scores command during intermission.
+- Change: \stats by a spectator now defaults to statistics on the
+  player he/she is chasing (except in CA mode).
+- Add: Per powerup banning.  Can now ban powerups on a case by
+  case basis.  This works even for entity "teams" that rotate
+  through several different powerups/items, so you can disable
+  one type of powerup without worry of losing the other
+  powerups/items in the "team":
+
+  ---> Use:  powerup_disable <powerup_mask>
+
+	powerup_mask
+	------------
+	* 0	- No powerups diabled (default)
+	  1	- Quad Damage
+	  2	- Battlesuit
+	  4	- Haste
+	  8	- Regeneration
+	  16	- Invisibility
+	  32	- Flight
+	  64	- Teleported
+	  128	- Medkit
+
+  ---> as a result, the powerup value in item_disable has been
+	 removed.  Its new values are now:
+
+	item_mask
+	------------
+	* 0	- No items diabled
+	  1	- All armor
+	  2	- All health
+	  4	- BFG
+	  8	- Machinegun
+	  16	- Shotgun
+	  32	- GrenadeLauncher
+	  64	- RocketLauncher
+	  128	- LightningGun
+	  256	- PlasmaGun
+	  512	- RailGun
+
+   *** MAKE SURE YOU CHANGE YOUR CONFIGS TO REFLECT THIS UPDATE !! ***
+	---> All of the shipped configs reflect these latest changes.
+
+Feb 25: 0.62
+============
+- Add: Parameter for inter-round countdown in CA.  This applies
+  ONLY after the first round has been played:  match_roundtimer
+  (default = 10).  Note, u cant set this below 2 or above 20.
+- Fix: Spec muting parameter now fixed to apply ONLY to specs.
+  Also did some fixups on 1v1 spec chats as well.
+- Add: Used fraglimit value in CA mode to show the roundlimit
+  next to team scores on the player hud.  No, u cant set frag-
+  limit directly, OSP just uses it to trick the client cgame
+  into displaying the roundlimit as the fraglimit.
+- Fix: At end of 1v1, loser didnt get bumped from the game
+  properly.
+- Fix: 1v1 map voting
+- Change: Can now cycle maps in 1v1 after the end of each match
+  by setting map_cycle to 1 in the server .cfg.
+- Fix: Console scoreboards weren't showing accurate stats for
+  players that were chasing other players (mostly applies to CA).
+- Change: CA scoreboard layout.  It now always displays the
+  winning team last on end of round scoreboard dump to more easily
+  see player health/armor status.
+- Add: Clamp maximum delay on end-of-level CA intermission to
+  7 seconds.
+- Fix: CA now properly zeros out match info if players leave.
+- Fix: Another attempt at fixing team kicks on level restart
+  in CA mode.
+
+Feb 23: 0.61
+============
+- Fix: Attempt at fixing a small case where players occasionally
+  do not rejoin their team when next round starts in CA.
+- Add: Server/vote option to mute spectators during a match:
+	Server: match_mutespecs <0|1> (default = 0 [off])
+	Vote: vote_allow_mutespecs <0|1> (default = 1 [on])
+	----> This only works for teamplay modes of play, and
+		only mutes spectators when a match is in progress.
+		They can still talk during warmups between matches,
+		for example, in CA.
+- Change: Falling damage is fully a dmflag setting now for CA.
+  The dmflag value is 8 for no_falling_damage, which is set by
+  default for CA mode of play.
+- Fix: Match stats shown for ALL players now in CA.
+- Add: More "Score_Time" external cval fixups
+- Tweaks: more on button timers for follow/end-level
+- Change: Reformatted CA "\scores" scoreboard
+- Fix: Cases for players dropping items even when weapon_deaddrop
+  was disabled.
+- Change: Players can now join a team at match intermission
+  (primarily for anxious players in CA).
+- Add: "start_armor" setting.  The default is 0 for all modes of
+  play, except CA, which defaults to 200.
+
+Feb 22: 0.6
+===========
+- Add: New "server-settings-Q3.txt" document that clearly describes
+  all new custom variables for OSP-Q3.
+- Change: Redid all config files into a cleaner format.
+- Add: INSTALL.txt info file.
+- Add: New field in maplist format: <roundlimit> at the end.  Don't
+  worry, if you don't care about this value, it defaults to the
+  current server setting.  So you dont HAVE to update all of your
+  maplist files =)
+- Add: Respawning in warmup gives you all the weapons on the
+  CURRENT map to, well, warm up with.
+- Fix: Server will go to the next map even if no clients are
+  connected.  It is annoying connecting to an empty server, only
+  to have to wait the intermissiontime.
+- Change: Level doesnt immediately change when a map is voted in.
+  Clients are taken to the intermission first.
+- Fix: Sanity checks on some server variables
+- Add: Can now view stats from previous level until warmup is over.
+  Of course, this only works with modes where g_doWarmup is set.
+- Fix: Small 1v1 bug that can cause a match reset
+- Fix: Made following players less difficult by putting in a 1
+  second timer between button presses.  The original format was
+  a bit trigger happy (i.e. 2-3 clients with 1 button press)
+  (id bug)
+- Fix: Put a timer debounce on end-level "READY" status, so its
+  easier to keep it on a particular state (id bug)
+- Fix: External timer cvar was negative during timeouts.
+- Add: Clan Arena support.  This is g_gametype "5" mode of play
+  under Quake3.  Clan Arena is a basic form of the popular
+  Rocket Arena mod, designed for fast pickup teamplay or 1v1.
+  It is a match-play mode of play, rather than a strict frag-
+  based format.  The only real additional server variables
+  for this are:
+	roundlimit - Specifies the number of rounds a team needs
+			 to win in order to win the match (default = 7)
+	vote_allow_modeCA - Obvious
+	vote_allow_roundlimit - Obvious
+
+  --> A more detailed description of this mode will be described
+	later, but suffice it to say the basic rules are this:
+		1. You cant hurt yourself or your teammates
+		2. No falling damage
+		3. Can't hurt others or lose ammo in warmup mode
+		4. No respawning when match begins
+		5. When you die, you go to spectator mode until the
+		   end of the round.
+		6. A team wins a round when all players on the opposing
+		   team have been eliminated.
+		7. A team wins the match if they have won <roundlimit>
+		   rounds.
+		8. After a match is won, team scores are rest to 0 to
+		   start again.
+		9. *BONUS*  You carry all weapon stats throughout the
+		   entire match!
+		10. *BONUS* You get 1 fragpoint for every 100 points
+		    of damage you inflict!
+
+Feb 18: 0.52
+============
+- Fix: Another small map rotate bug that can happen occassionally.
+- Add: External cvar info strings for time remaining in the match.
+  It is called: "Score_Time" and fits nicely below the "Score_Red"
+  if your cvars are sorted alphabetically (like in GameSpy).  This
+  shows up for teamplay, 1v1, and FFA matches alike.
+- Fix: CTF team scores now accurately shown in external vars.
+- Fix: CTF scoreboard now shows up in end-level dump.
+
+Feb 17: 0.51
+============
+- Fix: Map rotation was seriously hosed in several ways.
+- Fix: The included configs were a bit problematic, look better
+  now.
+
+Feb 17: 0.5
+===========
+****************************************************************
+- NOTE: I *seriously* recommend that server operators put:
+	+cvar_restart
+  on the command line when invoking a server.  Q3 likes to
+  save defined variables in q3config.cfg regardless if it is
+  a server or a client.  Therefore, if you start playing around
+  with settings on one server, and load another server expecting
+  defaults, dont be surprised if you see settings that were
+  defined on one server but not defined in the other server.
+  To safegaurd, add the above-mentioned +cvar_restart command
+  during server launch.  You CANNOT add this to the config file
+  for dedicated servers.
+****************************************************************
+- Add: Made 2 more reference configs: rail.cfg and railctf.cfg
+  The original instagib mod (OSP TOurney DM for Quake2) is now
+  alive in Q3!! =)
+- Add: External cvars for team scores.  They should show up in
+  stuff like GameSpy as: "Score_Red" and "Score_Blue"
+- Fix: Small buffer overflow on captains command
+- Fix: Accuracy hits with shotgun/railgun (it was an id bug
+  actually)
+- Fix: Specs can chat to players during timeouts on 1v1
+- Fix: map_restart voting.  Before it would actually reload
+  the map.  Now it just rests the match.
+- Add: Switch on wether players drop weapons when they are killed
+  	weapon_deaddrop	(Default: 1 - Players drop weapons when
+				 they are killed)
+- Add: \scores information for FFA matches.  This info includes
+  player times and FPH (Frags Per Hour) ratings.
+- Goof: Forgot to comment the map cariables in the last release
+	map_file	Specifies file containing map info
+			(Default = "maps.txt")
+	map_queue	0 - Disable using the map queue
+		    * 1 - Map queue is loaded and enabled (default)
+
+	map_rotate	0 - Map queue is enabled, but maps arent
+			    cycled at the end of a match (server stays
+			    on the same map until the current map is
+			    voted out).
+		    * 1 - Maps are cycled at the end of each match.
+			    (default)
+
+	map_random	0 - Step through the map list in the order it
+			    is specified.
+		    * 1 - Maps are randomly picked in the map queue.
+			    (default)
+
+	map_once	0 - No guarantee that a map will not be picked
+			    more times than any other map (if random
+			    cycling is enabled).
+		    * 1 - Guarantees that a map will only be picked
+			    once in an entire cycling of the map queue.
+			    (default)
+
+	map_nocount
+		    * 0 - Honors the min/max player settings as
+			    specified by the map queue.
+			1 - Ignores player counts and freely selects
+			    any map in the map queue.
+
+- Add: Item banning.  Variable:
+	item_disable <item_mask>	(Default = 0)
+	
+	item_mask:
+	----------
+	0	- No items diabled
+	1	- All powerups
+	2	- All armor
+	4	- All health
+	8	- BFG
+	16	- Machinegun
+	32	- Shotgun
+	64	- GrenadeLauncher
+	128	- ReocketLauncher
+	256	- LightningGun
+	512	- PlasmaGun
+	1024	- RailGun
+
+	---> Note, when a weapon is disabled, its associated
+	     ammo is also removed.
+
+- Add: Initial player weapon inventory.  Variable:
+	start_have <weapon_mask>  (cumulative)
+- Add: Initial player starting weapon.  Variable:
+	start_weapon <weapon_mask> (most significant bit order)
+
+	weapon_mask:
+	------------
+	1	- Machinegun
+	2	- Shotgun
+	4	- GrenadeLauncher
+	8	- RocketLauncher
+	16	- LightningGun
+	32	- Railgun
+	64	- PlasmaGun
+	128	- BFG
+
+- Add: Initial player ammo inventories.  Variables:
+
+	start_bullets	(Default: 50 teamplay/100 all else)
+	start_shells	(Default: 0)
+	start_rockets	(Default: 0)
+	start_grenades	(Default: 0)
+	start_lightning	(Default: 0)
+	start_slugs		(Default: 0)
+	start_plasma	(Default: 0)
+	start_bfg		(Default: 0)
+
+
+Feb 15: 0.4
+===========
+- Add: CTF-specific match stats.  Stuff like caps, defends, etc.
+  This info is dumped at the end of a match, or anytime the
+  \scores command is issued.
+- Add: CTF-specific syntax highlighting.  Allows one to see
+  important messages more clearly:
+	Yellow : Something is happening to a flag
+	Green  : Someone has captured a flag
+	Magenta: A flag carrier has been killed
+	Cyan   : Defense or other bonus award
+- Fix: Small id bug for people who in-eyes another player then
+  join the match.
+- Add: Map rotation.  This system allows server ops to specify
+  what maps to rotate through as well as limit what maps players
+  can pick.  Not only does this eliminate playing bad maps, but
+  it also fixes an id bug in the voting system.  This map
+  rotation also allows the admin to specify player counts for
+  maps to prevent inappropriate loading of large maps with
+  small # of players, or vice-versa.  Admins also have the
+  option to specify fraglimit/capturelimit/timelimit for each
+  map when it loads or is voted upon.  The sample ffamaps.cfg
+  is just a first approximation on decent player counts and
+  frag/time limits.  I would appreciate feedback on these
+  map configurations for more desirable settings.  Same goes
+  for the team/ctf/1v1 map settings.
+
+Feb 12: 0.34
+============
+- Add: "resign" captain command that allows the captain of a team
+  to resign his/her captainship and optionally assign it to
+  another teammate.
+- Add: Allow voting in of referees.  Requires at least 3 people
+  on the server to enable the vote (new server cvar is:
+  vote_allow_referee  Default = 0 (disabled)).
+- Fix: Timelimit vote enable was incorrect.
+- Fix: Losing flags in CTF if a timeout or pause was enforced.
+- Fix: Players cannot pickup flags in CTF if the match is in
+  warmup (general id bug).
+- Add: More referee commands:
+	r_lockred	(locks red team)
+	r_lockblue	(locks blue team)
+	r_putred <player_id>	(puts a player on the red team)
+	r_putblue <player_id>	(puts a player on the blue team)
+	r_promote <player_id>	(promotes player to captain)
+
+Feb 10: 0.32
+============
+- Added "resign" function for teamplay.  Allows
+  a player to resign captainship either randomly,
+  or to another player specifically.
+- Added the ability to vote for referees.  It
+  requires at least 3 players on the server,
+  and is strip after each map load. (New
+  server var is: vote_allow_referee)
+- Small fix in allowing timelimit to be voted
+  upon.
+- Redid some messages for consistancy.
+
+Feb 09: 0.3
+===========
+- Reset client timers after a pause/timeout
+- Fixed some weapon stats info
+- Reorganized some server variable names to not
+  confuse with id's semantics.
+- Added "referee" status for admin control of
+  matches.  Several commands are available for
+  use only by the referee (i.e. match pause,
+  readyall, change map, remove players from
+  teams, etc.).  Also, ANYTHING the referee
+  votes for WILL immediately pass or fail,
+  depending on how he/she votes.
+- Timeouts/pauses now FULLY pause clients
+  approriately.  Also added sound cues when
+  a pause starts and stops.  Its pretty cool,
+  actually =)
+- Fixed id's "talking-gauntlet" bug.
+- A stab at trying to determine players'
+  cl_maxpackets setting.  Its in the \players
+  command output for now.  It may be temporary
+  if id decides to provide this information to
+  the game server.
+- Added joincodes for players to enter during
+  the match without having captains unlock or
+  invite them in.  Pretty simple with auto-
+  generated codes at the start of a match
+  (4 letters only).
+- Added sv_floodprotect and capturelimit as
+  votable items.  Map rotation/selection will
+  come in next version =)
+- Various little voting fixes and other small
+  enhancements.
+
+2000 Feb 05: 0.2
+================
+Initial public release

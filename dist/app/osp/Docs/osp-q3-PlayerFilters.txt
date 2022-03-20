@@ -1,0 +1,143 @@
+Player Filtering under OSP
+==========================
+rhea@OrangeSmoothie.org
+14 Dec 01
+
+The "Player Filtering" capabilities under OSP allow for more than
+just simple IP address banning.  Below is a description of the
+features in the current version of OSP Tourney DM/CA/CTF for Quake3.
+
+All filtering commands are of the form:
+
+<ban_command> <TAB> <player_name> <TAB> <address_prefix> <TAB> <password>
+
+<ban_command>:
+	banplayer
+	bantag
+	banaddr
+	banpass
+
+<player_name>
+	Name (or partial) of a player to ban/allow.
+
+<address_prefix>
+	Beginning portion of a client's address to ban/allow.
+	Note that the current version does NOT support specifying
+	subnet masks, so this method is really a "traditional"
+	Class C filter at best (although you COULD get away with
+	smaller subnets if you know what you are doing).
+
+<password>
+	Specifies what a client's public "password" or "osp_password"
+	(use the "setu osp_password" command) must be set for pass/fail
+	of the current filter.
+
+----> Note: Specifying "none" in a field will disable	that field for
+		the current filter.
+
+
+Name Filtering
+--------------
+Traditional name filtering.  This specifies an exact match (barring
+capitalization and color escape codes) of a playername to allow/deny.
+A player will ALWAYS be denied access to the server (or changing their
+name after connect) with the name specified in the filter.
+
+The client CAN still connect even if his/her name matches the name
+specified in the filter if they can match either of the two criteria:
+	- They satisfy the <address_prefix> rule (if specified)
+	- They satisfy the <password> rule (if specifed) in their
+	  "password" or "osp_password" client userinfo.
+
+----> This is an old method of banning.  It is recommended that
+	the "bantag" filter (below) is used in nearly all cases.
+
+Usage:
+banplayer	Rhea	none	none
+	---> (Nobody with the name "Rhea" can ever connect, or change
+		their name in game to "Rhea" after connecting with a
+		valid name)
+
+banplayer	Johnny	129.237.	my_bad
+	---> (Nobody with the name "Johnny" can ever connect (or change
+		their name to "Johnny") unless they are connecting from
+		an address that begins with "129.237." or if they have
+		their public "password" or "osp_password" variable set to
+		"my_bad").
+
+
+Name "Tag" Filtering
+--------------------
+Pattern-match name filtering.  This specifies a pattern-matching filter
+(barring capitalization and color escape codes) of a playername to
+allow/deny.  The main difference between this type of filter and the
+straight name filter (above) is that such things as clan "tags" can be
+protected from name smurfs (people fakin the fraud, dissers, someone
+who aint on the down low, posers, imposters... git it??).  It is also
+useful for keeping people from changing their name slightly to achieve
+the same effect.
+
+A player will ALWAYS be denied access to the server (or changing their
+name after connect) with the name specified in the filter.
+
+The client CAN still connect even if his/her name contains the specified
+tag pattern in their name if they can match either of the two criteria:
+	- They satisfy the <address_prefix> rule (if specified)
+	- They satisfy the <password> rule (if specified) in their
+	  "password" or "osp_password" client userinfo.
+
+----> It is recommended that this form of name banning be used in
+	nearly all cases.  In fact, I can't thing of a reason not to
+	use it in place of "banplayer" =)
+
+Usage:
+bantag	a|	none	w3rd
+	---> (Nobody can connect with the pattern "a|" in their name unless
+		they have their public "password" or "osp_password" set to
+		"w3rd").
+
+
+IP Address Filtering
+--------------------
+Connecting client address filtering.  This allows admins to deny
+clients based solely on their connecting IP address.  A player will
+ALWAYS be denied access to the server based on their connecting
+address that matches the filter <address_prefeix> unless they can
+match either of the two criteria:
+	- They satisfy the <player_name> rule (if specified)
+	- They satisfy the <password> rule (if specified) in their
+	  "password" or "osp_password" client userinfo.
+
+----> This is probably the primary method to use for player
+	banning capabilities.
+
+Usage:
+banaddr	none	129.237.	none
+	---> (Nobody can connect from an address that begins with
+		"129.237.", period)
+
+banaddr	none	129.237.	imc00l
+	---> (Nobody can connect from an address that begins with
+		"129.237." unless they have their public "password"
+		or "osp_password" set to "imc00l").
+
+
+Password Filtering
+--------------------
+Connecting client password filtering.  This allows admins to specify
+multiple server passwords for connecting clients.  Clients must have
+the password specified in either their public "password" or
+"osp_password" variable.  Players may bypass the password if either:
+	- They satisfy the <player_name> rule (if specified)
+	- They satisfy the <address_prefix> rule (if specified)
+
+----> Players will not be banned unless they fail ALL "banpass"
+	filters (if any are specified at all).  Hence, you can
+	have temporary passwords while using default passwords that
+	persist for longer periods.
+
+Usage:
+banpass	none	129.237.	onthedownlow
+	---> (A player will fail the filter if their public "password" or
+		"osp_password" is not set to "onthedownlow" unless they are
+		connecting from an address that begins with "129.237.").
