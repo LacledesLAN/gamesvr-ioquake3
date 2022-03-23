@@ -2,8 +2,8 @@
 
 #####################################################################################################
 ### CONFIG VARS #####################################################################################
-declare LLTEST_CMD="/app/quake2 +set dedicated 1 +map q2dm1 +exec server.cfg";
-declare LLTEST_NAME="gamesvr-quake2-$(date '+%H%M%S')";
+declare LLTEST_CMD="/app/ioq3ded.x86_64 +exec server-ffa.cfg +exec docker-tester.cfg";
+declare LLTEST_NAME="gamesvr-quake3-$(date '+%H%M%S')";
 #####################################################################################################
 #####################################################################################################
 
@@ -146,15 +146,19 @@ fi;
 #####################################################################################################
 ### TESTS ###########################################################################################
 # Vanilla Server Checks
-should_lack 'Command 'quake2' not found, but can be installed with:' 'quake2 was not installed or executed';
-should_have 'Added packfile ./baseq2/pak0.pak (3307 files)' 'Loaded default pak0.pak';
-should_have 'Added packfile ./baseq2/pak1.pak (279 files)' 'Loaded default pak2.pak';
-should_have 'Added packfile ./baseq2/pak2.pak (2 files)' 'Loaded default pak2.pak';
+should_have 'ioq3 1.36_GIT_99b66faa-2022-02-12 linux-x86_64 Mar  6 2022' 'Loaded ioquake3';
+should_have '/app/ioquake3/baseq3/dc_mappack.pk3 (468 files)' 'Loaded VR/Dreamcast map pack';
+should_have '/app/ioquake3/baseq3/pak0.pk3 (3539 files))' 'Loaded default pak0.pak';
 should_have 'execing default.cfg' 'executed default config file';
-should_have '====== Quake2 Initialized ======' 'quake 2 initialized';
-should_have 'Loading gamei386.so ' 'Game library loaded';
-should_have '==== InitGame ====' 'game initialized';
-should_lack 'recurisve shutdown' 'quake2 shuts down';
+should_have 'execing autoexec.cfg' 'autoexec.cfg present';
+should_have 'execing server-ffa.cfg ' 'gametype config file loaded';
+should_have '------ Server Initialization ------' 'game initialized';
+should_have 'Loading vm file vm/qagame.qvm...' 'VM LOADED';
+should_have 'Sending heartbeat to master3.idsoftware.com' 'connection to idsoftware';
+should_lack 'recurisve shutdown' 'quake3 shuts down';
+should_lack 'Server is not running.' 'server not running no map loaded';
+should_have 'cl score ping name            address                                 rate' 'map loaded';
+should_have 'DOCKER-TESTER CONFIG LOADED' 'docker test config present';
 should_echo "echo starting tests"  "starting tests"
 #####################################################################################################
 #####################################################################################################
