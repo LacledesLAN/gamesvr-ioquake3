@@ -150,6 +150,7 @@ should_have 'ioq3 1.36_GIT_99b66faa-2022-02-12 linux-x86_64 Mar  6 2022' 'Loaded
 should_have '/app/ioquake3/baseq3/dc_mappack.pk3 (468 files)' 'Loaded VR/Dreamcast map pack';
 should_have 'execing default.cfg' 'executed default config file';
 should_have 'execing autoexec.cfg' 'autoexec.cfg present';
+should_have 'executing playlist.cfg' 'playlist.cfg present';
 should_have 'execing server-ffa.cfg ' 'gametype config file loaded';
 should_have '------ Server Initialization ------' 'server initialized';
 should_have 'loaded maps/q3dm7.aas' 'map loaded';
