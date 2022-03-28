@@ -148,11 +148,12 @@ fi;
 # Vanilla Server Checks
 should_have 'ioq3 1.36_GIT_99b66faa-2022-02-12 linux-x86_64 Mar  6 2022' 'Loaded ioquake3';
 should_have '/app/ioquake3/baseq3/dc_mappack.pk3 (468 files)' 'Loaded VR/Dreamcast map pack';
-should_have '/app/ioquake3/baseq3/pak0.pk3 (3539 files))' 'Loaded default pak0.pak';
 should_have 'execing default.cfg' 'executed default config file';
 should_have 'execing autoexec.cfg' 'autoexec.cfg present';
 should_have 'execing server-ffa.cfg ' 'gametype config file loaded';
-should_have '------ Server Initialization ------' 'game initialized';
+should_have '------ Server Initialization ------' 'server initialized';
+should_have 'loaded maps/q3dm7.aas' 'map loaded';
+should_have '------- Game Initialization -------' 'game initialized';
 should_have 'Loading vm file vm/qagame.qvm...' 'VM LOADED';
 should_have 'Sending heartbeat to master3.idsoftware.com' 'connection to idsoftware';
 should_lack 'recurisve shutdown' 'quake3 shuts down';
