@@ -1,5 +1,5 @@
 # escape=`
-FROM debian:buster-slim AS ioq3-builder
+FROM debian:bullseye-slim AS ioq3-builder
 
 RUN apt-get update && apt-get install -y`
     gcc git libsdl2-dev make --no-install-recommends
