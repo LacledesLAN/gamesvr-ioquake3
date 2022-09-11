@@ -1,0 +1,38 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Linux - Build Docker Image",
+            "type": "docker-build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dockerBuild": {
+                "context": "${workspaceFolder}",
+                "dockerfile": "${workspaceFolder}/linux.Dockerfile",
+                "tag": "lacledeslan/gamesvr-ioquake3",
+                "labels": {
+                    "com.lacledeslan.build-node": "${env:computername}",
+                    "org.opencontainers.image.version": "dirty (work in progress)"
+                }
+            }
+        },
+        {
+            "label": "Download git submodules",
+            "type": "shell",
+            "command": "git submodule foreach git pull origin master;",
+            "problemMatcher": [],
+            "promptOnClose": true
+        },
+        {
+            "label": "Update git submodules",
+            "type": "shell",
+            "command": "git submodule update --init --recursive --remote;",
+            "problemMatcher": [],
+            "promptOnClose": true
+        }
+    ]
+}

@@ -1,5 +1,0 @@
-sudo dpkg --add-architecture i386
-sudo apt install curl g++ gcc git make -y
-wget https://raw.githubusercontent.com/ioquake/ioq3/master/misc/linux/server_compile.sh
-chmod +x server_compile.sh
-./server_compile_auto.sh
