@@ -1,0 +1,3 @@
+[submodule "sources/ioq3"]
+	path = sources/ioq3
+	url = https://github.com/ioquake/ioq3
