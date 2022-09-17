@@ -1,6 +1,14 @@
+# Quake 3 Arena
+
+
+
+[Quake 3 Arena Screenshot](https://raw.githubusercontent.com/LacledesLAN/gamesvr-ioquake3/master/.misc/screenshot.jpg "Quake 3 Arena Screenshot")
+
+
+
 ### ioQuake3
 
-This docker image and repo uses https://ioquake3.org/
+This docker image and repo uses https://ioquake3.org/ for the server binary. OSP mod http://www.OrangeSmoothie.org. Rocket arena https://www.moddb.com/mods/rocket-arena-3
 
 
 ### Demo Vs. Full game server and pak0.pk3
@@ -65,16 +73,15 @@ docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 
 
 ### Instagib Capture The Flag
 
-> Currently broken!
 
 ```shell
-docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +set fs_game InstaUnlagged +exec DefaultServer-CTF.cfg +exec playlist.cfg +vstr stock-ctf-1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec ctf-instagib.cfg +exec playlist.cfg +vstr stock-ctf-1
 ```
 
 ### Instagib Team Deathmatch
 
 ```shell
-docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +set fs_game InstaUnlagged +exec DefaultServer-TeamDm.cfg +exec playlists.cfg +vstr stock-dm-1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec team.cfg +exec playlists.cfg +vstr stock-dm-1
 ```
 
 ### Freeze Tag Team Deathmatch
