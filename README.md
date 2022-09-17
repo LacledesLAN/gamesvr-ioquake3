@@ -62,13 +62,13 @@ docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 
 ### Instagib (Free For All Deathmatch)
 
 ```shell
-docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +set fs_game InstaUnlagged +exec DefaultServer-FFA.cfg +exec playlists.cfg +vstr stock-dm-1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec ffa-instagib.cfg +exec playlists.cfg +vstr stock-dm-1 
 ```
 
 ### Instagib 1v1
 
 ```shell
-docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +set fs_game InstaUnlagged +exec DefaultServer-Tourney.cfg +exec playlists.cfg +vstr stock-1v1-map1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec 1v1-instagib.cfg +exec playlists.cfg +vstr stock-1v1-map1 
 ```
 
 ### Instagib Capture The Flag
