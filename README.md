@@ -2,7 +2,7 @@
 
 
 
-[Quake 3 Arena Screenshot](https://raw.githubusercontent.com/LacledesLAN/gamesvr-ioquake3/master/.misc/screenshot.jpg "Quake 3 Arena Screenshot")
+![Quake 3 Arena Screenshot](https://raw.githubusercontent.com/LacledesLAN/gamesvr-ioquake3/master/.misc/screenshot.jpg "Quake 3 Arena Screenshot")
 
 
 
