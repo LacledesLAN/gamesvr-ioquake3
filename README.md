@@ -13,9 +13,9 @@ This docker image and repo uses https://ioquake3.org/ for the server binary. OSP
 
 ### Demo Vs. Full game server and pak0.pk3
 
-If you want to run all maps on this server you need to provide a copy of pak0.pk3 from a valid copy of quake3. The server will still work but would be limited to the maps that are only availabe on the demo. The only maps on the demo are q3dm1, q3dm7, q3dm17, and q3tourney2.  The game can be easily picked up on [Steam](https://store.steampowered.com/app/2200/Quake_III_Arena/), [GOG](https://www.gog.com/game/quake_iii_arena), and [Microsoft store/gamepass](https://www.xbox.com/en-us/games/store/quake-iii-arena/9nwnls28zg37). 
+If you want to run all maps on this server you need to provide pak0.pk3 from a valid copy of quake3. The server will still work but would be limited to the maps that are only availabe on the demo. The only maps on the demo are q3dm1, q3dm7, q3dm17, and q3tourney2.  The game can be easily picked up on [Steam](https://store.steampowered.com/app/2200/Quake_III_Arena/), [GOG](https://www.gog.com/game/quake_iii_arena), and [Microsoft store/Gamepass](https://www.xbox.com/en-us/games/store/quake-iii-arena/9nwnls28zg37). 
 
-Because of multiple legal reasons the pak0.pk3 file is not included. The way to include it on the server is to host the file outside the docker container and mount the file into the container. If you put he file in the /q3a-assets/ directory then you add this to your docker launch string.
+Because of legal reasons the pak0.pk3 file is not included. The way to use it on the server is to host the file outside the docker container and mount the file into the container. If you put he file in the /q3a-assets/ directory then you add this to your docker launch string.
 
 ```
 -v ~/q3a-assets/pak0.pk3:/app/baseq3/pak0.pk3
