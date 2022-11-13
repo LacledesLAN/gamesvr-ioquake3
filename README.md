@@ -38,50 +38,50 @@ Adding the command "+ vstr stock-dm-2" at the end of your launch string or runni
 ### Run Self-Tests
 
 ```shell
-TODO
+docker run -it --rm lacledeslan/gamesvr-ioquake3 ./ll-tests/gamesvr-quake3.sh;
 ```
 
 ### Run Simple Interactive Server (Free For All Deathmatch)
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +exec server-ffa.cfg +exec playlists.cfg +vstr stock-dm-1 +set rconpassword "EXAMPLE"
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +exec server-ffa.cfg +exec playlists.cfg +vstr stock-dm-1 +set rconpassword "EXAMPLE"
 ```
 
 ### Capture the Flag
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +exec server-ctf.cfg +exec playlists.cfg +vstr stock-ctf-1 set rconpassword "EXAMPLE"
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +exec server-ctf.cfg +exec playlists.cfg +vstr stock-ctf-1 set rconpassword "EXAMPLE"
 ```
 
 ### Team deathmatch
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +exec server-tdm.cfg +set rconpassword "EXAMPLE" +exec playlists.cfg +vstr stock-dm-1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 +exec server-tdm.cfg +set rconpassword "EXAMPLE" +exec playlists.cfg +vstr stock-dm-1
 ```
 
 ### Instagib (Free For All Deathmatch)
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec ffa-instagib.cfg +exec playlists.cfg +vstr stock-dm-1 
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec ffa-instagib.cfg +exec playlists.cfg +vstr stock-dm-1 
 ```
 
 ### Instagib 1v1
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec 1v1-instagib.cfg +exec playlists.cfg +vstr stock-1v1-map1 
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec 1v1-instagib.cfg +exec playlists.cfg +vstr stock-1v1-map1 
 ```
 
 ### Instagib Capture The Flag
 
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec ctf-instagib.cfg +exec playlist.cfg +vstr stock-ctf-1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec ctf-instagib.cfg +exec playlist.cfg +vstr stock-ctf-1
 ```
 
 ### Instagib Team Deathmatch
 
 ```shell
-docker run -d --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec team.cfg +exec playlists.cfg +vstr stock-dm-1
+docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64  +set fs_game osp +exec team.cfg +exec playlists.cfg +vstr stock-dm-1
 ```
 
 ### Freeze Tag Team Deathmatch
