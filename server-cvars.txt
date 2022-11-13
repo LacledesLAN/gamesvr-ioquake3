@@ -111,3 +111,12 @@ status // status of currently connected server
 system info // shows system info
 echo "text // outputs "text" to console. Really useful at the begining of a config for logs. echo "running server-example.cfg" to let you know when the config is loded
 
+Map changing
+So due to the strange nature of how playlists are done in quake 3, you cannot use the "map" command. Using the "map" command will break the chain of commands for the playlist to work. essentially you would have to refer to the playslist file to manually to put in the right "vstr" command to change the map. 
+
+For example under the stock dm playlist and you want to switch to brimstone abbey.
+
+set stock-dm-8 "map q3dm8 ; set nextmap vstr stock-dm-9"        // Brimstone Abbey
+
+you would simply put in the command "vstr stock-dm-8"
+It will change the map to q3dm8 and set the next map.
