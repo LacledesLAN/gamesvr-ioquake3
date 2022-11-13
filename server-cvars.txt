@@ -1,4 +1,4 @@
-In order to get a basic server going and setup you will need to setup a server config file with the settings you want. The settings for any quake engine game are called console varibles or CVAR's for short. In all the example config files the cvars and functions are labeled, but I figurued its best to go over a few.  All config files are just scripts that just commands that run in the console. So pretty much every cvar and console command are interchangeable. Also you can have multiple configs on your server for any reason, just add +exec server-whatever.cfg to your command string. G
+In order to get a basic server going and setup you will need to setup a server config file with the settings you want. The settings for any quake engine game are called console varibles or CVAR's for short. In all the example config files the cvars and functions are labeled, but I figurued its best to go over a few.  All config files are just scripts that just commands that run in the console. So pretty much every cvar and console command are interchangeable. Also you can have multiple configs on your server for any reason, just add +exec server-whatever.cfg to your command string. 
 
 So to start off to examine a basic config file and to examine the pices. 
 
@@ -20,6 +20,10 @@ So sv_private password is the password you would use to prevent players from ent
 
 
 set sv_maxclients 16                // max. number of clients than can connect
+sv_maxPing 0	                  // set the maximum ping aloud on the server. 0 to disable.
+
+
+
 
 This allows you to set the max number of players that can connect. 
 
@@ -98,10 +102,12 @@ Most situations would not require bots and bots have been used too often to make
 
 
 Commands
-addbot [name] [skill] [team] [delay] // adds a bot manually example: addbot doom       4   blue    10
-On the addbot command, the [name] command just simply the name of the model. 
+addbot [name] [skill] [team] [delay] // adds a bot manually example: addbot doom   4   blue    10
+When it comes to the addbot command, typically you only need the name, skill, and team (only on team games) for it to work. The names pull from the bots in the singleplayer campaign, you can go into models options on the player settings to see the list. 
+
 killserver // stop server and shutdown 
 kick // kick player
 status // status of currently connected server
 system info // shows system info
 echo "text // outputs "text" to console. Really useful at the begining of a config for logs. echo "running server-example.cfg" to let you know when the config is loded
+
