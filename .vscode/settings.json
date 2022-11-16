@@ -1,18 +1,43 @@
 {
     "cSpell.words": [
+        "addbot",
+        "allowvote",
         "BUILDNODE",
+        "capturelimit",
+        "cvar",
+        "CVAR's",
+        "Cvars",
         "Deathmatch",
         "DOCKERHUB",
         "Dreamcast",
+        "fraglimit",
         "gamesvr",
+        "gametype",
         "Insta",
         "Instagib",
         "ioquake",
+        "killserver",
         "Laclede's",
         "Laclede’s",
         "lacledeslan",
+        "logfile",
+        "maxclients",
+        "minplayers",
+        "nochat",
+        "openarena",
         "rconpassword",
+        "spskill",
+        "timelimit",
         "Unlagged",
         "vstr"
-    ]
+    ],
+    "markdownlint.ignore": [
+        "**/LICENSE"
+    ],
+    "[markdown]": {
+        "editor.rulers": [140],
+        "editor.unicodeHighlight.ambiguousCharacters": true,
+        "editor.unicodeHighlight.invisibleCharacters": true,
+        "editor.wordWrap": "on",
+    }
 }
