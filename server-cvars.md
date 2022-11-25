@@ -2,15 +2,85 @@
 
 By BEan
 
-In order to get a basic server going and setup you will need to setup a server config file with the settings you want. The settings for any
-quake engine game are stored in console, variables or `cvar`s for short. In all the example config files the cvars and functions are
+In order to get a basic server going and setup you will need to setup a server launch string and config file with the settings you want.
+The settings for any
+quake engine game are entered into the console and are stored in server configuration files as variables or `cvar`s for short.
+ In all the example config files the cvars and functions are
 labeled, but I figured its best to go over a few.  All config files are just scripts that just commands that run in the console. So pretty
 much every cvar and console command are interchangeable. Also you can have multiple configs on your server for any reason, just add
 `+exec server-whatever.cfg` to your command string.
 
-## Essential Cvars
 
-To start off, let's examine a basic config file and to examine the pieces.
+## Launch String
+Everything  starts at the launch string, this is the command that you will put into the console of your system to launch the server.
+To keep things simple, I will explain the part of the most basic example below and will exclude the docker parts that you will see mentioned in this repository.
+
+```
+./path/ioq3ded.x86_64 +exec server-ffa.cfg +exec playlists.cfg +vstr stock-dm-1 +set rconpassword "EXAMPLE"
+```
+
+First thing that you will see is `"./path/ioq3ded.x86_64"`, simply put this is the location and executable file of the server.
+
+The next part is `"+exec server-ffa.cfg +exec playlists.cfg"` both of these does the same thing.
+It immediately executes the the commands in those config files.
+The first file (`server-ffa.cfg`) one is your server config the second file is the playlist file.
+The second file (`server-ffa.cfg`) is the playlist file that stores the multiple playlists for the server.
+If these varibles are not in the string, your config files will not be read.
+Depending on the situation you can prepare different config files for different situations and game modes.
+
+
+The server just needs a map to run or it goes no where. The two methods to this  are `"+vstr stock-dm-1"` or `"+map mapname"` to pick the map.
+If you are running a single map for any reason (tournaments are a big reason for this), you can  just run +map mapname.
+However if you need a server to run a playlist you need to use the "+vstr command to launch a server and playlist.
+The list of vstr names are in the [playlsits.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/playlists.cfg) file.
+
+In order to protect remote access to your server a remote console "RCON" password needs to be set with +set rconpassword "EXAMPLE"
+on the commandline because the server configs are viewable on github.
+This is the password you use on hlsw or other rcon software in order to send commands to your server remotely.
+
+
+If you are running a mod you may see a command like this
+ `+set fs_game directory ` in the string.
+```
+/app/ioq3ded.x86_64 +set fs_game osp +exec freezetag.cfg +exec playlists.cfg +vstr stock-dm-1
+```
+Essentially you are having a server to look in a different directory for server files for files.
+In this example, instead of looking in `baseq3` it will access files in the `osp` folder for files to run that mod.
+Keep in mind the client would also need these files or at least be able to download them.
+
+
+If you need to run additional cvars after the configs on startup you can just add them to the end using "+ command".
+Just look in to the sample configs for examples.
+
+## Basics on server configs and examples
+When it comes to editing and making server configs, you just need a basic text editor like notepad, nothing fancy, no special formatting.
+Just remember if you need to comment or notes on something just type it after a "//" on the same line so the software doesn't try to process it.
+
+In the [baseq3](https://github.com/LacledesLAN/gamesvr-ioquake3/tree/main/dist/app/baseq3) folder of this repo
+I have included some sample config files to get started with and to build off of and some to help with certian situations.
+
+[autoexec.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/autoexec.cfg) - This file executes automatically
+executes on startup no matter what. This file is good for varibles that will be universal.
+In the example you will see settings for connection speeds, fast download, server master listings, etc.
+
+server-xxx.cfg - There are multiple files with this naming convention. The XXX stands for the game type that you want to run.
+I have included examples for Capture the flag, deathmatch, team deathmatch, and 1v1 tournaments.
+
+[server-VR-DM.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/server-VR-DM.cfg)- This is a basic config file
+built for the [quake3quest](https://quake3quest.quakevr.com/) community. It is set so that your server will show up in the server browser
+for the quest version of quake3.
+
+[lock-server.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/lock-server.cfg) and [unlock-server.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/unlock-server.cfg)-
+Originally developed for a quake3quest tournament. running `exec lock-server` and `exec unlock-server.cfg`
+in the commandline allows for server to be locked up and unlocked on command.
+It also provides a textbook example on how to set a server private.
+
+[docker-tester.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/docker-tester.cfg)-
+This file is used for testing purposes only. It just sends system information to the console.
+
+## Essential Cvars
+Now to real "bread and butter" of a server, let's examine a basic config file and to examine the pieces.
+
 
 ```text
 set sv_hostname "MY QUAKE3 SERVER"         // name that appears in the server list
@@ -25,13 +95,15 @@ set g_motd "CHANGE ME"                     // message that appears when connecti
 
 The MOTD, or 'Message Of The Day', is a text message that shows up on startup. Typically it is used to show server rules or other helpful
 information.
+```
+set sv_privatePassword "hello"             // password to join the server SET THIS AT LAUNCH STRING
+sv_privateClients 1                        // Enable server to be password protected.
+set rconpassword "changeme"                // password for remote console.  SET THIS AT LAUNCH STRING
+```
 
-set sv_privatePassword "hello"             // password to join the server
-set rconpassword "changeme"                // password for remote console. For Docker it is best to put this in your launch string
-
-So `sv_privatePassword` is the password you would use to prevent players from entering private matches. `sv_rconpassword` is the password to
-allow remote admin access. Since this Docker repository contains a stock server, it is completely open. You can add these cvar settings to
-the game upon launch by adding `+set sv_private password "secretword" +set rconpassword "adminpassword"`.
+So `sv_privatePassword` and `sv_privateClients 1`  are the varibles you would use to prevent players from entering private matches.
+ Since this Docker repository contains a stock server, it is completely open. You can add these cvar settings to
+the game upon launch by adding `+set sv_private password "secretword" sv_privateClients 1'`.
 
 ```text
 set sv_maxclients 16                       // maximum number of players than can connect to the server
@@ -46,7 +118,7 @@ set g_inactivity 120                       // kick players after being inactive 
 If a player has been inactive after that many seconds they get kicked.
 
 ```text
-set sv_pure 0                              // 1: pure server, no altered pk3 files
+set sv_pure 0                              // 0: Client side mods allowed 1: pure server, no altered pk3 files
 ```
 
 So players may have client side mods to change the look and appearance Quake 3. Some mods are to enhance the visual quality and other mods
@@ -101,7 +173,7 @@ The gametype variable is an important variable that determines what gametype is 
 | Free for All (Deathmatch) | 2     | Requires Team Arena Expansion |
 | One Flag Capture          | 5     | Requires Team Arena Expansion |
 | Overload                  | 6     | Requires Team Arena Expansion |
-| ?Harvester                | 7     | Requires Team Arena Expansion |
+| Harvester                | 7     | Requires Team Arena Expansion |
 
 For Quake 3 arena the two game modes that would require their own playlists are `1` (Tournament) and `4` (Capture the Flag). The capture the
 flag game mode just needs a CTF playlist. The tournament game mode is meant for 1v1 matches so having a play list of small maps would be
@@ -131,14 +203,42 @@ set bot_minplayers 5                // fills the server with bots to satisfy the
 
 Most situations would not require bots and bots have been used too often to make a server feel more populated than it is. For testing
 purposes these commands are valuable to ensure functionality.
+The variable `g_spskill` determines the skill of the bot, 1 for easy and 5 for hard.
 
 ## Commands
-
-| Command                              | Description                                               |
-| :----------------------------------- | --------------------------------------------------------- |
-| addbot [name] [skill] [team] [delay] | Adds a bot to the server. For [name] simply use the name of the model Example: `addbot doom 4 blue 10` |
+Keep in mind this doesnt contain all commands. More can be found the [ioquake3 sys-admin-guide](https://ioquake3.org/help/sys-admin-guide/).
+| Command                              | Description                                               |  EXAMPLE
+| :----------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| status                               | Current server status information                                     |
+| clientinfo |   display name, rate, number of snaps, player model, rail color, and handicap (state number?)
+| clientkick |  kick a client by slot number|
+| banclient | ban a client by slot number used in conjunction with serverstatus you can ban players by their slot number regardless of player name  | banclient 4
+| banUser | ban a client by their player name. | banuser jerk
+| banaddr| ban an ip address range from joining a game on this server, valid <range> is either playernum or CIDR notation address range. | banaddr 127.0.0.1
+| bandel <range> | delete ban (either range or ban number)| bandel 127.0.0.1
+| addbot [name] [skill] [team] [delay] | Adds a bot to the server. For [name] simply use the name of the model  | addbot doom 4 blue 10
 | killserver                           | Stop server and shutdown                                  |
-| kick                                 | Kick a player from the server                             |
-| status                               | Current server status                                     |
+| kick (client number)                               | Kick a player from the server                             |
+| kickbots | kick all bots
+| kicknum <client number> | kick a client by number, same as clientkick command |
+| game_restart <fs_game> | Switch to another mod | game_restart osp|
+| map (mapname) | change map (breaks playlist functionality) | map q3dm4
+| vstr varible name | runs varible in [playlist](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/playlists.cfg) file to change map and keep playlist going | vstr demo-dm-3 |
 | system info                          | Shows system info                                         |
-| echo "text                           | Outputs "text" to console. Useful at the beginning of a config for logs. echo "running server-example.cfg" to let you know when the config is loaded |
+| echo "text"                           | Outputs "text" to console. Useful at the beginning of a config for logs.  | echo "running server-cfg"
+
+
+## Team Arena
+
+ioquake3 fully supports the team arena expansion. The Team Arena expansion adds new modes, weapons, maps, team powerups and other content.
+Simply treat it like a mod by adding `+set fs_game missionpack` to the command line.
+Also you will have to provide the pak0.pk3 file and mount it if you are using docker.
+
+-v ~/q3a-assets/missionpack/pak0.pk3:/app/missionpack/pak0.pk3
+
+Every game mode that is available in stock quake 3 is available in Team Arena only difference is the added content.
+| Gamemode                              | Description                                               |
+| :----------------------------------- | --------------------------------------------------------- |
+| One Flag Capture          |  Collect the flag in the middle of the map and return it to the enemy base without being killed.     |
+| Overload                  | Objective is to destroy the other teams skull-adorned obelisk. The skull has a total of 2500 health and regenerates 1 health per second.   |
+| Harvester                | Objective is to collect skulls in the middle of the map that are generated when a member of the opposite team dies. Once skulls are collected you must take them to the enemy base to score. If you are killed you lose all skulls.    ||
