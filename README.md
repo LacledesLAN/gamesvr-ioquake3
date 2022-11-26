@@ -5,8 +5,7 @@ Screenshot")
 
 ## IOQuake3
 
-This docker image uses [IOQuake3](https://ioquake3.org/) for the server binary. It also includes [OSP mod](https://www.orangesmoothie.org)
-and [Rocker Arena](https://www.moddb.com/mods/rocket-arena-3).
+This docker image uses [IOQuake3](https://ioquake3.org/) for the server binary. It also includes [OSP mod](https://www.orangesmoothie.org).
 
 ## Demo Vs. Full Game Server
 
