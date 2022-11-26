@@ -50,6 +50,8 @@ docker run -it --rm --net=host lacledeslan/gamesvr-ioquake3 /app/ioq3ded.x86_64 
 
 ## Linux
 
+[![Update Docker Hub Description](https://github.com/LacledesLAN/gamesvr-ioquake3/actions/workflows/update-dockerhub.yml/badge.svg)](https://github.com/LacledesLAN/gamesvr-ioquake3/actions/workflows/update-dockerhub.yml)
+
 ### Run Self-Tests
 
 ```shell
