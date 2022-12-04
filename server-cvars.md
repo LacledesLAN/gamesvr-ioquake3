@@ -5,7 +5,7 @@ By BEan
 In order to get a basic server IOQuake3 going, you will want to create a configure the settings you want via *cvars*, and start the server
 with a *launch string*.
 
-The settings, for any quake-engine game, can either be entered in the to server's console, or stored in one or more configuration files
+The settings, for any Quake-engine game, can either be entered in the to server's console, or stored in one or more configuration files
 that will be automatically executed by the server. The engine stores these settings as variables, known as `cvar`s (e.g. *console
 variables*) for short. These cvars work the same, no matter how they are entered into the server. You may also chose to
 
@@ -70,11 +70,11 @@ I have included examples for Capture the flag, deathmatch, team deathmatch, and 
 
 [server-VR-DM.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/server-VR-DM.cfg)- This is a basic config file
 built for the [quake3quest](https://quake3quest.quakevr.com/) community. It is set so that your server will show up in the server browser
-for the quest version of quake3.
+for the quest version of Quake3.
 
 [lock-server.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/lock-server.cfg) and
 [unlock-server.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/unlock-server.cfg)- Originally developed for a
-quake3quest tournament. running `exec lock-server` and `exec unlock-server.cfg` in the command-line allows for server to be locked up and
+Quake3quest tournament. running `exec lock-server` and `exec unlock-server.cfg` in the command-line allows for server to be locked up and
 unlocked on command. It also provides a textbook example on how to set a server private.
 
 [docker-tester.cfg](https://github.com/LacledesLAN/gamesvr-ioquake3/blob/main/dist/app/baseq3/docker-tester.cfg)-
@@ -192,7 +192,7 @@ set cl_wwwDownload 1                // connects the client again when the downlo
 
 If you have custom maps or any custom files, the client needs to be able to download them. To prevent a client downloading files from
 interfering with function and performance with the server, its best to use a web server to host the files for download. The only variable
-that needs to be changed is the sc_dlURL. This feature was not original part of quake 3 arena and was added to ioquake. A good explanation
+that needs to be changed is the sc_dlURL. This feature was not original part of Quake 3 arena and was added to ioQuake. A good explanation
 of this feature can be found in the [openarena wiki](https://openarena.fandom.com/wiki/Manual/Automatic_downloading).
 
 ## Bot Cvars
@@ -235,13 +235,13 @@ Keep in mind this doesn't contain all commands. More can be found the
 
 ## Team Arena
 
-ioquake3 fully supports the team arena expansion. The Team Arena expansion adds new modes, weapons, maps, team power-ups and other content.
+ioQuake3 fully supports the team arena expansion. The Team Arena expansion adds new modes, weapons, maps, team power-ups and other content.
 Simply treat it like a mod by adding `+set fs_game missionpack` to the command line.
 Also you will have to provide the pak0.pk3 file and mount it if you are using docker.
 
 -v ~/q3a-assets/missionpack/pak0.pk3:/app/missionpack/pak0.pk3
 
-Every game mode that is available in stock quake 3 is available in Team Arena only difference is the added content.
+Every game mode that is available in stock Quake 3 is available in Team Arena only difference is the added content.
 
 | Game Mode        | Description                                              |
 | :--------------- | --------------------------------------------------------- |
