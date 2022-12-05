@@ -7,7 +7,7 @@ with a *launch string*.
 
 The settings, for any Quake-engine game, can either be entered in the to server's console, or stored in one or more configuration files
 that will be automatically executed by the server. The engine stores these settings as variables, known as `cvar`s (e.g. *console
-variables*) for short. These cvars work the same, no matter how they are entered into the server. You may also chose to
+variables*) for short. These cvars work the same, no matter how they are entered into the server. 
 
 'Launch string' is slang for the command use to start the server. It includes the server executable, followed by the server's starting
 commands and cvars. In this launch string, you'll generally want to specific config files to execute, via the `+exec <server-whatever.cfg>`
