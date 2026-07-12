@@ -1,6 +1,6 @@
 # Quake 3 Arena Dedicated Server in Docker
 
-![Quake 3 Arena Screenshot](https://raw.githubusercontent.com/LacledesLAN/gamesvr-ioquake3/master/.misc/screenshot.jpg "Quake 3 Arena
+![Quake 3 Arena Screenshot](https://raw.githubusercontent.com/LacledesLAN/gamesvr-ioquake3/refs/heads/main/.documentation/banner-ioquake3.jpg "Quake 3 Arena
 Screenshot")
 
 ## IOQuake3
