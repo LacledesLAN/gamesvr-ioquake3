@@ -5,25 +5,20 @@
     "tasks": [
         {
             "label": "Linux - Build Docker Image",
-            "type": "docker-build",
+            "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "dockerBuild": {
-                "context": "${workspaceFolder}",
-                "dockerfile": "${workspaceFolder}/linux.Dockerfile",
-                "tag": "lacledeslan/gamesvr-ioquake3",
-                "labels": {
-                    "com.lacledeslan.build-node": "${env:computername}",
-                    "org.opencontainers.image.version": "dirty (work in progress)"
-                }
+            "command": "./build.sh --skip-tests --skip-push-dockerhub",
+            "options": {
+                "cwd": "${workspaceFolder}"
             }
         },
         {
             "label": "Download git submodules",
             "type": "shell",
-            "command": "git submodule foreach git pull origin master;",
+            "command": "git submodule foreach git pull origin main;",
             "problemMatcher": [],
             "promptOnClose": true
         },

@@ -1,45 +1,51 @@
-# escape=`
-FROM debian:bullseye-slim AS ioq3-builder
+FROM debian:trixie-slim AS ioq3-builder
 
-RUN apt-get update && apt-get install -y`
-    gcc git libsdl2-dev make --no-install-recommends
+RUN apt-get update && apt-get install -y \
+    build-essential cmake libsdl2-dev git --no-install-recommends
 
 COPY ./source/ioq3 /ioq3
 
 WORKDIR /ioq3
 
-RUN make
+RUN rm -f .git && \
+    cmake -S . -B build \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_CLIENT=OFF \
+        -DBUILD_SERVER=ON \
+        -DBUILD_RENDERER_OPENGL1=OFF \
+        -DBUILD_RENDERER_OPENGL2=OFF \
+        -DBUILD_GAME_LIBRARIES=OFF \
+        -DBUILD_GAME_QVMS=OFF && \
+    cmake --build build --target ioq3ded --parallel
 
-FROM debian:bullseye-slim
+FROM debian:trixie-slim
 
 ARG BUILDNODE=unspecified
 ARG SOURCE_COMMIT=unspecified
 
-HEALTHCHECK NONE
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 EXPOSE 27960/udp
 
-RUN apt-get update && apt-get install -y `
-        glib2.0 lib32gcc-s1 locales locales-all tmux &&`
-    apt-get clean &&`
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*;
+HEALTHCHECK NONE
 
-LABEL maintainer="Laclede's LAN <contact @lacledeslan.com>" `
-      com.lacledeslan.build-node=$BUILDNODE `
-      org.label-schema.schema-version="1.0" `
-      org.label-schema.url="https://github.com/LacledesLAN/README.1ST" `
-      org.label-schema.vcs-ref=$SOURCE_COMMIT `
-      org.label-schema.vendor="Laclede's LAN" `
-      org.label-schema.description="ioQuake3 Dedicated Server in Docker" `
-      org.label-schema.vcs-url="https://github.com/LacledesLAN/gamesvr-ioquake3"
+LABEL architecture="amd64" \
+      maintainer="Laclede's LAN <contact@lacledeslan.com>" \
+      com.lacledeslan.build-node=$BUILDNODE \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.url="https://github.com/LacledesLAN/README.1ST" \
+      org.opencontainers.image.description="ioQuake3 Dedicated Server in Docker" \
+      org.opencontainers.image.revision=$SOURCE_COMMIT \
+      org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-ioquake3" \
+      org.opencontainers.image.vendor="Laclede's LAN"
 
-# Set up Enviornment
-RUN useradd --home /app --gid root --system Quake3 &&`
-    mkdir -p /app/ll-tests &&`
+# Set up Environment
+RUN mkdir --parents /app && \
+    useradd --home /app --gid root --system Quake3 && \
     chown Quake3:root -R /app;
 
 # `RUN true` lines are work around for https://github.com/moby/moby/issues/36573
-COPY --chown=Quake3:root --from=ioq3-builder /ioq3/build/release-linux-x86_64/ioq3ded.x86_64 /app
+COPY --chown=Quake3:root --from=ioq3-builder /ioq3/build/Release/ioq3ded /app
 RUN true
 
 COPY --chown=Quake3:root ./dist/app /app/

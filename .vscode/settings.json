@@ -36,6 +36,7 @@
         "rconpassword",
         "spskill",
         "timelimit",
+        "trixie",
         "Unlagged",
         "vstr"
     ],
@@ -43,7 +44,7 @@
         "**/LICENSE"
     ],
     "[markdown]": {
-        "editor.rulers": [140],
+        "editor.rulers": [110],
         "editor.unicodeHighlight.ambiguousCharacters": true,
         "editor.unicodeHighlight.invisibleCharacters": true,
         "editor.wordWrap": "on",

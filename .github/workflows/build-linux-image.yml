@@ -20,24 +20,8 @@ jobs:
         uses: actions/checkout@v7
         with:
           submodules: recursive
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4.2.0
-      - name: Pull Latest Linux Base Image
-        run: docker pull debian:buster-slim
       - name: Build Linux Image
-        uses: docker/build-push-action@v7.3.0
-        with:
-          context: .
-          file: ./linux.Dockerfile
-          tags: |
-            lacledeslan/gamesvr-ioquake3:latest
-            ghcr.io/lacledeslan/gamesvr-ioquake3:latest
-          build-args: |
-            BUILDNODE=GitHub (Run Number: ${{ github.run_number }} Run ID: ${{ github.run_id }})
-            SOURCE_COMMIT=${{ github.sha }}
-          no-cache: true
-#      - name: Test Linux Image
-#        run: docker run --rm lacledeslan/gamesvr-ioquake3:latest /app/ll-tests/gamesvr-ioquake3.sh
+        run: ./build.sh --skip-push-dockerhub
       - name: Login to DockerHub
         if: ${{ github.event_name != 'pull_request' }}
         uses: docker/login-action@v4.4.0
@@ -56,4 +40,6 @@ jobs:
         run: docker push lacledeslan/gamesvr-ioquake3:latest
       - name: Push to GitHub Packages
         if: ${{ github.event_name != 'pull_request' }}
-        run: docker push ghcr.io/lacledeslan/gamesvr-ioquake3:latest
+        run: |
+          docker tag lacledeslan/gamesvr-ioquake3:latest ghcr.io/lacledeslan/gamesvr-ioquake3:latest
+          docker push ghcr.io/lacledeslan/gamesvr-ioquake3:latest

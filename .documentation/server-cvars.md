@@ -7,7 +7,7 @@ with a *launch string*.
 
 The settings, for any Quake-engine game, can either be entered in the to server's console, or stored in one or more configuration files
 that will be automatically executed by the server. The engine stores these settings as variables, known as `cvar`s (e.g. *console
-variables*) for short. These cvars work the same, no matter how they are entered into the server. 
+variables*) for short. These cvars work the same, no matter how they are entered into the server.
 
 'Launch string' is slang for the command use to start the server. It includes the server executable, followed by the server's starting
 commands and cvars. In this launch string, you'll generally want to specific config files to execute, via the `+exec <server-whatever.cfg>`
@@ -23,10 +23,10 @@ To keep things simple, I will explain the part of the most basic example below a
 in this repository.
 
 ```shell
-./path/ioq3ded.x86_64 +exec server-ffa.cfg +exec playlists.cfg +vstr stock-dm-1 +set rconpassword "EXAMPLE"
+/app/ioq3ded +exec server-ffa.cfg +exec playlists.cfg +vstr stock-dm-1 +set rconpassword "EXAMPLE"
 ```
 
-First thing that you will see is `"./path/ioq3ded.x86_64"`, simply put this is the location and executable file of the server.
+First thing that you will see is `"/app/ioq3ded"`, simply put this is the location and executable file of the server.
 
 The next part is `+exec server-ffa.cfg +exec playlists.cfg`, which loads the config file `server-ffa.cfg` followed by `playlists.cfg`.
 Depending on the situation you can prepare different config files for different situations and game modes.
@@ -42,7 +42,7 @@ to send commands to your server remotely.
 If you are running a mod you may see a command like this `+set fs_game directory` in the string.
 
 ```shell
-/app/ioq3ded.x86_64 +set fs_game osp +exec freezetag.cfg +exec playlists.cfg +vstr stock-dm-1
+/app/ioq3ded +set fs_game osp +exec freezetag.cfg +exec playlists.cfg +vstr stock-dm-1
 ```
 
 This tells the server to look in a different directory for the server content files. In this example, instead of looking in `baseq3` it will
