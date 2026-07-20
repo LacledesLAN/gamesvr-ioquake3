@@ -18,31 +18,33 @@ RUN rm -f .git && \
         -DBUILD_GAME_QVMS=OFF && \
     cmake --build build --target ioq3ded --parallel
 
+
+#---------------------------------
 FROM debian:trixie-slim
 
-ARG BUILD_NODE=unspecified
-ARG GIT_REVISION=unspecified
+ARG BUILD_DATE=unspecified \
+    BUILD_NODE=unspecified \
+    GIT_REVISION=unspecified
 
 HEALTHCHECK NONE
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 LABEL architecture="amd64" \
-    com.lacledeslan.build-node="$BUILD_NODE" \
-    maintainer="Laclede's LAN <contact@lacledeslan.com>" \
-    org.opencontainers.image.description="ioQuake3 Dedicated Server in Docker" \
-    org.opencontainers.image.revision="$GIT_REVISION" \
-    org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-ioquake3" \
-    org.opencontainers.image.vendor="Laclede's LAN"
+      com.lacledeslan.build-node="$BUILD_NODE" \
+      maintainer="Laclede's LAN <contact@lacledeslan.com>" \
+      org.opencontainers.image.created="$BUILD_DATE" \
+      org.opencontainers.image.description="ioQuake3 Dedicated Server in Docker" \
+      org.opencontainers.image.revision="$GIT_REVISION" \
+      org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-ioquake3" \
+      org.opencontainers.image.vendor="Laclede's LAN"
 
 # Set up Environment
 RUN mkdir --parents /app && \
     useradd --home /app --gid root --system Quake3 && \
     chown Quake3:root -R /app;
 
-# `RUN true` lines are work around for https://github.com/moby/moby/issues/36573
 COPY --chown=Quake3:root --from=ioq3-builder /ioq3/build/Release/ioq3ded /app
-RUN true
 
 COPY --chown=Quake3:root ./dist/app /app/
 
