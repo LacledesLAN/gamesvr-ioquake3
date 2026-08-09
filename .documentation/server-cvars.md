@@ -176,7 +176,7 @@ The gametype variable is an important variable that determines what gametype is 
 | Free for All (Deathmatch) | 2     | Requires Team Arena Expansion |
 | One Flag Capture          | 5     | Requires Team Arena Expansion |
 | Overload                  | 6     | Requires Team Arena Expansion |
-| Harvester                | 7     | Requires Team Arena Expansion |
+| Harvester                 | 7     | Requires Team Arena Expansion |
 
 For Quake 3 arena the two game modes that would require their own playlists are `1` (Tournament) and `4` (Capture the Flag). The capture the
 flag game mode just needs a CTF playlist. The tournament game mode is meant for 1v1 matches so having a play list of small maps would be
@@ -244,7 +244,7 @@ Also you will have to provide the pak0.pk3 file and mount it if you are using do
 Every game mode that is available in stock Quake 3 is available in Team Arena only difference is the added content.
 
 | Game Mode        | Description                                              |
-| :--------------- | --------------------------------------------------------- |
+| :--------------- | :------------------------------------------------------- |
 | One Flag Capture |  Collect the flag in the middle of the map and return it to the enemy base without being killed. |
 | Overload         | Objective is to destroy the other teams skull-adorned obelisk. The skull has a total of 2500 health and regenerates 1 health per second. |
 | Harvester        | Objective is to collect skulls in the middle of the map that are generated when a member of the opposite team dies. Once skulls are collected you must take them to the enemy base to score. If you are killed you lose all skulls. |
